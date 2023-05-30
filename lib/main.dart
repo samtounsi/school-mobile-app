@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_schoolapp/presentation/animations/studentMotion.dart';
 import 'package:mobile_schoolapp/presentation/animations/teacherMotion.dart';
 void main() => runApp(const MyApp());
 
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: TeacherMotion()
+        home: StudentMotion()
     );
   }
 }

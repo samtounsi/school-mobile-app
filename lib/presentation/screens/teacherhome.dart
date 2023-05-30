@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/components1.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/homeItem.dart';
+import 'package:mobile_schoolapp/presentation/screens/attendance_for_teacher.dart';
+import 'package:mobile_schoolapp/presentation/screens/teacherAddQuizesOrHistory.dart';
 import 'package:mobile_schoolapp/presentation/screens/teacherTimeTable1.dart';
 
 
@@ -42,18 +44,10 @@ class TeacherHome extends StatelessWidget {
               ),
             ),
             InkWell(
-              onTap: (){},
+              onTap: (){
+                navigateTo(context, TeacherQuizzesAddOrHistory());
+              },
                 child: HomeText(text: 'Quizzes', numS: 22, image: 'images/exam.png')),
-            SizedBox(
-              height: 30,
-
-            ),
-            InkWell(
-              onTap: (){},
-              child: HomeText(numS: 18,
-
-                  text: 'Attendance monitoring  ', image: 'images/moitor.png'),
-            ),
             SizedBox(
               height: 30,
 

@@ -45,7 +45,9 @@ class StudentTimeTable extends StatelessWidget {
                         CircleAvatar(
                           backgroundColor: Colors.white,
                           child: IconButton(
-                            onPressed: (){},
+                            onPressed: (){
+                              Navigator.pop(context);
+                            },
                             icon: Icon(Icons.arrow_back,
                               color: AppColors.darkBlue,),),
                         ),

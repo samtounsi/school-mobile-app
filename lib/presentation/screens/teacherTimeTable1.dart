@@ -24,7 +24,7 @@ class TeacherTimeTable extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/Wallpaper 2.png'),
+              image: AssetImage('images/Wallpaper 2.png'),
               fit: BoxFit.fill,
             )),
         child: Scaffold(
