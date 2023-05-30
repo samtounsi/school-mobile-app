@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mobile_schoolapp/presentation/components%20and%20constants/components1.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/homeItem.dart';
+import 'package:mobile_schoolapp/presentation/screens/feedBack.dart';
 
 
 class ParentHome extends StatelessWidget {
@@ -10,7 +12,7 @@ class ParentHome extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('assets/images/Wallpaper 2.png'),
+                image: AssetImage('images/Wallpaper 2.png'),
                 fit: BoxFit.fill)),
         child: Column(
 
@@ -21,7 +23,7 @@ class ParentHome extends StatelessWidget {
             InkWell(
                 onTap: (){},
                 child: HomeText(
-                    text: 'Time Table',numS: 22, image: 'assets/images/schedule.png')),
+                    text: 'Time Table',numS: 22, image: 'images/schedule.png')),
             SizedBox(
               height: 30,
               child: ColoredBox(
@@ -54,7 +56,9 @@ class ParentHome extends StatelessWidget {
                 child: HomeText(text: 'Calender',numS: 22, image: 'images/calendar (1).png')),
             SizedBox(height: 30,),
             InkWell(
-              onTap: (){},
+              onTap: (){
+                navigateTo(context, FeedBack());
+              },
               child: HomeText(text: 'Send a Feedback',numS: 18,image: 'images/feedback2.png',),
             ),
             SizedBox(height: 40,),

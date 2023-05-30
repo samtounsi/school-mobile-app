@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_schoolapp/presentation/animations/parentMotion.dart';
 import 'package:mobile_schoolapp/presentation/animations/studentMotion.dart';
 import 'package:mobile_schoolapp/presentation/animations/teacherMotion.dart';
+
+import 'presentation/screens/myClasses.dart';
 void main() => runApp(const MyApp());
 
 
@@ -16,7 +19,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: StudentMotion()
+        home: myClasses()
     );
   }
 }
