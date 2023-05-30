@@ -1,4 +1,3 @@
-
 abstract class SectionAttendanceStates{}
 class SectionAttendanceInitialState extends SectionAttendanceStates{}
 class SectionAttendanceOnSelectedDayState extends SectionAttendanceStates{}
