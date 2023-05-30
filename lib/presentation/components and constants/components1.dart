@@ -150,7 +150,7 @@ navigateAndFinish(context,widget)=>Navigator.pushAndRemoveUntil(
     MaterialPageRoute(builder: (context)=>widget),
         (route) => false);
 
-Widget myDivider(){
+Widget myDivider({required Color dividerColor}){
   return Padding(
     padding: const EdgeInsetsDirectional.only(start: 20),
     child: Container(
