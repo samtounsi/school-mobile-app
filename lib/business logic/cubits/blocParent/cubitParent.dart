@@ -18,6 +18,9 @@ class ParentCubit extends Cubit<ParentState> {
     const Center(
       child: Text("Settings"),
     ),
+    const Center(
+      child: Text("Settings"),
+    ),
   ];
 
 

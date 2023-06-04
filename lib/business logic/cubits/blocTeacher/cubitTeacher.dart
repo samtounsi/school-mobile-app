@@ -16,8 +16,8 @@ class TeacherCubit extends Cubit<TeacherState> {
 
     Event(),
     TeacherProfile(),
-
-    Text('chat'),
+    Center(child: Text('chat')),
+    Center(child: Text('Setting')),
   ];
 
   void changeIndex(int index) {

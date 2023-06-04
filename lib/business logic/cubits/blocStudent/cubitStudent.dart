@@ -15,7 +15,8 @@ class StudentCubit extends Cubit<StudentState>{
     Event(),
     StudentProfile(),
 
-    Text('Chat'),
+    Center(child: Text('Chat')),
+    Center(child: Text('Setting')),
 
   ];
   void changeIndex(int index){

@@ -26,7 +26,7 @@ class StudentMotionState extends State<StudentMotion>
     super.initState();
     _tabController = TabController(
       initialIndex: 1,
-      length: 4,
+      length: 5,
       vsync: this,
     );
   }
@@ -50,12 +50,13 @@ class StudentMotionState extends State<StudentMotion>
                 initialSelectedTab: "Home",
                 useSafeArea: true,
                 // default: true, apply safe area wrapper
-                labels: const ["Home", "Event", "Profile", "Chat"],
+                labels: const ["Home", "Event", "Profile", "Chat","Setting"],
                 icons: const [
                   Icons.home,
                   Icons.event,
                   Icons.person,
-                  Icons.chat
+                  Icons.chat,
+                  Icons.settings
                 ],
 
                 // optional badges, length must be same with labels
@@ -115,7 +116,7 @@ class StudentMotionState extends State<StudentMotion>
                   controller: _tabController,
                   // ignore: prefer_const_literals_to_create_immutables
                   children: [
-                    for (int i = 0; i < 4; i++)
+                    for (int i = 0; i < 5; i++)
                       StudentCubit.get(context).studentScreen[
                           StudentCubit.get(context).currentIndex!],
                   ]),
