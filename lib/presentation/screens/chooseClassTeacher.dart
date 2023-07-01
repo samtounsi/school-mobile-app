@@ -18,20 +18,15 @@ class ChooseClassTeacher extends StatefulWidget {
 class _ChooseClassTeacherState extends State<ChooseClassTeacher> {
   // List<Map<String,dynamic>>list=[
 
-
   List<GradeTeacher> grade = [
-    GradeTeacher(
-        grade: 'seventh ',
-        section: '1'),
-    GradeTeacher(
-        grade: 'eighth ', section:' 3'),
-    GradeTeacher(
-        grade: 'ninth ',
-        section: '4'),
+    GradeTeacher(grade: 'seventh ', section: '1'),
+    GradeTeacher(grade: 'eighth ', section: ' 3'),
+    GradeTeacher(grade: 'ninth ', section: '4'),
     GradeTeacher(grade: 'seventh', section: '6'),
     GradeTeacher(grade: 'ninth', section: '1'),
     GradeTeacher(grade: 'eighth', section: '6'),
-    GradeTeacher(grade: 'seventh', section: '7'),GradeTeacher(grade: 'ninth', section: '2')
+    GradeTeacher(grade: 'seventh', section: '7'),
+    GradeTeacher(grade: 'ninth', section: '2')
   ];
 
   @override
@@ -90,70 +85,78 @@ class _ChooseClassTeacherState extends State<ChooseClassTeacher> {
                                 SizedBox(
                                   height: 60,
                                 ),
-
-                                  Column(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            right: 20, left: 20),
-                                        child: Container(
-                                          width: 320,
-                                          height: 60,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                  blurRadius: 2,
-                                                  color: Color(0x3A75A4FF),
-                                                  spreadRadius: 5),
-                                            ],
-                                            border: Border.all(
-                                                color: AppColors.borderColor),
-                                            color: Colors.white,
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 6, right: 30, bottom: 6,left:10),
-                                            child: DropdownButtonHideUnderline(
-                                              child: DropdownButton<GradeTeacher>(
-                                                value:TeacherCubit.get(context).currentItem ,
-                                                hint: Text('choose a class'),
-                                                onChanged: (GradeTeacher? newValue)
-                                                {TeacherCubit.get(context).gradeChangeItem(newValue!);
-
-
-
-                                                },
-                                                items:
-                                                grade.map<DropdownMenuItem<GradeTeacher>>((GradeTeacher value) {
-                                                  return DropdownMenuItem<GradeTeacher>(
-                                                    value: value,
-                                                    child: Text(value.grade.toString()+ ' ' +value.section.toString()),
-                                                  );
-                                                }).toList(),
-
-
-
-
+                                Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          right: 20, left: 20),
+                                      child: Container(
+                                        width: 320,
+                                        height: 60,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                blurRadius: 2,
+                                                color: Color(0x3A75A4FF),
+                                                spreadRadius: 5),
+                                          ],
+                                          border: Border.all(
+                                              color: AppColors.borderColor),
+                                          color: Colors.white,
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 6,
+                                              right: 30,
+                                              bottom: 6,
+                                              left: 10),
+                                          child: DropdownButtonHideUnderline(
+                                            child: DropdownButton<GradeTeacher>(
+                                              value: TeacherCubit.get(context)
+                                                  .currentItem,
+                                              hint: Text(
+                                                'choose a class',
                                                 style: TextStyle(
-                                                    fontSize: 20,
                                                     color: AppColors.darkBlue),
-                                                icon: Icon(
-                                                  Icons.arrow_drop_down,
-                                                  color: AppColors.darkBlue,
-                                                ),
-                                                dropdownColor: Colors.white,
                                               ),
+                                              onChanged:
+                                                  (GradeTeacher? newValue) {
+                                                TeacherCubit.get(context)
+                                                    .gradeChangeItem(newValue!);
+                                              },
+                                              items: grade.map<
+                                                      DropdownMenuItem<
+                                                          GradeTeacher>>(
+                                                  (GradeTeacher value) {
+                                                return DropdownMenuItem<
+                                                    GradeTeacher>(
+                                                  value: value,
+                                                  child: Text(value.grade
+                                                          .toString() +
+                                                      ' ' +
+                                                      value.section.toString()),
+                                                );
+                                              }).toList(),
+                                              style: TextStyle(
+                                                  fontSize: 20,
+                                                  color: AppColors.darkBlue),
+                                              icon: Icon(
+                                                Icons.arrow_drop_down,
+                                                color: AppColors.darkBlue,
+                                              ),
+                                              dropdownColor: Colors.white,
                                             ),
                                           ),
                                         ),
                                       ),
-                                      SizedBox(
-                                        height: 20,
-                                      )
-                                    ],
-                                  ),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    )
+                                  ],
+                                ),
                                 SizedBox(
                                   height: 40,
                                 ),
