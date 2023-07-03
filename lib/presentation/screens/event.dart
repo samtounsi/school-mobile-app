@@ -1,10 +1,12 @@
 
 import 'package:flutter/material.dart';
+import 'package:mobile_schoolapp/presentation/components%20and%20constants/components.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/constants.dart';
+import 'package:mobile_schoolapp/presentation/screens/addEventTeacher.dart';
 
 
-class Event extends StatelessWidget {
-  const Event({Key? key}) : super(key: key);
+class TeacherEvent extends StatelessWidget {
+  const TeacherEvent({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class Event extends StatelessWidget {
               padding: const EdgeInsets.only(top: 100),
               child: ListView.separated(
                   shrinkWrap:true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: BouncingScrollPhysics(),
                   itemBuilder:(context, index) {
                     return Padding(
                       padding: const EdgeInsets.all(20.0),
@@ -104,7 +106,25 @@ class Event extends StatelessWidget {
                   ), itemCount: 10)
 
           ),
-          TextButton(onPressed:(){}, child:Text('ok'))
+          Padding(
+            padding: const EdgeInsets.only(bottom: 20,right: 10),
+            child: Container(
+              height: 50,
+              width: 50,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(60),
+                color: AppColors.aqua
+              ),
+                child:IconButton(
+                  onPressed: (){
+                    navigateTo(context, AddEventTeacher());
+                  },
+                  icon: Icon(Icons.add,
+                  color: AppColors.darkBlue,
+                  size:30 ,),
+                )),
+          ),
+
         ],
       ),
     );

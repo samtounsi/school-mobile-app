@@ -23,66 +23,103 @@ class FeedBack extends StatelessWidget {
           backgroundColor: Colors.transparent,
             body: Form(
               key: formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 30,top: 50,right: 30),
-                    child: Container(
-                      width: 300,
-                      height: 200,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(45),
-                          color: Colors.white,
-                          boxShadow:[
-                            BoxShadow(
-                                blurRadius: 2, color: Color(0x3A75A4FF), spreadRadius: 5),
-                          ],
-                      border:Border.all(color: AppColors.borderColor
-                      ) ),
-                      child:   Center(
-                        child: defaultformfeild(
-                          radius: 45,
-
-                          width: 300,
-                          height: 200,
-
-                          maxChars: [
-                            new LengthLimitingTextInputFormatter(300
-                             ),
-                          ],
-                          controller: controller,
-                          type: TextInputType.text,
-                          label:'' ,
-                          validate:(value) {
-                            if (value.toString().isEmpty) {
-                              return 'enter your FeedBack';
-                            }
-                          },
-                          textStyle: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20,left: 15),
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: Colors.white,
+                            child: IconButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              icon: Icon(
+                                Icons.arrow_back,
+                                color: AppColors.darkBlue,
+                              ),
+                            ),
                           ),
-                          color: Colors.white,
-
-                        ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            'Feedback',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          )
+                        ],
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 45,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      defaultTextButton(text:'Submit',function: (){
-                        if(formKey.currentState!.validate()){
-                        }
-                      },radius: 10.0 ,
-                      background: AppColors.lightOrange),
-                    ],
-                  )
-                ],
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+
+                        Padding(
+                          padding: const EdgeInsets.only(left: 30,top:180,right: 30),
+                          child: Container(
+                            width: 300,
+                            height: 200,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(45),
+                                color: Colors.white,
+                                boxShadow:[
+                                  BoxShadow(
+                                      blurRadius: 2, color: Color(0x3A75A4FF), spreadRadius: 5),
+                                ],
+                            border:Border.all(color: AppColors.borderColor
+                            ) ),
+                            child:   Center(
+                              child: defaultformfeild(
+                                radius: 45,
+
+                                width: 300,
+                                height: 200,
+
+                                maxChars: [
+                                  new LengthLimitingTextInputFormatter(300
+                                   ),
+                                ],
+                                controller: controller,
+                                type: TextInputType.text,
+                                label:'' ,
+                                validate:(value) {
+                                  if (value.toString().isEmpty) {
+                                    return 'enter your FeedBack';
+                                  }
+                                },
+                                textStyle: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                color: Colors.white,
+
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 45,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            defaultTextButton(text:'Send'
+                                '',function: (){
+                              if(formKey.currentState!.validate()){
+                              }
+                            },radius: 10.0 ,
+                            background: AppColors.lightOrange),
+                          ],
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
             )),
       ),

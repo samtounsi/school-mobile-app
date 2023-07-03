@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/blocStudent/stateStudent.dart';
 import 'package:mobile_schoolapp/presentation/screens/event.dart';
+import 'package:mobile_schoolapp/presentation/screens/eventS&P.dart';
+import 'package:mobile_schoolapp/presentation/screens/setting.dart';
 import 'package:mobile_schoolapp/presentation/screens/studenthome.dart';
 import 'package:mobile_schoolapp/presentation/screens/studentprofile.dart';
+
+import '../../../presentation/screens/contacts.dart';
 
 
 class StudentCubit extends Cubit<StudentState>{
@@ -12,11 +16,10 @@ class StudentCubit extends Cubit<StudentState>{
   int? currentIndex=0;
   List<Widget>studentScreen=[
     StudentHome(),
-    Event(),
+    EventScreen(),
     StudentProfile(),
-
-    Center(child: Text('Chat')),
-    Center(child: Text('Setting')),
+    ChatContacts(),
+    Setting()
 
   ];
   void changeIndex(int index){

@@ -7,6 +7,8 @@ import 'package:mobile_schoolapp/presentation/screens/setting.dart';
 import 'package:mobile_schoolapp/presentation/screens/teacherhome.dart';
 import 'package:mobile_schoolapp/presentation/screens/teacherprofile.dart';
 
+import '../../../presentation/screens/contacts.dart';
+
 
 class TeacherCubit extends Cubit<TeacherState> {
   TeacherCubit() : super(InitialTeacherState());
@@ -16,9 +18,9 @@ class TeacherCubit extends Cubit<TeacherState> {
   List<Widget> teacherScreen = [
     TeacherHome(),
 
-    Event(),
+    TeacherEvent(),
     TeacherProfile(),
-    Center(child: Text('chat')),
+    ChatContacts(),
    Setting(),
   ];
   GradeTeacher? currentItem;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/constants.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/subject_text.dart';
-import 'package:mobile_schoolapp/presentation/components%20and%20constants/utils.dart';
+import 'package:mobile_schoolapp/shared/utils.dart';
 
 final columns = ['Day', '1', '2', '3', '4', '5', '6'];
 List<Lessons> lesson = [

@@ -19,9 +19,7 @@ class SectionAttendance extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (BuildContext context) =>SectionAttendanceCubit(),
-      child: BlocConsumer<SectionAttendanceCubit,SectionAttendanceStates>(
+    return  BlocConsumer<SectionAttendanceCubit,SectionAttendanceStates>(
         listener: (context,state){},
         builder: (context,state)
         {
@@ -45,7 +43,10 @@ class SectionAttendance extends StatelessWidget {
                   (
                   backgroundColor: Colors.white,
                   child: IconButton(
-                    onPressed: (){},
+                    onPressed: (){
+
+                      Navigator.pop(context);
+                    },
                     icon: Icon(Icons.arrow_back,
                       color: AppColors.darkBlue,),),
                 ),
@@ -199,8 +200,7 @@ class SectionAttendance extends StatelessWidget {
         );
 
         },
-      ),
-    );
+      );
   }
 
   Widget buildAbsentsItem(name,index,context)

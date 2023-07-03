@@ -4,8 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/logincubit/login_cubit.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/logincubit/login_states.dart';
-import 'package:mobile_schoolapp/presentation/components%20and%20constants/components.dart';
+import 'package:mobile_schoolapp/presentation/animations/teacherMotion.dart';
+import 'package:mobile_schoolapp/presentation/components%20and%20constants/componentslogin.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/constants.dart';
+
+import 'package:mobile_schoolapp/presentation/screens/teacherhome.dart';
 
 
 
@@ -44,7 +47,7 @@ class Login extends StatelessWidget {
                         padding: const EdgeInsets.fromLTRB(30, 50, 0, 0),
                         child: Text(
                           'Welcome here\nLog in with your account',
-                          style: TextStyle(fontSize: 23, color: AppColors.blue),
+                          style: TextStyle(fontSize: 23, color: AppColors.darkBlue),
                         ),
                       ),
                       SizedBox(
@@ -55,7 +58,7 @@ class Login extends StatelessWidget {
                             width: 300,
                             height: 300,
                             child: SvgPicture.asset(
-                                'assets/images/Back to school-pana BLUE.svg')),
+                                'images/Back to school-pana BLUE.svg')),
                       ),
                       SizedBox(
                         height: 30,
@@ -103,7 +106,9 @@ class Login extends StatelessWidget {
                           builder: (context) => defaultButton(
                               text: 'Continue',
                               onPressed: () {
-                                if (formkey.currentState!.validate()) {}
+                                if (formkey.currentState!.validate()) {
+                                  navigateTo(context, TeacherMotion());
+                                }
                               }),
                           fallback: (context) => Center(
                             child: CircularProgressIndicator(

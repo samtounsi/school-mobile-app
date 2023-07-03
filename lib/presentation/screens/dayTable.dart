@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mobile_schoolapp/presentation/classes/dayNameItem.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/constants.dart';
 
-
 class DayTable extends StatelessWidget {
   Items name;
 
@@ -14,28 +13,30 @@ class DayTable extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('images/Wallpaper 2.png'),
-              fit: BoxFit.fill),
+              image: AssetImage('images/Wallpaper 2.png'), fit: BoxFit.fill),
         ),
         child: Scaffold(
           backgroundColor: Colors.transparent,
           body: Column(
             children: [
-              Row(
-                children: [
-                  IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: Icon(
-                        Icons.arrow_back,
-                        color: AppColors.lightOrange,
-                        size: 35,
-                      )),
-                ],
+              Padding(
+                padding: const EdgeInsets.only(top: 30),
+                child: Row(
+                  children: [
+                    IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: Icon(
+                          Icons.arrow_back,
+                          color: AppColors.darkBlue,
+                          size: 35,
+                        )),
+                  ],
+                ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 12, left: 20),
+                padding: const EdgeInsets.only(top: 10, left: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [

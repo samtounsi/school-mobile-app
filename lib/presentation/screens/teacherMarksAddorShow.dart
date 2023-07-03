@@ -39,7 +39,7 @@ class TeacherMarksAddOrShow extends StatelessWidget {
                     left: 60,
                     right: 30
                   ),
-                  child: Image.asset('images/exam (1).png',height: 250,width: 250,
+                  child: Image.asset('images/exam (1)head.png',height: 250,width: 250,
                   fit: BoxFit.cover,),
                 ),
 

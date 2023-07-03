@@ -7,7 +7,8 @@ class AppColors {
   static const lightOrange = Color(0xFFF0B976);
   static const borderColor = Color(0xFFF0EDED);
   static const shadow=Color(0xF295087);
- static Color blue = Color.fromARGB(255, 34, 88, 164);
+  static Color blue = Color.fromARGB(255, 34, 88, 164);
+
 
 }
 MaterialColor buildMaterialColor(Color color) {

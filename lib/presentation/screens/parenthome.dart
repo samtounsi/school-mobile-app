@@ -3,6 +3,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/components1.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/homeItem.dart';
 import 'package:mobile_schoolapp/presentation/screens/feedBack.dart';
+import 'package:mobile_schoolapp/presentation/screens/student_attendance.dart';
+import 'package:mobile_schoolapp/presentation/screens/student_time_table.dart';
+
+import 'chooseMarksScreen.dart';
 
 
 class ParentHome extends StatelessWidget {
@@ -21,7 +25,9 @@ class ParentHome extends StatelessWidget {
               height:120,
             ),
             InkWell(
-                onTap: (){},
+                onTap: (){
+                  navigateTo(context, StudentTimeTable());
+                },
                 child: HomeText(
                     text: 'Time Table',numS: 22, image: 'images/schedule.png')),
             SizedBox(
@@ -31,7 +37,9 @@ class ParentHome extends StatelessWidget {
               ),
             ),
             InkWell(
-              onTap: (){},
+              onTap: (){
+                navigateTo(context, StudentAttendance());
+              },
               child: HomeText(
                   numS: 18,
                   text: 'Attendance monitoring ', image: 'images/moitor.png'),
@@ -43,7 +51,9 @@ class ParentHome extends StatelessWidget {
               ),
             ),
             InkWell(
-              onTap: (){},
+              onTap: (){
+                navigateTo(context, ChooseMarks());
+              },
               child: HomeText(
                   text: 'Marks',numS: 22, image: 'images/grade.png'),
             ),

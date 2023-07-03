@@ -3,6 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/components1.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/homeItem.dart';
 import 'package:mobile_schoolapp/presentation/screens/chooseMarksScreen.dart';
+import 'package:mobile_schoolapp/presentation/screens/studentHistoryQuizOrNew.dart';
+import 'package:mobile_schoolapp/presentation/screens/student_attendance.dart';
 import 'package:mobile_schoolapp/presentation/screens/student_time_table.dart';
 
 
@@ -34,7 +36,9 @@ class StudentHome extends StatelessWidget {
               ),
             ),
             InkWell(
-              onTap: (){},
+              onTap: (){
+                navigateTo(context, StudentAttendance());
+              },
               child: HomeText(
                 numS: 18,
                   text: 'Attendance monitoring ', image: 'images/moitor.png'),
@@ -46,7 +50,10 @@ class StudentHome extends StatelessWidget {
               ),
             ),
             InkWell(
-                onTap: (){},
+                onTap: (){
+                  navigateTo(context, StudentQuizzesNewOrHistory());
+
+                },
                 child: HomeText(numS:22,text: 'Quizzes', image: 'images/exam.png')),
             SizedBox(
               height: 30,

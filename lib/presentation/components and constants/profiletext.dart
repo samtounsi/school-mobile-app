@@ -32,7 +32,7 @@ class ProfileText extends StatelessWidget {
         ),
         Container(
           width: 340,
-          height: 80,
+          height: 85,
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             border:  Border.all(color: AppColors.borderColor),
@@ -40,17 +40,20 @@ class ProfileText extends StatelessWidget {
                 color: AppColors.shadow,
                 spreadRadius: 15)],
             color: Colors.white,
-            borderRadius: BorderRadius.circular(10),//10
+            borderRadius: BorderRadius.circular(10),
 
           ),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(
-              text2,
-              style: const TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.w500,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Text(
+                text2,
+                style: const TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w500,
 
+                ),
               ),
             ),
           ),

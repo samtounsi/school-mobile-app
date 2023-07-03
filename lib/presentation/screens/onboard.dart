@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mobile_schoolapp/presentation/components%20and%20constants/components.dart';
+import 'package:mobile_schoolapp/presentation/components%20and%20constants/componentslogin.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/constants.dart';
+
 import 'package:mobile_schoolapp/presentation/screens/login.dart';
 
 
@@ -39,7 +40,7 @@ class Onboard extends StatelessWidget {
               Row(
                 children: [
                   Spacer(),
-                  SvgPicture.asset('assets/images/Back to school-amico ORANGE.svg'),
+                  SvgPicture.asset('images/Back to school-amico ORANGE.svg'),
                   Spacer(),
                 ],
               ),
