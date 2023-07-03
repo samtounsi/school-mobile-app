@@ -123,6 +123,12 @@ class QuizCubit extends Cubit<QuizState> {
         ],
         isSelected: false),
   ];
+  void minusCounter()
+  {
+    if(count>1) count--;
+    emit(CounterMinus());
+
+  }
 
   int counterOfQuestion = 6;
 

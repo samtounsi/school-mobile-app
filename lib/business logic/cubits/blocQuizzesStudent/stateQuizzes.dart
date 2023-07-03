@@ -7,6 +7,7 @@ class CheckStateAnswer extends QuizState{}
 class ColorState extends QuizState{}
 
 class CounterPlus extends QuizState {}
+class CounterMinus extends QuizState {}
 
 class ChangeAnswerIndex extends QuizState{}
 

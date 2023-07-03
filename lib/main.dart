@@ -23,6 +23,7 @@ import 'package:mobile_schoolapp/presentation/screens/eventS&P.dart';
 import 'package:mobile_schoolapp/presentation/screens/login.dart';
 import 'package:mobile_schoolapp/presentation/screens/onboard.dart';
 import 'package:mobile_schoolapp/presentation/screens/quizzesHistory.dart';
+import 'package:mobile_schoolapp/presentation/screens/quizzesHistoryQuestion.dart';
 import 'package:mobile_schoolapp/presentation/screens/quizzesScreenStudent.dart';
 import 'package:mobile_schoolapp/presentation/screens/score_board.dart';
 import 'package:mobile_schoolapp/presentation/screens/show_marks_for_student.dart';
@@ -63,6 +64,6 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               primarySwatch: buildMaterialColor(AppColors.darkBlue),
             ),
-            home: StudentMotion()));
+            home: QuizzesHistory()));
   }
 }

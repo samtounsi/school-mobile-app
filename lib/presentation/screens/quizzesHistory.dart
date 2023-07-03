@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_schoolapp/presentation/classes/quizzesHistory.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/components1.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/constants.dart';
+import 'package:mobile_schoolapp/presentation/screens/quizzesHistoryQuestion.dart';
 import 'package:mobile_schoolapp/presentation/screens/teacherAddQuizesOrHistory.dart';
 
 class QuizzesHistory extends StatelessWidget {
@@ -31,51 +32,56 @@ class QuizzesHistory extends StatelessWidget {
               child: ListView.separated(
                 itemCount:quizzesHistory.length,
                 itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(right: 30,left: 30,top: 40),
-                    child: Container(
-                      height: 100,
-                      width: 300,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(35),
-                        boxShadow: [
-                          BoxShadow(
-                              blurRadius: 2, color: Color(0x3A75A4FF), spreadRadius: 5),
-                        ],
+                  return InkWell(
+                    onTap: (){
+                      navigateTo(context, QuizzesScreenHQ(subject: quizzesHistory[index].name,));
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 30,left: 30,top: 40),
+                      child: Container(
+                        height: 100,
+                        width: 300,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(35),
+                          boxShadow: [
+                            BoxShadow(
+                                blurRadius: 2, color: Color(0x3A75A4FF), spreadRadius: 5),
+                          ],
+                        ),
+                        child:Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 10),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text('${quizzesHistory[index].name}',
+                                  style: TextStyle(fontSize: 30,
+                                  color: AppColors.darkBlue),),
+
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: 10,),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 20),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+
+                                children: [
+                                  Container(),
+                                  Text('${quizzesHistory[index].date}',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: AppColors.lightOrange
+                                  ),)
+                                ],
+                              ),
+                            )
+                          ],
+                        ) ,
                       ),
-                      child:Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text('${quizzesHistory[index].name}',
-                                style: TextStyle(fontSize: 30,
-                                color: AppColors.darkBlue),),
-
-                              ],
-                            ),
-                          ),
-                          SizedBox(height: 10,),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-
-                              children: [
-                                Container(),
-                                Text('${quizzesHistory[index].date}',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: AppColors.lightOrange
-                                ),)
-                              ],
-                            ),
-                          )
-                        ],
-                      ) ,
                     ),
                   );
 
