@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/blocAddQuizzes/cubit.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/blocAttendance/cubit.dart';
+import 'package:mobile_schoolapp/business%20logic/cubits/blocCalender/cubit.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/blocChat/cubit.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/blocMark/cubit.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/blocParent/cubitParent.dart';
@@ -56,6 +57,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => AddQuizCubit()),
           BlocProvider(create: (context) => StudentCubit()),
           BlocProvider(create: (context) => ParentCubit()),
+          BlocProvider(create: (context) => CalendarCubit()..getHolidays()),
 
         ],
         child: MaterialApp(
@@ -64,6 +66,6 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               primarySwatch: buildMaterialColor(AppColors.darkBlue),
             ),
-            home: QuizzesHistory()));
+            home: StudentMotion()));
   }
 }

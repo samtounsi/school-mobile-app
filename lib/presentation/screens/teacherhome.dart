@@ -4,6 +4,7 @@ import 'package:mobile_schoolapp/presentation/components%20and%20constants/compo
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/homeItem.dart';
 import 'package:mobile_schoolapp/presentation/screens/attendance_for_teacher.dart';
 import 'package:mobile_schoolapp/presentation/screens/chooseClassTeacher.dart';
+import 'package:mobile_schoolapp/presentation/screens/school_calendar.dart';
 import 'package:mobile_schoolapp/presentation/screens/teacherAddQuizesOrHistory.dart';
 import 'package:mobile_schoolapp/presentation/screens/teacherTimeTable1.dart';
 
@@ -56,7 +57,9 @@ class TeacherHome extends StatelessWidget {
 
             ),
             InkWell(
-                onTap: (){},
+                onTap: (){
+                  navigateTo(context, SchoolCalendarScreen());
+                },
                 child: HomeText(text: 'Calender',numS: 22, image: 'images/calendar (1).png')),
             SizedBox(
               height: 10,
