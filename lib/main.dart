@@ -66,6 +66,6 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               primarySwatch: buildMaterialColor(AppColors.darkBlue),
             ),
-            home: StudentMotion()));
+            home: TeacherMotion()));
   }
 }

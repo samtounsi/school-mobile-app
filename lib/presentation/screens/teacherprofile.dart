@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mobile_schoolapp/presentation/screens/teacherTimeTable1.dart';
 
 import '../components and constants/components.dart';
 import '../components and constants/constants.dart';
@@ -150,7 +151,9 @@ class _TeacherProfileState extends State<TeacherProfile> {
                       Center(
                                 child: defaultTextButton(
                                     text: 'schedule',
-                                    function: (){},
+                                    function: (){
+                                      navigateTo(context, TeacherTimeTable());
+                                    },
                                     radius: 50.0),
                       ),
                       SizedBox(height: 20,),
