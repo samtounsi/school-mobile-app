@@ -10,7 +10,8 @@ import 'package:mobile_schoolapp/presentation/screens/teacherprofile.dart';
 import '../../../presentation/screens/contacts.dart';
 
 
-class TeacherCubit extends Cubit<TeacherState> {
+class
+TeacherCubit extends Cubit<TeacherState> {
   TeacherCubit() : super(InitialTeacherState());
 
   static TeacherCubit get(context) => BlocProvider.of(context);
@@ -28,6 +29,7 @@ class TeacherCubit extends Cubit<TeacherState> {
   {
     currentItem=value;
     emit(ChangeDropDownItem());
+    print(currentItem);
 
 
   }

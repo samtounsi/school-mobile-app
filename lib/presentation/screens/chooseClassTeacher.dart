@@ -166,7 +166,8 @@ class _ChooseClassTeacherState extends State<ChooseClassTeacher> {
                             ),
                             MaterialButton(
                               onPressed: () {
-                                navigateTo(context, myClasses());
+                                // navigateTo(context, myClasses());
+                              print(TeacherCubit.get(context).currentItem.toString());
                               },
                               child: Text(
                                 'submit',
@@ -188,5 +189,9 @@ class _ChooseClassTeacherState extends State<ChooseClassTeacher> {
         },
       ),
     );
+  }
+  post(String grade)
+  {
+    print(grade);
   }
 }
