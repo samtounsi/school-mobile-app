@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mobile_schoolapp/network/cache_helper.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/componentslogin.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/constants.dart';
 
 import 'package:mobile_schoolapp/presentation/screens/login.dart';
-
 
 //import 'package:flutter_svg/flutter_svg.dart';
 
@@ -51,9 +51,13 @@ class Onboard extends StatelessWidget {
                 children: [
                   Spacer(),
                   defaultButton(
-                      text: 'Login',
+                      text: 'Continue',
                       onPressed: () {
-                        navigateAndFinish(context, Login());
+                        CacheHelper.saveData(key: 'onBoard', value: true).then((value){
+                          if(value){
+                            navigateAndFinish(context, Login());
+                          }
+                        });
                       }),
                   Spacer(),
                 ],

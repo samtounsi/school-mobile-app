@@ -1,122 +1,208 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mobile_schoolapp/business%20logic/cubits/SettingsCubit/cubit.dart';
+import 'package:mobile_schoolapp/business%20logic/cubits/SettingsCubit/states.dart';
+import 'package:mobile_schoolapp/network/cache_helper.dart';
+import 'package:mobile_schoolapp/presentation/components%20and%20constants/components.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/constants.dart';
+import 'package:mobile_schoolapp/presentation/screens/login.dart';
 
 class Setting extends StatelessWidget {
   const Setting({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          image: DecorationImage(
-        image: AssetImage("images/Wallpaper 2.png"),
-        fit: BoxFit.fill,
-      )),
-      child: Padding(
-        padding: const EdgeInsets.only(top: 80),
-        child: Column(
-          children: [
-            InkWell(
-              onTap: () {
-                print('9');
-              },
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          title: Column(
-                            children: [
-                              InkWell(
-                                onTap: () {},
-                                child: ListTile(
-                                  title: Text('Arabic',
-                                      style: TextStyle(
-                                          color: AppColors.darkBlue,
-                                          fontSize: 20)),
+    return BlocConsumer<SettingsCubit, SettingsStates>(
+      listener: (context, state) {
+        if (state is SettingsLogoutSuccessState) {
+          CacheHelper.removeData(key: 'token').then((value) {
+            CacheHelper.removeData(key: 'type');
+          }).then((value) {
+            CacheHelper.removeData(key: 'id');
+            navigateAndFinish(context, Login());
+          }).then((value){
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Center(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: AppColors.aqua,
+                  borderRadius: BorderRadius.circular(17),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    state.logoutModel!.messege.toString(),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            behavior: SnackBarBehavior.floating,
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            width: MediaQuery.of(context).size.width-10,
+          ));
+
+          });
+        }
+        else if(state is SettingsLogoutErrorState){
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Center(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: AppColors.lightOrange,
+                  borderRadius: BorderRadius.circular(17),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    state.error,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            behavior: SnackBarBehavior.floating,
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            width: MediaQuery.of(context).size.width-10,
+          ));
+
+        }
+      },
+      builder: (context, state) => Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+          image: AssetImage("images/Wallpaper 2.png"),
+          fit: BoxFit.fill,
+        )),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 60),
+          child: Column(
+            children: [
+              InkWell(
+                onTap: () {
+                  print('9');
+                },
+                child: Column(
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: Column(
+                              children: [
+                                InkWell(
+                                  onTap: () {},
+                                  child: ListTile(
+                                    title: Text('Arabic',
+                                        style: TextStyle(
+                                            color: AppColors.darkBlue,
+                                            fontSize: 20)),
+                                  ),
                                 ),
+                                InkWell(
+                                  onTap: () {},
+                                  child: ListTile(
+                                    title: Text('English',
+                                        style: TextStyle(
+                                            color: AppColors.darkBlue,
+                                            fontSize: 20)),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                      child: ListTile(
+                        leading: Icon(
+                          Icons.translate,
+                          color: AppColors.lightOrange,
+                        ),
+                        title: Text(
+                          'translation',
+                          style: TextStyle(
+                              fontSize: 22, color: AppColors.lightOrange),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 7,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: Text(
+                              'Are you sure?',
+                              style: TextStyle(color: AppColors.darkBlue),
+                            ),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () =>
+                                    Navigator.pop(context, 'Cancel'),
+                                child: const Text('Cancel',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        color: AppColors.darkBlue)),
                               ),
-                              InkWell(
-                                onTap: () {},
-                                child: ListTile(
-                                  title: Text('English',
-                                      style: TextStyle(
-                                          color: AppColors.darkBlue,
-                                          fontSize: 20)),
-                                ),
-                              )
+                              TextButton(
+                                onPressed: () {
+                                  String token =
+                                      CacheHelper.getData(key: 'token');
+                                  SettingsCubit.get(context).Logout(token);
+                                  // CacheHelper.removeData(key: 'token');
+                                  // CacheHelper.removeData(key: 'type');
+                                  // CacheHelper.removeData(key: 'id');
+                                  
+                                },
+                                child: const Text('OK',
+                                    style: TextStyle(
+                                        color: AppColors.darkBlue,
+                                        fontSize: 18)),
+                              ),
                             ],
                           ),
+                        );
+                      },
+                      child: ListTile(
+                        leading: Icon(
+                          Icons.logout_outlined,
+                          color: AppColors.lightOrange,
                         ),
-                      );
-                    },
-                    child: ListTile(
-                      leading: Icon(
-                        Icons.translate,
-                        color: AppColors.lightOrange,
-                      ),
-                      title: Text(
-                        'translation',
-                        style: TextStyle(
-                            fontSize: 22, color: AppColors.lightOrange),
+                        title: Text(
+                          'Logout',
+                          style: TextStyle(
+                              fontSize: 22, color: AppColors.lightOrange),
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          title: Text(
-                            'Are you sure?',
-                            style: TextStyle(color: AppColors.darkBlue),
-                          ),
-                          actions: <Widget>[
-                            TextButton(
-                              onPressed: () => Navigator.pop(context, 'Cancel'),
-                              child: const Text('Cancel',
-                                  style: TextStyle(
-                                      fontSize: 18, color: AppColors.darkBlue)),
-                            ),
-                            TextButton(
-                              onPressed: () => Navigator.pop(context, 'OK'),
-                              child: const Text('OK',
-                                  style: TextStyle(
-                                      color: AppColors.darkBlue, fontSize: 18)),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                    child: ListTile(
-                      leading: Icon(
-                        Icons.logout_outlined,
-                        color: AppColors.lightOrange,
-                      ),
-                      title: Text(
-                        'Logout',
-                        style: TextStyle(
-                            fontSize: 22, color: AppColors.lightOrange),
-                      ),
+                    SizedBox(
+                      height: 30,
                     ),
-                  ),
-                  SizedBox(
-                    height: 40,
-                  ),
-                  Container(
-                      width: 400,
-                      height: 400,
-                      child: SvgPicture.asset("images/setting3.svg"))
-                ],
-              ),
-            )
-          ],
+                    Container(
+                        width: 400,
+                        height: 400,
+                        child: SvgPicture.asset("images/setting3.svg"))
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
