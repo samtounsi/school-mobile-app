@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mobile_schoolapp/business%20logic/cubits/student_time_table/cubit.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/components1.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/homeItem.dart';
 import 'package:mobile_schoolapp/presentation/screens/chooseMarksScreen.dart';
@@ -26,7 +27,8 @@ class StudentHome extends StatelessWidget {
             ),
             InkWell(
                 onTap: (){
-                  navigateTo(context, StudentTimeTable());
+                 navigateTo(context, StudentTimeTable());
+                 StudentTimetableCubit.get(context).getStudentsTimetable();
                 },
                 child: HomeText(
                     text: 'Time Table',numS: 22, image: 'images/schedule.png')),

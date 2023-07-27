@@ -30,3 +30,7 @@ MaterialColor buildMaterialColor(Color color) {
   });
   return MaterialColor(color.value, swatch);
 }
+String? token;
+int?id;
+int? profileId;
+String? type;

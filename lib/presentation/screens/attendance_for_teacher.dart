@@ -1,28 +1,35 @@
 
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/attendanceCubit/cubit.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/attendanceCubit/states.dart';
+import 'package:mobile_schoolapp/business%20logic/cubits/blocTeacher/stateTeacher.dart';
+import 'package:mobile_schoolapp/data/models/get_absent_students_model.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/attendance.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/components1.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/constants.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 
-
-
-
-List<String> absents=['Fatima Alkhlif','Sama Tunsi','Nour Ghanem','Yumna Hashem','Abeer Barakat'];
-
+var model;
 class SectionAttendance extends StatelessWidget {
   const SectionAttendance({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return  BlocConsumer<SectionAttendanceCubit,SectionAttendanceStates>(
-        listener: (context,state){},
+        listener: (context,state)
+        {
+          if(state is GetStudentsAbsenceSuccessState)
+          {
+             model=state.getAbsentStudents.absenceStudents;
+          }
+        },
         builder: (context,state)
         {
+       model=SectionAttendanceCubit.get(context).getAbsentStudents==null? SectionAttendanceCubit.get(context).emptyAbsent:
+       SectionAttendanceCubit.get(context).getAbsentStudents?.absenceStudents;
        DateTime today= SectionAttendanceCubit.get(context).today;
         return Container(
           decoration: BoxDecoration(
@@ -44,7 +51,6 @@ class SectionAttendance extends StatelessWidget {
                   backgroundColor: Colors.white,
                   child: IconButton(
                     onPressed: (){
-
                       Navigator.pop(context);
                     },
                     icon: Icon(Icons.arrow_back,
@@ -155,8 +161,8 @@ class SectionAttendance extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            buildAttendance('Present: ', '25'),
-                            buildAttendance('Absent:  ', '5'),
+                            buildAttendance('Present: ', SectionAttendanceCubit.get(context).getAbsentStudents?.numberOfAttendences.toString()),
+                            buildAttendance('Absent:  ', SectionAttendanceCubit.get(context).getAbsentStudents?.numberOfAbsences.toString()),
                             Padding(
                               padding: EdgeInsetsDirectional.only(top: 10,bottom: 10,start: 10),
                               child: Text('Absent Students: ',
@@ -167,26 +173,33 @@ class SectionAttendance extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            ListView.separated(
-                                scrollDirection: Axis.vertical,
-                                shrinkWrap: true,
-                               physics: NeverScrollableScrollPhysics(),
-                                itemBuilder: (context,index)
-                                {
-                                  return Padding(
-                                      padding: EdgeInsetsDirectional.only(start: 20),
-                                      child: buildAbsentsItem(absents[index], index, context));
-                                },
-                                separatorBuilder:(context,index)
-                                {
-                                  return Padding(
-                                    padding: EdgeInsetsDirectional.only(start : 20,end: 180),
-                                    child: myDivider(
-                                      dividerColor: AppColors.darkBlue,
-                                    ),
-                                  );
-                                } ,
-                                itemCount: absents.length),
+                            ConditionalBuilder(
+                              condition: state is ! GetStudentsAbsenceLoadingState,
+                              builder: (context)
+                              {
+                                return ListView.separated(
+                                    scrollDirection: Axis.vertical,
+                                    shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemBuilder: (context,index)
+                                    {
+                                      return Padding(
+                                          padding: EdgeInsetsDirectional.only(start: 20),
+                                          child: buildAbsentsItem(model[index], index, context));
+                                    },
+                                    separatorBuilder:(context,index)
+                                    {
+                                      return Padding(
+                                        padding: EdgeInsetsDirectional.only(start : 20,end: 180),
+                                        child: myDivider(
+                                          dividerColor: AppColors.darkBlue,
+                                        ),
+                                      );
+                                    } ,
+                                    itemCount: model.length);
+                              },
+                              fallback: (context)=>Center(child: CircularProgressIndicator()),
+                            ),
                           ],
                         ),
                       ),
@@ -203,11 +216,12 @@ class SectionAttendance extends StatelessWidget {
       );
   }
 
-  Widget buildAbsentsItem(name,index,context)
+  Widget buildAbsentsItem(AbsenceStudents model,index,context)
   {
     return Padding(
       padding: EdgeInsetsDirectional.symmetric(vertical: 3),
-      child: Text(name,
+      child: Text(model.firstName.toString()+" "+
+          model.fatherName.toString()+' '+model.lastName.toString(),
       style: TextStyle(
         fontSize: 20,
         color: AppColors.darkBlue

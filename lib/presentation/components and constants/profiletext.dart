@@ -24,7 +24,7 @@ class ProfileText extends StatelessWidget {
         style: TextStyle(
           fontSize: 27,
           fontWeight: FontWeight.w700,
-          color: AppColors.darkBlue
+          color: AppColors.lightOrange
         ),
         ),
         SizedBox(
@@ -50,6 +50,7 @@ class ProfileText extends StatelessWidget {
               child: Text(
                 text2,
                 style: const TextStyle(
+                  color: AppColors.darkBlue,
                   fontSize: 22,
                   fontWeight: FontWeight.w500,
 

@@ -17,3 +17,4 @@ class SchoolLoginErrorState extends SchoolLoginStates{
 }
 
 class SchoolLoginChangePWVisabilityState extends SchoolLoginStates{}
+

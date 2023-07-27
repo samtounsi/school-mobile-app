@@ -7,7 +7,6 @@ import '../../business logic/cubits/blocMark/states.dart';
 import '../components and constants/constants.dart';
 import '../components and constants/marks.dart';
 
-
 class ShowMarks extends StatelessWidget {
   const ShowMarks({Key? key}) : super(key: key);
 

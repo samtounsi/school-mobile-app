@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mobile_schoolapp/business%20logic/cubits/attendanceCubit/cubit.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/components1.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/constants.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/homeItem.dart';
@@ -61,7 +62,9 @@ class myClasses extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    navigateTo(context, SectionAttendance());
+                    SectionAttendanceCubit.get(context).
+                    getAbsentStudent(grade: 'seventh',section: '2',date: SectionAttendanceCubit.get(context).today)
+                        .then((value) => navigateTo(context, SectionAttendance()));
                   },
                   child: HomeText(
                       numS: 18,

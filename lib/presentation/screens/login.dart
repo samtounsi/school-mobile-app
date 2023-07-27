@@ -29,13 +29,25 @@ class Login extends StatelessWidget {
           if (state.loginModel!.message == 'successful login') {
             CacheHelper.saveData(key: 'token', value: state.loginModel!.token)
                 .then((value) {
-              String token = state.loginModel!.token!;
+                  token = state.loginModel!.token!;
               print(token);
               print(state.loginModel!.message);
             }).then((value) {
+              CacheHelper.saveData(key: 'id', value: state.loginModel!.id)
+                  .then((value) {
+                 id = state.loginModel!.id!;
+                print(id);
+              });
+            }).then((value) {
+              CacheHelper.saveData(key: 'profile_id', value: state.loginModel!.profileId)
+                  .then((value) {
+                profileId = state.loginModel!.profileId!;
+                print(profileId);
+              });
+            }).then((value) {
               CacheHelper.saveData(key: 'type', value: state.loginModel!.type)
                   .then((value) {
-                String type = state.loginModel!.type!;
+                 type = state.loginModel!.type!;
                 print(type);
                 if (type == 'student') {
                   navigateAndFinish(context, StudentMotion());
@@ -44,38 +56,6 @@ class Login extends StatelessWidget {
                 } else if (type == 'parent') {
                   navigateAndFinish(context, ParentMotion());
                 }
-              }).then((value) {
-                CacheHelper.saveData(key: 'id', value: state.loginModel!.id)
-                    .then((value) {
-                  int id = state.loginModel!.id!;
-                  print(id);
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Center(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: AppColors.aqua,
-                  borderRadius: BorderRadius.circular(17),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    state.loginModel!.message.toString(),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            behavior: SnackBarBehavior.floating,
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            width: MediaQuery.of(context).size.width-10,
-          ));
-                });
               });
             });
           }

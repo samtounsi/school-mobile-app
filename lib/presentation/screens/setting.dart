@@ -19,9 +19,11 @@ class Setting extends StatelessWidget {
           CacheHelper.removeData(key: 'token').then((value) {
             CacheHelper.removeData(key: 'type');
           }).then((value) {
-            CacheHelper.removeData(key: 'id');
-            navigateAndFinish(context, Login());
-          }).then((value){
+            CacheHelper.removeData(key: 'id').then(
+                    (value){
+                      CacheHelper.removeData(key: 'profile_id');
+                    });
+          }).then((value) => navigateAndFinish(context, Login())).then((value){
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Center(
               child: Container(

@@ -19,7 +19,7 @@ class LoginCubit extends Cubit<SchoolLoginStates> {
     emit(SchoolLoginChangePWVisabilityState());
     password = !password;
     showPassword =
-        password ? Icons.visibility_outlined : Icons.visibility_off_outlined;
+    password ? Icons.visibility_outlined : Icons.visibility_off_outlined;
   }
 
   //login process function

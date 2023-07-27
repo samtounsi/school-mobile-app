@@ -11,6 +11,7 @@ import 'package:mobile_schoolapp/business%20logic/cubits/blocParent/cubitParent.
 import 'package:mobile_schoolapp/business%20logic/cubits/blocStudent/cubitStudent.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/blocTeacher/cubitTeacher.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/logincubit/login_cubit.dart';
+import 'package:mobile_schoolapp/business%20logic/cubits/student_time_table/cubit.dart';
 import 'package:mobile_schoolapp/network/cache_helper.dart';
 import 'package:mobile_schoolapp/presentation/animations/parentMotion.dart';
 import 'package:mobile_schoolapp/presentation/animations/studentMotion.dart';
@@ -32,6 +33,7 @@ import 'package:mobile_schoolapp/presentation/screens/quizzesScreenStudent.dart'
 import 'package:mobile_schoolapp/presentation/screens/score_board.dart';
 import 'package:mobile_schoolapp/presentation/screens/show_marks_for_student.dart';
 import 'package:mobile_schoolapp/presentation/screens/student_attendance.dart';
+import 'package:mobile_schoolapp/shared/bloc_observer.dart';
 
 import 'business logic/cubits/attendanceCubit/cubit.dart';
 import 'presentation/screens/attendance_for_teacher.dart';
@@ -42,8 +44,18 @@ void main() async {
   await CacheHelper.init();
   Widget? initWidget;
   bool? onBoard = CacheHelper.getData(key: 'onBoard');
-  String? token = CacheHelper.getData(key: 'token');
-  String? type;
+   token = CacheHelper.getData(key: 'token');
+   id=CacheHelper.getData(key: 'id');
+   profileId=CacheHelper.getData(key: 'profile_id');
+   type=CacheHelper.getData(key: 'type');
+   print(token);
+   print(id);
+   print(profileId);
+   print(type);
+  //CacheHelper.removeData(key: 'token');
+  //CacheHelper.removeData(key: 'id');
+  //CacheHelper.removeData(key: 'profile_id');
+ // CacheHelper.removeData(key: 'type');
   if (onBoard != null) {
     if (token != null) {
       type = CacheHelper.getData(key: 'type');
@@ -60,6 +72,7 @@ void main() async {
   } else {
     initWidget = Onboard();
   }
+  Bloc.observer = MyBlocObserver();
   runApp(MyApp(start: initWidget));
 }
 
@@ -67,31 +80,23 @@ class MyApp extends StatelessWidget {
   final Widget? start;
   MyApp({Key? key, this.start}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
         providers: [
-          BlocProvider(
-            create: (context) => MarksCubit(),
-          ),
-          BlocProvider(
-            create: (context) => SectionAttendanceCubit(),
-          ),
+          BlocProvider(create: (context) => MarksCubit(),),
+          BlocProvider(create: (context) => SectionAttendanceCubit(),),
+          BlocProvider(create: (context) => StudentTimetableCubit()),
           BlocProvider(create: (context) => StudentAttendanceCubit()),
           BlocProvider(create: (context) => ChatCubit()),
           BlocProvider(create: (context) => StudentAttendanceCubit()),
-          BlocProvider(create: (context) => TeacherCubit()),
+          BlocProvider(create: (context) => TeacherCubit()..getTeacherProfile(id: profileId!)),
           BlocProvider(create: (context) => AddQuizCubit()),
-          BlocProvider(create: (context) => StudentCubit()),
-          BlocProvider(create: (context) => ParentCubit()),
+          BlocProvider(create: (context) => StudentCubit()..getStudentProfile(id: profileId!)),
+          BlocProvider(create: (context) => ParentCubit()..getParentProfile(id: profileId!)),
           BlocProvider(create: (context) => CalendarCubit()..getHolidays()),
-          BlocProvider(
-            create: (context) => LoginCubit(),
-          ),
-          BlocProvider(
-            create: (context) => SettingsCubit(),
-          )
+          BlocProvider(create: (context) => LoginCubit(),),
+          BlocProvider(create: (context) => SettingsCubit(),)
         ],
         child: MaterialApp(
             debugShowCheckedModeBanner: false,

@@ -166,7 +166,7 @@ class _ChooseClassTeacherState extends State<ChooseClassTeacher> {
                             ),
                             MaterialButton(
                               onPressed: () {
-                                // navigateTo(context, myClasses());
+                                 navigateTo(context, myClasses());
                               print(TeacherCubit.get(context).currentItem.toString());
                               },
                               child: Text(
