@@ -29,15 +29,15 @@ class SchoolCalendarScreen extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 90,
+                    height: 120,
                   ),
-                  text('School Calendar',
-                      size: 27,
-                      color: AppColors.darkBlue,
-                      weight: FontWeight.w400),
-                  SizedBox(
-                    height: 10,
-                  ),
+                  // text('School Calendar',
+                  //     size: 27,
+                  //     color: AppColors.darkBlue,
+                  //     weight: FontWeight.w400),
+                  // SizedBox(
+                  //   height: 10,
+                  // ),
                   Container(
                     width: MediaQuery.of(context).size.width / 3,
                     height: 50,
@@ -306,7 +306,7 @@ class SchoolCalendarScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
+              padding: const EdgeInsets.fromLTRB(0, 25, 0, 0),
               child: Row(
                 children: [
                   IconButton(
@@ -318,6 +318,10 @@ class SchoolCalendarScreen extends StatelessWidget {
                         color: AppColors.darkBlue,
                         size: 30,
                       )),
+                  text('\nSchool\n      Calendar',
+                      size: 24,
+                      color: AppColors.darkBlue,
+                      weight: FontWeight.w400),
                 ],
               ),
             ),

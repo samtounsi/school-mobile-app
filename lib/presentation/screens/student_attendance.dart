@@ -173,8 +173,9 @@ class StudentAttendance extends StatelessWidget {
                           separatorBuilder: (context, index) => SizedBox(
                             height: 20,
                           ),
-                          itemCount:
-                              StudentCubit.get(context).studentProfileModel!.numberOfAbsenceDays,
+                          itemCount: StudentCubit.get(context)
+                              .studentProfileModel!
+                              .numberOfAbsenceDays,
                         ),
                         fallback: (context) => text('No Absent Days',
                             color: AppColors.darkBlue, size: 22),
@@ -190,7 +191,7 @@ class StudentAttendance extends StatelessWidget {
               ],
             ),
             Container(
-              height: 190,
+              height: 140,
               width: MediaQuery.of(context).size.width,
               child: Image.asset(
                 'images/head.png',
@@ -199,7 +200,7 @@ class StudentAttendance extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsetsDirectional.only(
-                top: 15.0,
+                top: 45.0,
               ),
               child: Row(
                 children: [
@@ -217,7 +218,7 @@ class StudentAttendance extends StatelessWidget {
                   ),
                   Text(
                     'Attendance',
-                    style: TextStyle(fontSize: 25, color: Colors.white),
+                    style: TextStyle(fontSize: 24, color: AppColors.darkBlue),
                   ),
                   Spacer()
                 ],
