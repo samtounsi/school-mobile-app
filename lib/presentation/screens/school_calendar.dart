@@ -1,22 +1,26 @@
+// ignore_for_file: must_be_immutable
+
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile_schoolapp/data/models/schoolCalendar_model.dart';
 import 'package:mobile_schoolapp/presentation/screens/Calendar.dart';
-
 
 import '../../business logic/cubits/blocCalender/cubit.dart';
 import '../../business logic/cubits/blocCalender/states.dart';
 import '../components and constants/components.dart';
 import '../components and constants/constants.dart';
 
-
-
 class SchoolCalendarScreen extends StatelessWidget {
   SchoolCalendarScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CalendarCubit, SchoolCalendarStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is SchoolCalendarErrorState) {
+          print(state.error);
+        }
+      },
       builder: (context, state) => Scaffold(
         backgroundColor: Colors.white,
         body: Stack(
@@ -28,7 +32,9 @@ class SchoolCalendarScreen extends StatelessWidget {
                     height: 90,
                   ),
                   text('School Calendar',
-                      size: 27, color: AppColors.darkBlue, weight: FontWeight.w400),
+                      size: 27,
+                      color: AppColors.darkBlue,
+                      weight: FontWeight.w400),
                   SizedBox(
                     height: 10,
                   ),
@@ -58,6 +64,11 @@ class SchoolCalendarScreen extends StatelessWidget {
                                       selectedDate: DateTime.now(),
                                       onChanged: (year) {
                                         print(year.year.toString());
+
+                                        CalendarCubit.get(context)
+                                            .getSchoolCalendarData(
+                                                year: year.year + 1,
+                                                newyear: year.year);
                                       }),
                                 ),
                               );
@@ -65,7 +76,8 @@ class SchoolCalendarScreen extends StatelessWidget {
                       },
                       child: Row(
                         children: [
-                          Text('Choose Year'),
+                          Text(
+                              '${CalendarCubit.get(context).selectedDate.year} - ${CalendarCubit.get(context).selectedDate.year + 1}'),
                           Icon(Icons.keyboard_arrow_down)
                         ],
                       ),
@@ -74,26 +86,124 @@ class SchoolCalendarScreen extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                  Container(
-                    height: 350,
-                    width: MediaQuery.of(context).size.width - 20,
-                    decoration: BoxDecoration(
-                        color: Colors.grey[100],
-                        borderRadius: BorderRadius.circular(17)),
-                    child: calendar(
-                      focusedDay: CalendarCubit.get(context).selectedDate,
-                      size: 16,
-                      holidayPredicate: (day) {
-                        return CalendarCubit.get(context).isHoliday(day) ||
-                            CalendarCubit.get(context).isYearHoliday(day);
-                      },
-                      selectedDayPredicate:
-                          CalendarCubit.get(context).selectPred,
-                      startRange: CalendarCubit.get(context).startExam,
-                      endRange: CalendarCubit.get(context).endExam,
-                      eventLoader:
-                          CalendarCubit.get(context).registerEventPred,
+                  //Calendar
+                  ConditionalBuilder(
+                    condition: state is! SchoolCalendarLoadingState,
+                    builder: (context) => Container(
+                      height: 350,
+                      width: MediaQuery.of(context).size.width - 30,
+                      decoration: BoxDecoration(
+                          color: Colors.grey[100],
+                          borderRadius: BorderRadius.circular(17)),
+                      child: calendar(
+                        focusedDay: CalendarCubit.get(context).selectedDate,
+                        size: 16,
+                        holidayPredicate: (day) {
+                          if (CalendarCubit.get(context)
+                              .model!
+                              .holidays!
+                              .isNotEmpty) {
+                            return CalendarCubit.get(context).isYearHoliday(day,
+                                holidays:
+                                    CalendarCubit.get(context).model!.holidays);
+                          }
+                          return false;
+                        },
+                        selectedDayPredicate: (day) {
+                          if (CalendarCubit.get(context)
+                              .model!
+                              .work!
+                              .isNotEmpty) {
+                            return CalendarCubit.get(context).selectPred(day,
+                                startWork: CalendarCubit.get(context)
+                                    .model!
+                                    .work![CalendarCubit.get(context)
+                                            .model!
+                                            .work!
+                                            .length -
+                                        1]
+                                    .startDate,
+                                endWork: CalendarCubit.get(context)
+                                    .model!
+                                    .work![CalendarCubit.get(context)
+                                            .model!
+                                            .work!
+                                            .length -
+                                        1]
+                                    .endDate);
+                          }
+                          return false;
+                        },
+                        startRange: (CalendarCubit.get(context)
+                                .model!
+                                .exams!
+                                .isNotEmpty)
+                            ? CalendarCubit.get(context)
+                                .model!
+                                .exams![CalendarCubit.get(context)
+                                        .model!
+                                        .exams!
+                                        .length -
+                                    1]
+                                .startDate
+                            : DateTime(1995, 1, 1),
+                        endRange: (CalendarCubit.get(context)
+                                .model!
+                                .exams!
+                                .isNotEmpty)
+                            ? CalendarCubit.get(context)
+                                .model!
+                                .exams![CalendarCubit.get(context)
+                                        .model!
+                                        .exams!
+                                        .length -
+                                    1]
+                                .endDate
+                            : DateTime(1995, 1, 2),
+                        eventLoader: (day) {
+                          if (CalendarCubit.get(context)
+                              .model!
+                              .registration!
+                              .isNotEmpty) {
+                            return CalendarCubit.get(context).registerEventPred(
+                                day,
+                                startRegister: CalendarCubit.get(context)
+                                    .model!
+                                    .registration![CalendarCubit.get(context)
+                                            .model!
+                                            .registration!
+                                            .length -
+                                        1]
+                                    .startDate,
+                                endRegister: CalendarCubit.get(context)
+                                    .model!
+                                    .registration![CalendarCubit.get(context)
+                                            .model!
+                                            .registration!
+                                            .length -
+                                        1]
+                                    .endDate);
+                          }
+                          return [];
+                        },
+                      ),
                     ),
+                    fallback: (context) => Container(
+                        height: 350,
+                        width: MediaQuery.of(context).size.width - 30,
+                        child: Column(
+                          children: [
+                            Spacer(),
+                            Container(
+                              height: 75,
+                              width: 75,
+                              child: CircularProgressIndicator(
+                                color: AppColors.darkBlue,
+                              ),
+                            ),
+                            Spacer(),
+                          ],
+                        )),
                   ),
                   SizedBox(
                     height: 20,

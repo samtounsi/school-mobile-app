@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class AppColors {
@@ -6,11 +5,10 @@ class AppColors {
   static const aqua = Color(0xFFA6CDCA);
   static const lightOrange = Color(0xFFF0B976);
   static const borderColor = Color(0xFFF0EDED);
-  static const shadow=Color(0xF295087);
+  static const shadow = Color(0xF295087);
   static Color blue = Color.fromARGB(255, 34, 88, 164);
-
-
 }
+
 MaterialColor buildMaterialColor(Color color) {
   List strengths = <double>[.05];
   Map<int, Color> swatch = {};
@@ -30,7 +28,14 @@ MaterialColor buildMaterialColor(Color color) {
   });
   return MaterialColor(color.value, swatch);
 }
+
 String? token;
-int?id;
+int? id;
 int? profileId;
 String? type;
+
+int daysBetween(DateTime? from, DateTime? to) {
+  from = DateTime(from!.year, from.month, from.day);
+  to = DateTime(to!.year, to.month, to.day);
+  return (to.difference(from).inHours / 24).round();
+}

@@ -160,10 +160,12 @@ class _StudentProfileState extends State<StudentProfile> {
                                                     label:'' ,
                                                     height: 140,
                                                     width: 290,
+                                                    // ignore: body_might_complete_normally_nullable
                                                     validate:(value) {
                                                       if (value.toString().isEmpty) {
                                                         return 'enter your Bio';
                                                       }
+                                                      
                                                     },
                                                     textStyle: TextStyle(
                                                       fontSize: 20,
@@ -181,7 +183,7 @@ class _StudentProfileState extends State<StudentProfile> {
                                                           onPressed: (){
                                                             if(formKey.currentState!.validate()){
                                                               StudentCubit.get(context).postBio(id: id!, bio: bioController.text);
-                                                              StudentCubit.get(context).getStudentProfile(id: profileId!);
+                                                              StudentCubit.get(context).getStudentProfile(id: profileId!, year: DateTime.now().year);
 
                                                             }
                                                           },

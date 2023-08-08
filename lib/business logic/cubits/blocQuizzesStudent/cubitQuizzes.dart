@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/blocQuizzesStudent/stateQuizzes.dart';
@@ -14,11 +12,12 @@ class QuizCubit extends Cubit<QuizState> {
 
   //Timer
   Timer? countdown;
-  Duration myDur = Duration(hours: 1);
+  Duration? myDur = Duration(hours: 1);
   int reduction = 1;
 
+  
   void countDown() {
-    final seconds = myDur.inSeconds - reduction;
+    final seconds = myDur!.inSeconds - reduction;
     if (seconds == 30) {
       //popup that we're almost done
     }
@@ -45,17 +44,17 @@ class QuizCubit extends Cubit<QuizState> {
   }
 
   String showHours() {
-    String hours = myDur.inHours.remainder(24).toString().padLeft(2, '0');
+    String hours = myDur!.inHours.remainder(24).toString().padLeft(2, '0');
     return '${hours}';
   }
 
   String showMinutes() {
-    String minutes = myDur.inMinutes.remainder(60).toString().padLeft(2, '0');
+    String minutes = myDur!.inMinutes.remainder(60).toString().padLeft(2, '0');
     return '${minutes}';
   }
 
   String showSeconds() {
-    String seconds = myDur.inSeconds.remainder(60).toString().padLeft(2, '0');
+    String seconds = myDur!.inSeconds.remainder(60).toString().padLeft(2, '0');
     return '${seconds}';
   }
 
@@ -123,11 +122,9 @@ class QuizCubit extends Cubit<QuizState> {
         ],
         isSelected: false),
   ];
-  void minusCounter()
-  {
-    if(count>1) count--;
+  void minusCounter() {
+    if (count > 1) count--;
     emit(CounterMinus());
-
   }
 
   int counterOfQuestion = 6;

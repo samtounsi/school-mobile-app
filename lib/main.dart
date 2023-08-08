@@ -44,18 +44,18 @@ void main() async {
   await CacheHelper.init();
   Widget? initWidget;
   bool? onBoard = CacheHelper.getData(key: 'onBoard');
-   token = CacheHelper.getData(key: 'token');
-   id=CacheHelper.getData(key: 'id');
-   profileId=CacheHelper.getData(key: 'profile_id');
-   type=CacheHelper.getData(key: 'type');
-   print(token);
-   print(id);
-   print(profileId);
-   print(type);
+  token = CacheHelper.getData(key: 'token');
+  id = CacheHelper.getData(key: 'id');
+  profileId = CacheHelper.getData(key: 'profile_id');
+  type = CacheHelper.getData(key: 'type');
+  print(token);
+  print(id);
+  print(profileId);
+  print(type);
   //CacheHelper.removeData(key: 'token');
   //CacheHelper.removeData(key: 'id');
   //CacheHelper.removeData(key: 'profile_id');
- // CacheHelper.removeData(key: 'type');
+  // CacheHelper.removeData(key: 'type');
   if (onBoard != null) {
     if (token != null) {
       type = CacheHelper.getData(key: 'type');
@@ -84,19 +84,43 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
         providers: [
-          BlocProvider(create: (context) => MarksCubit(),),
-          BlocProvider(create: (context) => SectionAttendanceCubit(),),
+          BlocProvider(
+            create: (context) => MarksCubit(),
+          ),
+          BlocProvider(
+            create: (context) => SectionAttendanceCubit(),
+          ),
           BlocProvider(create: (context) => StudentTimetableCubit()),
           BlocProvider(create: (context) => StudentAttendanceCubit()),
           BlocProvider(create: (context) => ChatCubit()),
-          BlocProvider(create: (context) => StudentAttendanceCubit()),
-          BlocProvider(create: (context) => TeacherCubit()..getTeacherProfile(id: profileId!)),
+          // BlocProvider(
+          //     create: (context) => StudentAttendanceCubit()
+          //       ..getAttendanceStudent(
+          //           id: profileId,
+          //           year: (DateTime.now().month > 6)
+          //               ? DateTime.now().year + 1
+          //               : DateTime.now().year)),
+          BlocProvider(
+              create: (context) =>
+                  TeacherCubit()..getTeacherProfile(id: profileId!)),
           BlocProvider(create: (context) => AddQuizCubit()),
-          BlocProvider(create: (context) => StudentCubit()..getStudentProfile(id: profileId!)),
-          BlocProvider(create: (context) => ParentCubit()..getParentProfile(id: profileId!)),
-          BlocProvider(create: (context) => CalendarCubit()..getHolidays()),
-          BlocProvider(create: (context) => LoginCubit(),),
-          BlocProvider(create: (context) => SettingsCubit(),)
+          BlocProvider(
+              create: (context) => StudentCubit()
+                ..getStudentProfile(
+                    id: profileId!,
+                    year: (DateTime.now().month > 6)
+                        ? DateTime.now().year + 1
+                        : DateTime.now().year)),
+          BlocProvider(
+              create: (context) =>
+                  ParentCubit()..getParentProfile(id: profileId!)),
+          BlocProvider(create: (context) => CalendarCubit()..getSchoolCalendarData(year: (DateTime.now().month>6)?DateTime.now().year+1:DateTime.now().year, newyear: DateTime.now().year),),
+          BlocProvider(
+            create: (context) => LoginCubit(),
+          ),
+          BlocProvider(
+            create: (context) => SettingsCubit(),
+          )
         ],
         child: MaterialApp(
             debugShowCheckedModeBanner: false,
