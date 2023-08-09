@@ -63,7 +63,6 @@ class SchoolCalendarScreen extends StatelessWidget {
                                       selectedDate: DateTime.now(),
                                       onChanged: (year) {
                                         print(year.year.toString());
-
                                         CalendarCubit.get(context)
                                             .getSchoolCalendarData(
                                             year: year.year + 1,

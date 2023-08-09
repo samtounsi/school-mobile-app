@@ -4,122 +4,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bfbbeb2c-de17-48cf-9417-db70ff9d6a59" name="Changes" comment="another commit">
-      <change afterPath="$PROJECT_DIR$/images/Exams-bro ORANGE.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/Toggle-rafiki (1).svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/Wallpaper (4).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/Wallpaper (5).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/one.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/two.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/business logic/cubits/score_board_cubit/cubit.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/business logic/cubits/score_board_cubit/states.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/data/models/add_marks_model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/data/models/add_quiz_model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/data/models/get_students_marks_model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/data/models/get_students_model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/data/models/schoolCalendar_model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/data/models/score_board_model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/data/models/show_student_marks_model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/presentation/screens/child_attendance.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/presentation/screens/parent_student_time_table.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/presentation/screens/section_time_table.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/presentation/screens/teacherMarksSemesteroneOrtwo.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/c1effc384fad05eb74f28b57c9953c7a/.filecache" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/c1effc384fad05eb74f28b57c9953c7a/.filecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/c1effc384fad05eb74f28b57c9953c7a/app.dill" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/c1effc384fad05eb74f28b57c9953c7a/app.dill" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/c1effc384fad05eb74f28b57c9953c7a/debug_android_application.stamp" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/c1effc384fad05eb74f28b57c9953c7a/debug_android_application.stamp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/c1effc384fad05eb74f28b57c9953c7a/flutter_assets.d" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/c1effc384fad05eb74f28b57c9953c7a/flutter_assets.d" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/c1effc384fad05eb74f28b57c9953c7a/kernel_snapshot.d" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/c1effc384fad05eb74f28b57c9953c7a/kernel_snapshot.d" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/c1effc384fad05eb74f28b57c9953c7a/kernel_snapshot.stamp" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/c1effc384fad05eb74f28b57c9953c7a/kernel_snapshot.stamp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/c1effc384fad05eb74f28b57c9953c7a/outputs.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/c1effc384fad05eb74f28b57c9953c7a/outputs.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config_subset" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config_subset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/schoolapp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/schoolapp.iml" afterDir="false" />
+    <list default="true" id="bfbbeb2c-de17-48cf-9417-db70ff9d6a59" name="Changes" comment="fatima sama commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/7.5/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/7.5/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/7.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/7.5/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/7.5/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/7.5/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/7.5/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/7.5/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/4c047974a210d020bc36639e340fe5a6.cache.dill.track.dill" beforeDir="false" afterPath="$PROJECT_DIR$/build/4c047974a210d020bc36639e340fe5a6.cache.dill.track.dill" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/intermediates/assets/debug/flutter_assets/AssetManifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/assets/debug/flutter_assets/AssetManifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/intermediates/assets/debug/flutter_assets/AssetManifest.smcbin" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/assets/debug/flutter_assets/AssetManifest.smcbin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/intermediates/assets/debug/flutter_assets/NOTICES.Z" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/assets/debug/flutter_assets/NOTICES.Z" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/intermediates/assets/debug/flutter_assets/kernel_blob.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/assets/debug/flutter_assets/kernel_blob.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/intermediates/compressed_assets/debug/out/assets/flutter_assets/AssetManifest.json.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/compressed_assets/debug/out/assets/flutter_assets/AssetManifest.json.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/intermediates/compressed_assets/debug/out/assets/flutter_assets/AssetManifest.smcbin.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/compressed_assets/debug/out/assets/flutter_assets/AssetManifest.smcbin.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/intermediates/compressed_assets/debug/out/assets/flutter_assets/NOTICES.Z.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/compressed_assets/debug/out/assets/flutter_assets/NOTICES.Z.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/intermediates/compressed_assets/debug/out/assets/flutter_assets/kernel_blob.bin.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/compressed_assets/debug/out/assets/flutter_assets/kernel_blob.bin.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/intermediates/flutter/debug/flutter_assets/AssetManifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/flutter/debug/flutter_assets/AssetManifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/intermediates/flutter/debug/flutter_assets/AssetManifest.smcbin" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/flutter/debug/flutter_assets/AssetManifest.smcbin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/intermediates/flutter/debug/flutter_assets/NOTICES.Z" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/flutter/debug/flutter_assets/NOTICES.Z" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/intermediates/flutter/debug/flutter_assets/kernel_blob.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/flutter/debug/flutter_assets/kernel_blob.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/intermediates/flutter/debug/flutter_build.d" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/flutter/debug/flutter_build.d" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/intermediates/flutter/debug/libs.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/flutter/debug/libs.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/intermediates/incremental/debug-mergeJavaRes/merge-state" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/incremental/debug-mergeJavaRes/merge-state" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/W70PwedaP1zPvQ_4KZE7BQafD28=" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/intermediates/incremental/debug/mergeDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/incremental/debug/mergeDebugResources/compile-file-map.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/intermediates/incremental/packageDebug/tmp/debug/zip-cache/androidResources" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/incremental/packageDebug/tmp/debug/zip-cache/androidResources" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/intermediates/processed_res/debug/out/resources-debug.ap_" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/processed_res/debug/out/resources-debug.ap_" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/kotlin/compileDebugKotlin/cacheable/last-build.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/kotlin/compileDebugKotlin/cacheable/last-build.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/kotlin/compileDebugKotlin/local-state/build-history.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/kotlin/compileDebugKotlin/local-state/build-history.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/outputs/apk/debug/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/outputs/apk/debug/app-debug.apk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/outputs/flutter-apk/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/outputs/flutter-apk/app-debug.apk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/outputs/flutter-apk/app-debug.apk.sha1" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/outputs/flutter-apk/app-debug.apk.sha1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/emoji_picker_flutter/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/build/emoji_picker_flutter/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/emoji_picker_flutter/kotlin/compileDebugKotlin/cacheable/last-build.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/emoji_picker_flutter/kotlin/compileDebugKotlin/cacheable/last-build.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/emoji_picker_flutter/kotlin/compileDebugKotlin/local-state/build-history.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/emoji_picker_flutter/kotlin/compileDebugKotlin/local-state/build-history.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/flutter_plugin_android_lifecycle/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/build/flutter_plugin_android_lifecycle/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image_picker_android/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/build/image_picker_android/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/path_provider_android/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/build/path_provider_android/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/shared_preferences_android/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/build/shared_preferences_android/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/sqflite/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/build/sqflite/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/business logic/cubits/attendanceCubit/cubit.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/business logic/cubits/attendanceCubit/cubit.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/business logic/cubits/blocAddQuizzes/cubit.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/business logic/cubits/blocAddQuizzes/cubit.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/business logic/cubits/blocAddQuizzes/states.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/business logic/cubits/blocAddQuizzes/states.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/business logic/cubits/blocCalender/cubit.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/business logic/cubits/blocCalender/cubit.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/business logic/cubits/blocCalender/states.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/business logic/cubits/blocCalender/states.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/business logic/cubits/blocMark/cubit.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/business logic/cubits/blocMark/cubit.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/business logic/cubits/blocMark/states.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/business logic/cubits/blocMark/states.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/business logic/cubits/blocParent/cubitParent.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/business logic/cubits/blocParent/cubitParent.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/business logic/cubits/blocParent/stateParent.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/business logic/cubits/blocParent/stateParent.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/business logic/cubits/blocStudent/cubitStudent.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/business logic/cubits/blocStudent/cubitStudent.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/business logic/cubits/student_time_table/cubit.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/business logic/cubits/student_time_table/cubit.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/business logic/cubits/student_time_table/states.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/business logic/cubits/student_time_table/states.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/data/models/student_profile_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/models/student_profile_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/data/models/student_time_table.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/models/section_timetable.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/classes/show_marks.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/classes/show_student_marks.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/add_marks.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/add_marks.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/add_quiz.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/add_quiz.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/add_quiz_questions.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/add_quiz_questions.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/attendance_for_teacher.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/attendance_for_teacher.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/chat_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/chat_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/chooseClassTeacher.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/chooseClassTeacher.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/chooseMarksScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/chooseMarksScreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/choose_subject.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/choose_subject.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/contacts.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/contacts.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/myClasses.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/myClasses.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/parenthome.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/parenthome.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/parentprofile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/parentprofile.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/presentation/screens/school_calendar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/school_calendar.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/score_board.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/score_board.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/show_marks_for_student.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/show_marks_for_student.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/show_marks_for_teacher.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/show_marks_for_teacher.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/student_attendance.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/student_attendance.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/student_time_table.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/student_time_table.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/studenthome.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/studenthome.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/studentprofile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/studentprofile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/teacherAddQuizesOrHistory.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/teacherAddQuizesOrHistory.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/teacherMarksAddorShow.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/teacherMarksAddorShow.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/teacherhome.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/teacherhome.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +23,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="login_authentication" />
+        <entry key="$PROJECT_DIR$" value="profiles_ready" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -197,7 +84,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690429466771</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="fatima sama commit">
+      <created>1691607480436</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1691607480438</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -213,6 +107,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="another commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="another commit" />
+    <MESSAGE value="fatima sama commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="fatima sama commit" />
   </component>
 </project>
