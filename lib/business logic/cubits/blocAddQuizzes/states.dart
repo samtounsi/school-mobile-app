@@ -6,3 +6,8 @@ class AddQuizTimeState extends AddQuizStates{}
 class AddToCurrentStepState extends AddQuizStates{}
 class SubtractFromCurrentStepState extends AddQuizStates{}
 class SaveOnTappedStepState extends AddQuizStates{}
+class AddQuizChooseSemesterState extends AddQuizStates{}
+class AddQuizQuestionsState extends AddQuizStates{}
+class AddTeacherQuizLoadingState extends AddQuizStates{}
+class AddTeacherQuizSuccessState extends AddQuizStates{}
+class AddTeacherQuizErrorState extends AddQuizStates{}

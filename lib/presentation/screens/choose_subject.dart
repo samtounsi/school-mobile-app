@@ -1,13 +1,20 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:mobile_schoolapp/presentation/components%20and%20constants/components1.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/constants.dart';
+import 'package:mobile_schoolapp/presentation/screens/show_marks_for_student.dart';
+import 'package:mobile_schoolapp/presentation/screens/teacherMarksAddorShow.dart';
 
 import '../components and constants/middleInRow.dart';
 
 
 class SubjectsScreen extends StatelessWidget {
-  SubjectsScreen({super.key});
+  String? gradeSection;
+  String semester;
+  String typeOfExam;
+  SubjectsScreen({super.key, this.gradeSection,required this.semester
+  ,required this.typeOfExam});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +47,7 @@ class SubjectsScreen extends StatelessWidget {
                     crossAxisSpacing: 7,
                     childAspectRatio: 0.9,
                   ),
-                  itemBuilder: (context, index) => subjectButton(index),
+                  itemBuilder: (context, index) => subjectButton(index,context),
                   itemCount: subjectText.length,
                 ),
               )
@@ -71,7 +78,7 @@ class SubjectsScreen extends StatelessWidget {
     );
   }
 
-  Widget subjectButton(int index) => Row(
+  Widget subjectButton(int index,context) => Row(
         children: [
           SizedBox(
             width: 10,
@@ -100,10 +107,22 @@ class SubjectsScreen extends StatelessWidget {
                 child: MaterialButton(
                   //color: Colors.white,
                   onPressed: () {},
-                  child: Image.asset(
-                    subjectImage[index],
-                    height: 150,
-                    width: 150,
+                  child: InkWell(
+                    onTap: ()
+                    {
+                      print(type);
+                       navigateTo(context, TeacherMarksAddOrShow(
+                         gradeSection: gradeSection!,
+                         semester: semester,
+                         type:typeOfExam,
+                         subject: subjectText[index],
+                       ));
+                    },
+                    child: Image.asset(
+                      subjectImage[index],
+                      height: 150,
+                      width: 150,
+                    ),
                   ),
                 ),
               )

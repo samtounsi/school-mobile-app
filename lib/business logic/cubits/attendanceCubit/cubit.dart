@@ -32,6 +32,10 @@ class SectionAttendanceCubit extends Cubit<SectionAttendanceStates>
   GetAbsentStudents? getAbsentStudents;
   Future getAbsentStudent({grade,section,date})async
   {
+    if(getAbsentStudents!=null)
+    {
+      getAbsentStudents=null;
+    }
     emit(GetStudentsAbsenceLoadingState());
     var headers = {
       'Authorization': 'Bearer $token'

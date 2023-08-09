@@ -7,7 +7,9 @@ import 'package:mobile_schoolapp/presentation/screens/chooseMarksScreen.dart';
 import 'package:mobile_schoolapp/presentation/screens/school_calendar.dart';
 import 'package:mobile_schoolapp/presentation/screens/studentHistoryQuizOrNew.dart';
 import 'package:mobile_schoolapp/presentation/screens/student_attendance.dart';
+import 'package:mobile_schoolapp/presentation/screens/section_time_table.dart';
 import 'package:mobile_schoolapp/presentation/screens/student_time_table.dart';
+import 'package:mobile_schoolapp/presentation/screens/teacherMarksSemesteroneOrtwo.dart';
 
 
 class StudentHome extends StatelessWidget {
@@ -27,8 +29,8 @@ class StudentHome extends StatelessWidget {
             ),
             InkWell(
                 onTap: (){
-                 navigateTo(context, StudentTimeTable());
-                 StudentTimetableCubit.get(context).getStudentsTimetable();
+                  StudentTimetableCubit.get(context).getStudentTimetable()
+                  .then((value) =>  navigateTo(context, StudentTimeTable()));
                 },
                 child: HomeText(
                     text: 'Time Table',numS: 22, image: 'images/schedule.png')),
@@ -66,7 +68,7 @@ class StudentHome extends StatelessWidget {
             ),
             InkWell(
               onTap: (){
-                navigateTo(context, ChooseMarks());
+                navigateTo(context, TeacherMarksSemesters());
                 },
               child: HomeText(
                   text: 'Marks',numS: 22, image: 'images/grade.png'),

@@ -36,6 +36,15 @@ class ParentCubit extends Cubit<ParentState> {
     emit(ChangeIndexMotionTabBarState());
   }
 
+  int childId=1;
+  int chooseChild(childId)
+  {
+    this.childId=childId;
+    emit(ChangeChildIdState());
+    return childId;
+  }
+
+
   ParentProfileModel? parentProfileModel;
   Future getParentProfile({required int id})async
   {
@@ -53,7 +62,7 @@ class ParentCubit extends Cubit<ParentState> {
       parentProfileModel=ParentProfileModel.fromJson(jsonDecode(await response.stream.bytesToString()));
       print(response.statusCode);
       print(id);
-      //print(parentProfileModel?.toJson().toString());
+      print(parentProfileModel?.toJson().toString());
       emit(GetParentProfileSuccessState(parentProfileModel!));
     }
     else {

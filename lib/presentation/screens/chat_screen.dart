@@ -1,5 +1,3 @@
-
-
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,7 +28,10 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ChatCubit,ChatStates>(
-      listener: (context,state){},
+      listener: (context,state)
+      {
+
+      },
       builder: (context,state)
       {
        return Container(
@@ -49,7 +50,7 @@ class _ChatScreenState extends State<ChatScreen> {
                padding: EdgeInsetsDirectional.only(start: 5.0),
                child: IconButton(
                  onPressed: (){
-                   navigateTo(context, ChatContacts());
+                   Navigator.pop(context);
                  },
                  icon: Icon(Icons.arrow_back,
                    size: 30,

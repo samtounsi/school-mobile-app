@@ -8,9 +8,15 @@ import 'package:mobile_schoolapp/presentation/screens/attendance_for_teacher.dar
 import 'package:mobile_schoolapp/presentation/screens/feedBack.dart';
 import 'package:mobile_schoolapp/presentation/screens/show_marks_for_teacher.dart';
 import 'package:mobile_schoolapp/presentation/screens/student_attendance.dart';
-import 'package:mobile_schoolapp/presentation/screens/student_time_table.dart';
+import 'package:mobile_schoolapp/presentation/screens/section_time_table.dart';
+import 'package:mobile_schoolapp/presentation/screens/teacherMarksAddorShow.dart';
+import 'package:mobile_schoolapp/presentation/screens/teacherMarksSemesteroneOrtwo.dart';
+
+import '../../business logic/cubits/student_time_table/cubit.dart';
 
 class myClasses extends StatelessWidget {
+  String teacherClass;
+   myClasses({super.key,required this.teacherClass});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -48,7 +54,8 @@ class myClasses extends StatelessWidget {
               children: [
                 InkWell(
                     onTap: () {
-                      navigateTo(context, StudentTimeTable());
+                      StudentTimetableCubit.get(context).getSectionTimetable(gradeSection: 'seventh 2')
+                      .then((value) => navigateTo(context, SectionTimeTable()));
                     },
                     child: HomeText(
                         text: 'Time Table',
@@ -79,7 +86,7 @@ class myClasses extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    navigateTo(context, ShowMarks());
+                    navigateTo(context, TeacherMarksSemesters(gradeSection: teacherClass,));
                   },
                   child: HomeText(
                       text: 'Marks', numS: 22, image: 'images/grade.png'),

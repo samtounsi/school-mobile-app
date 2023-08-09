@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mobile_schoolapp/business%20logic/cubits/blocMark/cubit.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/blocTeacher/cubitTeacher.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/blocTeacher/stateTeacher.dart';
 import 'package:mobile_schoolapp/presentation/classes/gradeAndSectionClass.dart';
@@ -166,7 +167,9 @@ class _ChooseClassTeacherState extends State<ChooseClassTeacher> {
                             ),
                             MaterialButton(
                               onPressed: () {
-                                 navigateTo(context, myClasses());
+                                MarksCubit.get(context).getStudentsNames().then((value) =>
+                                navigateTo(context, myClasses(teacherClass: 'seventh 1',)));
+
                               print(TeacherCubit.get(context).currentItem.toString());
                               },
                               child: Text(

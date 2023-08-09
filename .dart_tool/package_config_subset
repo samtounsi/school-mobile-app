@@ -170,6 +170,10 @@ lints
 3.0
 file:///C:/Users/LENOVO/AppData/Local/Pub/Cache/hosted/pub.dev/lints-2.1.0/
 file:///C:/Users/LENOVO/AppData/Local/Pub/Cache/hosted/pub.dev/lints-2.1.0/lib/
+logging
+2.19
+file:///C:/Users/LENOVO/AppData/Local/Pub/Cache/hosted/pub.dev/logging-1.2.0/
+file:///C:/Users/LENOVO/AppData/Local/Pub/Cache/hosted/pub.dev/logging-1.2.0/lib/
 matcher
 2.18
 file:///C:/Users/LENOVO/AppData/Local/Pub/Cache/hosted/pub.dev/matcher-0.12.15/
@@ -290,6 +294,14 @@ simple_gesture_detector
 2.12
 file:///C:/Users/LENOVO/AppData/Local/Pub/Cache/hosted/pub.dev/simple_gesture_detector-0.2.0/
 file:///C:/Users/LENOVO/AppData/Local/Pub/Cache/hosted/pub.dev/simple_gesture_detector-0.2.0/lib/
+socket_io_client
+2.12
+file:///C:/Users/LENOVO/AppData/Local/Pub/Cache/hosted/pub.dev/socket_io_client-1.0.2/
+file:///C:/Users/LENOVO/AppData/Local/Pub/Cache/hosted/pub.dev/socket_io_client-1.0.2/lib/
+socket_io_common
+2.12
+file:///C:/Users/LENOVO/AppData/Local/Pub/Cache/hosted/pub.dev/socket_io_common-1.0.1/
+file:///C:/Users/LENOVO/AppData/Local/Pub/Cache/hosted/pub.dev/socket_io_common-1.0.1/lib/
 source_span
 2.14
 file:///C:/Users/LENOVO/AppData/Local/Pub/Cache/hosted/pub.dev/source_span-1.9.1/

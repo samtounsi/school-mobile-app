@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mobile_schoolapp/business%20logic/cubits/blocStudent/cubitStudent.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/components1.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/homeItem.dart';
 import 'package:mobile_schoolapp/presentation/screens/feedBack.dart';
+import 'package:mobile_schoolapp/presentation/screens/parent_student_time_table.dart';
 import 'package:mobile_schoolapp/presentation/screens/school_calendar.dart';
 import 'package:mobile_schoolapp/presentation/screens/student_attendance.dart';
-import 'package:mobile_schoolapp/presentation/screens/student_time_table.dart';
+import 'package:mobile_schoolapp/presentation/screens/section_time_table.dart';
+import 'package:mobile_schoolapp/presentation/screens/teacherMarksSemesteroneOrtwo.dart';
 
+import '../../business logic/cubits/blocParent/cubitParent.dart';
+import '../../business logic/cubits/student_time_table/cubit.dart';
 import 'chooseMarksScreen.dart';
 
 
@@ -27,7 +32,9 @@ class ParentHome extends StatelessWidget {
             ),
             InkWell(
                 onTap: (){
-                  navigateTo(context, StudentTimeTable());
+                  StudentTimetableCubit.get(context).getParentStudentTimetable(
+                      id:ParentCubit.get(context).childId)
+                      .then((value) =>  navigateTo(context, ParentTimeTable()));
                 },
                 child: HomeText(
                     text: 'Time Table',numS: 22, image: 'images/schedule.png')),
@@ -39,7 +46,9 @@ class ParentHome extends StatelessWidget {
             ),
             InkWell(
               onTap: (){
-                navigateTo(context, StudentAttendance());
+                StudentCubit.get(context).getStudentProfile(
+                    id:ParentCubit.get(context).childId,year: 2023 )
+                    .then((value) =>  navigateTo(context, StudentAttendance()));
               },
               child: HomeText(
                   numS: 18,
@@ -53,7 +62,7 @@ class ParentHome extends StatelessWidget {
             ),
             InkWell(
               onTap: (){
-                navigateTo(context, ChooseMarks());
+                navigateTo(context, TeacherMarksSemesters());
               },
               child: HomeText(
                   text: 'Marks',numS: 22, image: 'images/grade.png'),

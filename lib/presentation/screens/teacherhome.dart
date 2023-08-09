@@ -62,7 +62,7 @@ class TeacherHome extends StatelessWidget {
                 },
                 child: HomeText(text: 'Calender',numS: 22, image: 'images/calendar (1).png')),
             SizedBox(
-              height: 10,
+              height: 15,
             ),
             Center(
               child: SvgPicture.asset(
@@ -71,6 +71,7 @@ class TeacherHome extends StatelessWidget {
                 height: 198,
               ),
             ),
+            SizedBox(height: 80,)
           ],
         ),
       ),

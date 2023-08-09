@@ -28,13 +28,13 @@ class SectionAttendance extends StatelessWidget {
         },
         builder: (context,state)
         {
-       model=SectionAttendanceCubit.get(context).getAbsentStudents==null? SectionAttendanceCubit.get(context).emptyAbsent:
+       model=SectionAttendanceCubit.get(context).getAbsentStudents?.exist==false? SectionAttendanceCubit.get(context).emptyAbsent:
        SectionAttendanceCubit.get(context).getAbsentStudents?.absenceStudents;
        DateTime today= SectionAttendanceCubit.get(context).today;
         return Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("images/Wallpaper.png"),
+              image: AssetImage("images/Wallpaper (4).png"),
               fit: BoxFit.cover,
             ),
           ),
@@ -46,9 +46,11 @@ class SectionAttendance extends StatelessWidget {
 
                 backgroundColor: Colors.transparent,
                 elevation: 0,
-                leading: CircleAvatar
-                  (
-                  backgroundColor: Colors.white,
+                leading: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white
+                  ),
                   child: IconButton(
                     onPressed: (){
                       Navigator.pop(context);
@@ -67,7 +69,7 @@ class SectionAttendance extends StatelessWidget {
               body: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 40,),
+                  SizedBox(height: 60,),
                   Text(
                     'Selected Day: '+today.toString().split(" ")[0],
                     style: TextStyle(
@@ -154,30 +156,31 @@ class SectionAttendance extends StatelessWidget {
                         ),
                       )
                   ),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.only(top: 20,bottom: 10,start:10 ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            buildAttendance('Present: ', SectionAttendanceCubit.get(context).getAbsentStudents?.numberOfAttendences.toString()),
-                            buildAttendance('Absent:  ', SectionAttendanceCubit.get(context).getAbsentStudents?.numberOfAbsences.toString()),
-                            Padding(
-                              padding: EdgeInsetsDirectional.only(top: 10,bottom: 10,start: 10),
-                              child: Text('Absent Students: ',
-                                style: TextStyle(
-                                    fontSize: 28,
-                                    //fontWeight: FontWeight.bold,
-                                    color: AppColors.lightOrange
+                  ConditionalBuilder(
+                    condition: state is ! GetStudentsAbsenceLoadingState
+                    &&SectionAttendanceCubit.get(context).getAbsentStudents!=null,
+                    builder:(context)
+                    {
+                      return Expanded(
+                        child: SingleChildScrollView(
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.only(top: 20,bottom: 10,start:10 ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                buildAttendance('Present: ', SectionAttendanceCubit.get(context).getAbsentStudents?.numberOfAttendences.toString()),
+                                buildAttendance('Absent:  ', SectionAttendanceCubit.get(context).getAbsentStudents?.numberOfAbsences.toString()),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.only(top: 10,bottom: 10,start: 10),
+                                  child: Text('Absent Students: ',
+                                    style: TextStyle(
+                                        fontSize: 28,
+                                        //fontWeight: FontWeight.bold,
+                                        color: AppColors.lightOrange
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                            ConditionalBuilder(
-                              condition: state is ! GetStudentsAbsenceLoadingState,
-                              builder: (context)
-                              {
-                                return ListView.separated(
+                                ListView.separated(
                                     scrollDirection: Axis.vertical,
                                     shrinkWrap: true,
                                     physics: NeverScrollableScrollPhysics(),
@@ -196,16 +199,19 @@ class SectionAttendance extends StatelessWidget {
                                         ),
                                       );
                                     } ,
-                                    itemCount: model.length);
-                              },
-                              fallback: (context)=>Center(child: CircularProgressIndicator()),
+                                    itemCount: model.length)
+
+                              ],
                             ),
-                          ],
+                          ),
                         ),
-                      ),
+                      );
+                    },
+                    fallback: (context)=>Padding(
+                      padding: EdgeInsetsDirectional.only(top: 100,bottom: 10,start:10 ),
+                      child: Center(child: CircularProgressIndicator()),
                     ),
                   ),
-
                 ],
               ),
             ),

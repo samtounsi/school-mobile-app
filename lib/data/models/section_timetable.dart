@@ -1,4 +1,4 @@
-class StudentTimetable {
+class SectionTimetable {
   int? exist;
   List<DaysLessons>? daysLessons;
   String? arabicTeacher;
@@ -16,8 +16,9 @@ class StudentTimetable {
   String? philosophyTeacher;
   String? scienceTeacher;
   String? technologyTeacher;
+  String? message;
 
-  StudentTimetable(
+  SectionTimetable(
       {this.exist,
         this.daysLessons,
         this.arabicTeacher,
@@ -34,9 +35,10 @@ class StudentTimetable {
         this.religionTeacher,
         this.philosophyTeacher,
         this.scienceTeacher,
-        this.technologyTeacher});
+        this.technologyTeacher,
+        this.message});
 
-  StudentTimetable.fromJson(Map<String, dynamic> json) {
+  SectionTimetable.fromJson(Map<String, dynamic> json) {
     exist = json['exist'];
     if (json['daysLessons'] != null) {
       daysLessons = <DaysLessons>[];
@@ -59,6 +61,7 @@ class StudentTimetable {
     philosophyTeacher = json['philosophyTeacher'];
     scienceTeacher = json['scienceTeacher'];
     technologyTeacher = json['technologyTeacher'];
+    message = json['message'];
   }
 
   Map<String, dynamic> toJson() {
@@ -82,6 +85,7 @@ class StudentTimetable {
     data['philosophyTeacher'] = this.philosophyTeacher;
     data['scienceTeacher'] = this.scienceTeacher;
     data['technologyTeacher'] = this.technologyTeacher;
+    data['message'] = this.message;
     return data;
   }
 }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_schoolapp/business%20logic/cubits/score_board_cubit/cubit.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/components1.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/markItem.dart';
 import 'package:mobile_schoolapp/presentation/screens/add_quiz.dart';
 import 'package:mobile_schoolapp/presentation/screens/quizzesHistory.dart';
+import 'package:mobile_schoolapp/presentation/screens/score_board.dart';
 
 import '../components and constants/constants.dart';
 

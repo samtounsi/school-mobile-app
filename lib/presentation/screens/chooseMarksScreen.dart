@@ -3,10 +3,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/components.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/constants.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/containerItem.dart';
+import 'package:mobile_schoolapp/presentation/screens/choose_subject.dart';
 import 'package:mobile_schoolapp/presentation/screens/show_marks_for_student.dart';
 
+import '../../business logic/cubits/blocMark/cubit.dart';
+import '../../business logic/cubits/blocParent/cubitParent.dart';
+
 class ChooseMarks extends StatelessWidget {
-  const ChooseMarks({Key? key}) : super(key: key);
+  String? gradeSection;
+  String semester;
+   ChooseMarks({super.key,this.gradeSection,required this.semester}) ;
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +65,22 @@ class ChooseMarks extends StatelessWidget {
                   children: [
                     InkWell(
                         onTap: () {
-                          navigateTo(context, ShowStudentMarks());
+                          if(type=='teacher'){
+                          navigateTo(context, SubjectsScreen(
+                            gradeSection: gradeSection,
+                            semester: semester,
+                            typeOfExam:'monthly_test' ,
+                          ));}
+                          if(type=='student')
+                          {
+                            MarksCubit.get(context).getStudentMarks(semester: semester, type: 'monthly_test', id: profileId!);
+                              navigateTo(context, ShowStudentMarks());
+                          }
+                          if(type=='parent')
+                          {
+                            MarksCubit.get(context).getStudentMarks(semester: semester, type: 'monthly_test', id:ParentCubit.get(context).childId );
+                            navigateTo(context, ShowStudentMarks());
+                          }
                         },
                         child: ContainerItem(
                           title: 'Monthly Test Marks',
@@ -70,7 +91,25 @@ class ChooseMarks extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
+                      if(type=='taecher')
+                      {
+                        navigateTo(context, SubjectsScreen(
+                          gradeSection: gradeSection,
+                          semester: semester,
+                          typeOfExam: 'final',
+                        ));
+                      }
+                      if(type=='student')
+                      {
+                        MarksCubit.get(context).getStudentMarks(semester: semester, type: 'final', id: profileId!);
                         navigateTo(context, ShowStudentMarks());
+                      }
+
+                      if(type=='parent')
+                      {
+                        MarksCubit.get(context).getStudentMarks(semester: semester, type: 'final', id:ParentCubit.get(context).childId );
+                        navigateTo(context, ShowStudentMarks());
+                      }
                       },
                       child: ContainerItem(
                         title: 'Final Marks',

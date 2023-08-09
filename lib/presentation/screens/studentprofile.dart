@@ -181,7 +181,7 @@ class _StudentProfileState extends State<StudentProfile> {
                                                           onPressed: (){
                                                             if(formKey.currentState!.validate()){
                                                               StudentCubit.get(context).postBio(id: id!, bio: bioController.text);
-                                                              StudentCubit.get(context).getStudentProfile(id: profileId!);
+                                                              StudentCubit.get(context).getStudentProfile(id: profileId!, year:2023);
 
                                                             }
                                                           },

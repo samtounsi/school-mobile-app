@@ -1,10 +1,14 @@
 
 
 
+import 'dart:convert';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/blocAddQuizzes/states.dart';
-
+import 'package:http/http.dart' as http;
+import '../../../data/models/add_quiz_model.dart';
 import '../../../presentation/classes/question.dart';
+import '../../../presentation/components and constants/constants.dart';
 
 class AddQuizCubit extends Cubit<AddQuizStates>
 {
@@ -13,66 +17,65 @@ class AddQuizCubit extends Cubit<AddQuizStates>
   static AddQuizCubit get(context) => BlocProvider.of(context);
 
 
-  String classValue='7th';
+  String classValue='seventh';
   String changeClass(value) {
     this.classValue = value;
     print(value);
     emit(AddQuizChooseClassState());
     return value;
   }
-
+  String semesterValue='1';
+  String changeSemester(value) {
+    this.semesterValue = value;
+    print(value);
+    emit(AddQuizChooseSemesterState());
+    return value;
+  }
 
 
 
   List<Question> quiz=[];
 
- /* postQuiz({
-    required List controllers1,
-    required List controllers2,
-    required List  controllers3,
-    required List  controllers4,
-    required List  controllers5,
-    required List  controllers6,
-    required List   controllers7,
-    required List  controllers8,
-    required List  controllers9,
-    required List  controllers10,}
-      )
-  {
-    for(int i=0;i<5;i++)
-    {
-      print(controllers1);
-      print(controllers2);
-      print(controllers3);
-      print(controllers4);
-      print(controllers5);
-      print(controllers6);
-      print(controllers7);
-      print(controllers8);
-      print(controllers9);
-      print(controllers10);
-    }
+   List<String>quizPost=[];
+   Future addQuizQuestions({required nof, required quizController})async
+   {
 
-  }*/
-  postQuiz({required grade,
-    required label,
-    required nof,
-    required st,
-    required et,
-    required quizController})
+     for(int i=0;i<nof;i++)
+     {
+       for(int j=0;j<5;j++)
+       {
+         //print(quizController[i][j].text.toString());
+         quizPost.add(quizController[i][j].text.toString());
+       }
+     }
+     emit(AddQuizQuestionsState());
+     return quizPost;
+   }
+
+  postQuiz({required AddQuizModel data})async
   {
-    print(grade);
-    print(label);
-    print(nof);
-    print(st);
-    print(et);
-    for(int i=0;i<nof;i++)
-    {
-      for(int j=0;j<5;j++)
-      {
-        print(quizController[i][j].text.toString());
-      }
-    }
+    emit(AddTeacherQuizLoadingState());
+    var request = http.post(
+        Uri.parse('https://new-school-management-system.onrender.com/mob/add_quiz')
+      ,headers:{
+      'Content-Type': 'application/json',
+      'Accept': '*/*',
+      'Authorization': 'Bearer $token'
+    },
+        body: jsonEncode(data.toJson(data))
+    );
+
+    var response = await request;
+
+    if (response.statusCode == 200) {
+      print(jsonDecode(await response.body));
+      emit(AddTeacherQuizSuccessState());
+  }
+  else {
+    print(jsonDecode(await response.body)['message']);
+    emit(AddTeacherQuizErrorState());
+  }
+
   }
 
 

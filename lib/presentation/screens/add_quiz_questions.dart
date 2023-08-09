@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fx_stepper/fx_stepper.dart';
+import 'package:mobile_schoolapp/data/models/add_quiz_model.dart';
+import 'package:mobile_schoolapp/presentation/components%20and%20constants/components.dart';
+import 'package:mobile_schoolapp/presentation/screens/teacherAddQuizesOrHistory.dart';
 
 import '../../business logic/cubits/blocAddQuizzes/cubit.dart';
 import '../../business logic/cubits/blocAddQuizzes/states.dart';
@@ -32,11 +35,16 @@ bool isCompleted=false;
 class AddQuizQuestions extends StatelessWidget {
 
   String grade;
+  String semester;
+  String subject;
   String label;
   int numberOfQuestions;
+  String date;
   String startTime;
   String endTime;
-  AddQuizQuestions({required this.grade,required this.label,required this.numberOfQuestions,required this.startTime,required this.endTime});
+  AddQuizQuestions({super.key, required this.grade,required this.semester,
+    required this.subject, required this.label,required this.numberOfQuestions,
+    required this.date, required this.startTime,required this.endTime});
   @override
   Widget build(BuildContext context) {
 
@@ -62,20 +70,26 @@ class AddQuizQuestions extends StatelessWidget {
               appBar: AppBar(
                 elevation: 0,
                 backgroundColor: Colors.transparent,
-                leading:  IconButton(
-                  onPressed: (){
-                    Navigator.pop(context);
+                leading:  Padding(
+                  padding: const EdgeInsets.only(top:15.0),
+                  child: IconButton(
+                    onPressed: (){
+                      Navigator.pop(context);
 
-                  },
-                  icon: Icon(Icons.arrow_back,
-                    size: 40,
-                    color: AppColors.darkBlue,),),
-                titleSpacing: 10,
-                title: Text('Add Quiz',
-                  style: TextStyle(
-                      color:AppColors.darkBlue,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold
+                    },
+                    icon: Icon(Icons.arrow_back,
+                      size: 35,
+                      color: AppColors.darkBlue,),),
+                ),
+                titleSpacing: 0,
+                title: Padding(
+                  padding: const EdgeInsets.only(top:20.0),
+                  child: Text('Add Quiz',
+                    style: TextStyle(
+                        color:AppColors.darkBlue,
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold
+                    ),
                   ),
                 ),
 
@@ -83,7 +97,7 @@ class AddQuizQuestions extends StatelessWidget {
               body: Form(
                 key:formKey,
                 child: Padding(
-                  padding: EdgeInsetsDirectional.only(bottom:15),
+                  padding: EdgeInsetsDirectional.only(bottom:15,top:20),
                   child: Theme(
                     data: Theme.of(context).copyWith(
                         shadowColor: Colors.transparent,
@@ -107,27 +121,25 @@ class AddQuizQuestions extends StatelessWidget {
                               print('Completed');
                               if(formKey.currentState!.validate())
                               {
-                                /* AddQuizCubit.get(context).postQuiz(
-                              controllers1: [controller1[0],controller1[1],controller1[2],controller1[3],controller1[4]],
-                              controllers2: [controller2[0],controller2[1],controller2[2],controller2[3],controller2[4]],
-                              controllers3: [controller3[0],controller3[1],controller3[2],controller3[3],controller3[4]],
-                              controllers4: [controller4[0],controller4[1],controller4[2],controller4[3],controller4[4]],
-                              controllers5: [controller5[0],controller5[1],controller5[2],controller5[3],controller5[4]],
-                              controllers6: [controller6[0],controller6[1],controller6[2],controller6[3],controller6[4]],
-                              controllers7: [controller7[0],controller7[1],controller7[2],controller7[3],controller7[4]],
-                              controllers8: [controller8[0],controller8[1],controller8[2],controller8[3],controller8[4]],
-                              controllers9: [controller9[0],controller9[1],controller9[2],controller9[3],controller9[4]],
-                              controllers10:[controller10[0],controller10[1],controller10[2],controller10[3],controller10[4]],
-                            );*/
-                                AddQuizCubit.get(context).postQuiz(
-                                  grade: grade,
-                                  label: label,
-                                  nof: numberOfQuestions,
-                                  st: startTime,
-                                  et:endTime,
-                                  quizController: questionList
-
-                                );
+                                AddQuizCubit.get(context).addQuizQuestions(
+                                    nof: numberOfQuestions, quizController: questionList).then(
+                                  (value)
+                                    {
+                                      AddQuizModel model=AddQuizModel
+                                        (
+                                          grade: grade,
+                                          semester: int.parse(semester),
+                                          subject: subject,
+                                          title: label,
+                                          numberOfQuestions: numberOfQuestions,
+                                          date: date,
+                                          startTime: startTime,
+                                          endTime:endTime,
+                                          questions: AddQuizCubit.get(context).quizPost
+                                      );
+                                      print(model.toJson(model).toString());
+                                      AddQuizCubit.get(context).postQuiz(data: model);
+                                    }).then((value) => navigateTo(context, TeacherQuizzesAddOrHistory()));
 
                               }
 

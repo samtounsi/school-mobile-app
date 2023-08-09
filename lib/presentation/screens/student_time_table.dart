@@ -7,7 +7,7 @@ import 'package:mobile_schoolapp/presentation/components%20and%20constants/const
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/subject_text.dart';
 import 'package:mobile_schoolapp/shared/utils.dart';
 
-import '../../data/models/student_time_table.dart';
+import '../../data/models/section_timetable.dart';
 
 final columns = ['Day', '1', '2', '3', '4', '5', '6'];
 
@@ -23,7 +23,7 @@ class StudentTimeTable extends StatelessWidget {
         if(state is GetStudentTimetableSuccessState)
         {
 
-            model=state.studentTimetable.daysLessons;
+        model=state.studentTimetable.daysLessons;
         }
         if(state is GetStudentTimetableEmptyState){
           model=state.empty.daysLessons;
@@ -31,6 +31,8 @@ class StudentTimeTable extends StatelessWidget {
       },
       builder: (context,state)
       {
+        model=StudentTimetableCubit.get(context).studentTimetable==null?StudentTimetableCubit.get(context).emptyTable!.daysLessons
+            :StudentTimetableCubit.get(context).studentTimetable!.daysLessons ;
         return Scaffold(
           backgroundColor: Colors.white,
           body: SingleChildScrollView(
@@ -45,7 +47,7 @@ class StudentTimeTable extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsetsDirectional.only(start: 20, top: 18),
                 child: ConditionalBuilder(
-                  condition:state != GetStudentTimetableLoadingState &&model!=null,
+                  condition:state is ! GetStudentTimetableLoadingState&&model!=null,
                  builder: (context)
                  {
                    model=StudentTimetableCubit.get(context).studentTimetable==null?StudentTimetableCubit.get(context).emptyTable!.daysLessons
@@ -90,7 +92,7 @@ class StudentTimeTable extends StatelessWidget {
                          columns: getColumns(columns),
                          rows: getRows(model),
                          border: TableBorder.all(width: 1, color: AppColors.darkBlue),
-                         columnSpacing: 25,
+                         columnSpacing: state is GetStudentTimetableSuccessState? 25: 35,
                          headingRowColor: MaterialStateColor.resolveWith(
                                  (states) => AppColors.lightOrange),
                          // dataRowColor: MaterialStateColor.resolveWith((states) => AppColors.lightOrange),

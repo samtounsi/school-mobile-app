@@ -17,8 +17,9 @@ class StudentProfileModel {
   String? className;
   String? parentPhoneNumber;
   String? photo;
-  List<String>? absences;
-  int? numberOfAbsenceDays;
+  // List<WorkDateModel> workDate = [];
+  List<DateTime> absences =[];
+  int numberOfAbsenceDays = 2;
   String? bio;
   String? message;
 
@@ -41,8 +42,9 @@ class StudentProfileModel {
         this.className,
         this.parentPhoneNumber,
         this.photo,
-        this.absences,
-        this.numberOfAbsenceDays,
+        // required this.workDate,
+        required this.absences,
+        required this.numberOfAbsenceDays,
         this.bio,
         this.message});
 
@@ -65,7 +67,15 @@ class StudentProfileModel {
     className = json['class_name'];
     parentPhoneNumber = json['parent_phone_number'];
     photo = json['photo'];
-    absences = json['absences'].cast<String>();
+    // json['school_work_date'].forEach((element) {
+    //   workDate.add(WorkDateModel.fromJson(element));
+    // });
+    //absences = json['absences'].cast<String>();
+    if (json['absences'] != null) {
+      json['absences'].forEach((element) {
+        absences.add(DateTime.parse(element));
+      });
+    }
     numberOfAbsenceDays = json['number_of_absence_days'];
     bio = json['bio'];
     message = json['message'];
@@ -91,10 +101,36 @@ class StudentProfileModel {
     data['class_name'] = this.className;
     data['parent_phone_number'] = this.parentPhoneNumber;
     data['photo'] = this.photo;
-    data['absences'] = this.absences;
+    // if (this.workDate != null) {
+    //   data['workDate'] = this.workDate.map((v) => v.toJson()).toList();
+    // }
+    if (this.absences != null) {
+      // ignore: unnecessary_this
+      data['absences'] = this.absences!.map((v) => v.toString()).toList();
+    }
+    //data['absences'] = this.absences;
     data['number_of_absence_days'] = this.numberOfAbsenceDays;
     data['bio'] = this.bio;
     data['message'] = this.message;
     return data;
   }
+}
+
+class WorkDateModel {
+  DateTime startSchool;
+  DateTime endSchool;
+
+  WorkDateModel({
+    required this.startSchool,
+    required this.endSchool,
+  });
+
+  WorkDateModel.fromJson(Map<String, dynamic> json)
+      : startSchool = DateTime.parse(json['start_date']),
+        endSchool = DateTime.parse(json['end_date']);
+
+  Map<String, dynamic> toJson() => {
+    'start_date': startSchool.toString(),
+    'end_date': endSchool.toString(),
+  };
 }

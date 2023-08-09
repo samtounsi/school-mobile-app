@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
-import 'package:mobile_schoolapp/presentation/screens/chat_screen.dart';
 
 import '../components and constants/components.dart';
 import '../components and constants/constants.dart';
+import 'chat_screen.dart';
 
 
 class ChatContacts extends StatelessWidget {
@@ -11,69 +11,49 @@ class ChatContacts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white
-      ),
-      child: Stack(
-
-        children: [
-
-            SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(height: 60,),
-                  Padding(
-                    padding: const EdgeInsetsDirectional.all(15.0),
-                    child: ListView.separated(
-                      physics: NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemBuilder:(context,index)=>buildContactItem(context,index)
-                          , separatorBuilder:(context ,index)=>SizedBox(height: 32.0),
-                          itemCount:15),
-                  ),
-                ],
-              ),
-            ),
-
-          Container(
-            color: Colors.white,
-            padding: EdgeInsets.only(top: 10),
-            child: Row(
-              children: [
-                CircleAvatar(
-                  backgroundColor: Colors.white,
-                  child: IconButton(
-                    onPressed: (){},
-                    icon: Icon(Icons.arrow_back,
-                      size: 30,
-                      color: AppColors.darkBlue,),),
-                ),
-                SizedBox(width: 10,),
-                Text('My Contacts ',
-                  style: TextStyle(
-                      color:AppColors.darkBlue,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold
-                  ),
-                ),
-
-              ],),
+    return SingleChildScrollView(
+      child: Card(
+        child: Container(
+          decoration: BoxDecoration(
+              color: Colors.white
           ),
-        ],
+          child: Padding(
+            padding: EdgeInsetsDirectional.all(15),
+            child: Column(
+              children: [
+                AppBar(
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  title: Text('My Contacts ',
+                    style: TextStyle(
+                        color:AppColors.darkBlue,
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10,),
+                ListView.separated(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemBuilder:(context,index)=>buildContactItem(context,index)
+                      , separatorBuilder:(context ,index)=>SizedBox(height: 32.0),
+                      itemCount:15),
+              ],
+            ),
+          ),
+        ),
       ),
     );
 
   }
-
 
   buildContactItem(context,index)
   {
     return GestureDetector(
       onTap: ()
       {
-        // navigateTo(context, ChatScreen());
+        navigateTo(context, ChatScreen());
       },
       child: Container(
         width: 340,
@@ -106,9 +86,9 @@ class ChatContacts extends StatelessWidget {
                 children: [
                   Text('Taylor Swift',
                     style:TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.darkBlue
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.darkBlue
                     ) ,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,),

@@ -167,28 +167,36 @@ class _ParentProfileState extends State<ParentProfile> {
   }
 
 Widget buildChildItem( Childrens childAccount, index,context){
-    return Container(
-      width: 340,
-      height: 85,
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        border:  Border.all(color: AppColors.borderColor),
-        boxShadow: [BoxShadow(blurRadius: 10,
-            color: AppColors.shadow,
-            spreadRadius: 15)],
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
+    return InkWell(
+      onTap: ()
+      {
+        ParentCubit.get(context).chooseChild(childAccount.id);
+      },
+      child: Container(
+        width: 340,
+        height: 85,
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          border:  Border.all(color: AppColors.borderColor),
+          boxShadow: [BoxShadow(blurRadius: 10,
+              color: AppColors.shadow,
+              spreadRadius: 15)],
+          color:
+          childAccount.id== ParentCubit.get(context).childId?
+          AppColors.lightOrange: Colors.white,
+          borderRadius: BorderRadius.circular(10),
 
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          childAccount.firstName.toString() +' '+ childAccount.lastName.toString(),
-          style: const TextStyle(
-            fontSize: 22,
-            color: AppColors.darkBlue,
-            fontWeight: FontWeight.w500,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            childAccount.firstName.toString() +' '+ childAccount.lastName.toString(),
+            style: const TextStyle(
+              fontSize: 22,
+              color: AppColors.darkBlue,
+              fontWeight: FontWeight.w500,
 
+            ),
           ),
         ),
       ),
