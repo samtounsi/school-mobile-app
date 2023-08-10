@@ -1,6 +1,7 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile_schoolapp/presentation/screens/submission_screen.dart';
 import '../../business logic/cubits/blocQuizzesStudent/stateQuizzes.dart';
 import 'package:mobile_schoolapp/presentation/animations/studentMotion.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/constants.dart';
@@ -212,30 +213,14 @@ class _QuizzesScreenStudentState extends State<QuizzesScreenStudent> {
                                         function: () {
                                           if (QuizCubit.get(context).count !=
                                               QuizCubit.get(context)
-                                                  .counterOfQuestion) {
+                                                  .quizStudentPostModel!.quiz.numberOfQuestions) {
                                             _pageController.nextPage(
-                                                duration:
-                                                    Duration(milliseconds: 3),
+
+                                                duration:Duration(milliseconds: 3),
                                                 curve: Curves.bounceInOut);
                                             QuizCubit.get(context).counter();
                                           } else {
-                                            showDialog(
-                                              context: context,
-                                              builder: (context) => AlertDialog(
-                                                actions: [
-                                                  TextButton(
-                                                      onPressed: () {
-                                                        // navigateTo(context, QuizzesHistory());
-                                                      },
-                                                      child: Center(
-                                                          child: Text(
-                                                        'Come back',
-                                                        style: TextStyle(
-                                                            fontSize: 25),
-                                                      )))
-                                                ],
-                                              ),
-                                            );
+                                            navigateTo(context, SubmissionScreen());
                                           }
                                         },
                                         isUpperCase: true,
