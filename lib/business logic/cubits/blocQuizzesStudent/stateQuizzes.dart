@@ -52,3 +52,9 @@ class QuizzesGetListUnSolvedErrorState extends QuizState {
 
   QuizzesGetListUnSolvedErrorState(this.errorUnSolve);
 }
+class SubmissionQuizzesSuccessState extends QuizState{}
+class SubmissionQuizzesLoadingState extends QuizState{}
+class SubmissionQuizzesErrorState extends QuizState{
+  final String errorSubmission;
+  SubmissionQuizzesErrorState({required this.errorSubmission});
+}

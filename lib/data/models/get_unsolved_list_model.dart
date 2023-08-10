@@ -10,6 +10,7 @@ class UnSolvedListModel {
   final String updatedAt;
   final int teacherSubjectId;
   final int gradeId;
+  final String subjectName;
 
   UnSolvedListModel(
       {required this.id,
@@ -22,7 +23,8 @@ class UnSolvedListModel {
       required this.createdAt,
       required this.updatedAt,
       required this.teacherSubjectId,
-      required this.gradeId});
+      required this.gradeId,
+      required this.subjectName});
 
   factory UnSolvedListModel.fromJson(Map<String, dynamic> json) {
     return UnSolvedListModel(
@@ -36,6 +38,7 @@ class UnSolvedListModel {
         createdAt: json['createdAt'],
         updatedAt: json['updatedAt'],
         teacherSubjectId: json['teacherSubjectId'],
-        gradeId: json['gradeId']);
+        gradeId: json['gradeId'],
+    subjectName: json['subject_name']);
   }
 }

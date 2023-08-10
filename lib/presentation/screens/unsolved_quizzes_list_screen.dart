@@ -51,7 +51,7 @@ class _UnSolvedQuizzesListScreenState extends State<UnSolvedQuizzesListScreen> {
                             QuizCubit.get(context)
                                 .quizzesStudentPost(unSolvedObj[index].id);
 
-                            navigateTo(context, QuizzesScreenStudent());
+                            navigateTo(context, QuizzesScreenStudent(quizId:unSolvedObj[index].id));
                           },
                           child: Padding(
                             padding: const EdgeInsets.only(
@@ -78,9 +78,9 @@ class _UnSolvedQuizzesListScreenState extends State<UnSolvedQuizzesListScreen> {
                                           MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          '${unSolvedObj[index].title} ',
+                                          '${unSolvedObj[index].title}${'(${unSolvedObj[index].subjectName})'}',
                                           style: TextStyle(
-                                              fontSize: 30,
+                                              fontSize: 22,
                                               color: AppColors.darkBlue),
                                         ),
                                       ],
@@ -103,7 +103,7 @@ class _UnSolvedQuizzesListScreenState extends State<UnSolvedQuizzesListScreen> {
                                               color: AppColors.lightOrange),
                                         ),
                                         Text(
-                                          '${unSolvedObj[index].numberOfQuestion}',
+                                          '${unSolvedObj[index].startTime}',
                                           style: TextStyle(
                                               fontSize: 20,
                                               color: AppColors.lightOrange),

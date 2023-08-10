@@ -1,32 +1,63 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
-import 'package:mobile_schoolapp/business%20logic/cubits/blocEvent/cubit.dart';
-import 'package:mobile_schoolapp/business%20logic/cubits/blocEvent/state.dart';
+import 'package:mobile_schoolapp/data/models/submission_model.dart';
+import 'package:mobile_schoolapp/presentation/animations/studentMotion.dart';
+import 'package:mobile_schoolapp/presentation/components%20and%20constants/components.dart';
 import '../../business logic/cubits/blocQuizzesStudent/cubitQuizzes.dart';
 import '../../business logic/cubits/blocQuizzesStudent/stateQuizzes.dart';
-import '../../data/models/send_add_event_teacher.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/constants.dart';
 
 class SubmissionScreen extends StatelessWidget {
-  SubmissionScreen({Key? key}) : super(key: key);
-  TextEditingController numberOfQuestionController = TextEditingController();
+  int quizzesId;
+  SubmissionScreen({Key? key,required this.quizzesId}) : super(key: key);
+  TextEditingController numOfQuestionsCorrectController = TextEditingController();
   TextEditingController timerController = TextEditingController();
 
   var formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    numberOfQuestionController.text=QuizCubit.get(context).countOfCorrectAnswers.toString();
+    numOfQuestionsCorrectController.text =
+        QuizCubit.get(context).countOfCorrectAnswers.toString();
     return Scaffold(
       body: Stack(
         children: [
           BlocConsumer<QuizCubit, QuizState>(
-            listener: (context, state) {},
+            listener: (context, state) {
+              if(state is SubmissionQuizzesSuccessState)
+                {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Center(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: AppColors.aqua,
+                          borderRadius: BorderRadius.circular(17),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "submit success",
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    behavior: SnackBarBehavior.floating,
+                    backgroundColor: Colors.transparent,
+                    elevation: 0,
+                    width: MediaQuery.of(context).size.width-10,
+                  ));
+
+                }
+            },
             builder: (context, state) {
-              return SingleChildScrollView
-                (
+              return SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.only(
                       top: 200, left: 30, right: 30, bottom: 30),
@@ -40,11 +71,11 @@ class SubmissionScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20),
                             color: Colors.white,
                             border:
-                            Border.all(color: AppColors.darkBlue, width: 2),
+                                Border.all(color: AppColors.darkBlue, width: 2),
                           ),
                           child: TextFormField(
-                            readOnly:true,
-                            controller: numberOfQuestionController,
+                            readOnly: true,
+                            controller: numOfQuestionsCorrectController,
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: 'NumberOfQuestion',
@@ -53,7 +84,6 @@ class SubmissionScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-
                         SizedBox(
                           height: 40,
                         ),
@@ -63,10 +93,10 @@ class SubmissionScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20),
                             color: Colors.white,
                             border:
-                            Border.all(color: AppColors.darkBlue, width: 2),
+                                Border.all(color: AppColors.darkBlue, width: 2),
                           ),
                           child: TextFormField(
-                            readOnly:true,
+                            readOnly: true,
                             controller: timerController,
                             decoration: InputDecoration(
                               border: InputBorder.none,
@@ -80,7 +110,7 @@ class SubmissionScreen extends StatelessWidget {
                           height: 60,
                         ),
                         ConditionalBuilder(
-                          condition: state is !  AddEventLoadingState,
+                          condition: state is! SubmissionQuizzesLoadingState,
                           builder: (BuildContext context) {
                             return Container(
                                 width: 200,
@@ -89,8 +119,14 @@ class SubmissionScreen extends StatelessWidget {
                                     color: AppColors.lightOrange),
                                 child: TextButton(
                                     onPressed: () {
-
-
+                                      SubmissionModel s = SubmissionModel(
+                                          quizId: quizzesId,
+                                          numberOfCorrectAnswer:numOfQuestionsCorrectController.text,
+                                          submitDuration: '10',
+                                          duration: QuizCubit.get(context).quizStudentPostModel!.quiz.duration.toString());
+                                      QuizCubit.get(context)
+                                          .submissionResult(s);
+                                      navigateTo(context, StudentMotion());
                                     },
                                     child: Text(
                                       'Submit',

@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/blocQuizzesStudent/stateQuizzes.dart';
 import 'package:http/http.dart' as http;
 import 'package:mobile_schoolapp/data/models/get_unsolved_list_model.dart';
+import 'package:mobile_schoolapp/data/models/submission_model.dart';
 
 import '../../../data/models/quizzes_get_student_model.dart';
 import '../../../presentation/components and constants/constants.dart';
@@ -240,6 +241,8 @@ class QuizCubit extends Cubit<QuizState> {
   List<UnSolvedListModel>? unSolveStudent;
 
   Future<void> getListUnSolved() async {
+    if(unSolveStudent!=null)
+      unSolveStudent=null;
     emit(QuizzesGetListUnSolvedLoadingState());
     try {
       var request = await http.get(
@@ -261,8 +264,8 @@ class QuizCubit extends Cubit<QuizState> {
       emit(QuizzesGetListUnSolvedErrorState(e.toString()));
     }
   }
-  void submissionResult(int id) async {
-    emit(QuizzesLoadingState());
+  void submissionResult(SubmissionModel submissionModel) async {
+    emit(SubmissionQuizzesLoadingState());
 
     try {
       var request = http.MultipartRequest(
@@ -270,7 +273,12 @@ class QuizCubit extends Cubit<QuizState> {
         Uri.parse(
             "https://new-school-management-system.onrender.com/mob/submission"),
       );
-      request.fields.addAll({'quiz': id.toString()});
+      request.fields.addAll({
+        'quiz_id':submissionModel.quizId.toString(),
+        'number_of_correct_answers':submissionModel.numberOfCorrectAnswer,
+        'submit_duration':submissionModel.submitDuration,
+        'duration':submissionModel.duration,
+      });
 
       request.headers.addAll({
         'Accept': '*/*',
@@ -286,15 +294,15 @@ class QuizCubit extends Cubit<QuizState> {
       print(json);
       print(myResponse.statusCode);
 
-      if (myResponse.statusCode == 200) {
-        quizStudentPostModel = QuizzesStudentPostModel.fromJson(json);
+      if (myResponse.statusCode == 201) {
 
-        emit(QuizzesSuccessState(quiz: quizStudentPostModel!));
+
+        emit(SubmissionQuizzesSuccessState());
       } else {
         throw Exception(json['message']);
       }
     } catch (e) {
-      emit(QuizzesErrorState(e.toString()));
+      emit(SubmissionQuizzesErrorState(errorSubmission: e.toString()));
     }
   }
 

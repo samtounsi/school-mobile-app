@@ -14,7 +14,8 @@ import 'package:mobile_schoolapp/presentation/screens/teacherTimeTable1.dart';
 import '../../business logic/cubits/blocQuizzesStudent/cubitQuizzes.dart';
 
 class QuizzesScreenStudent extends StatefulWidget {
-  QuizzesScreenStudent({Key? key}) : super(key: key);
+  int quizId;
+  QuizzesScreenStudent({Key? key,required this.quizId}) : super(key: key);
 
   @override
   State<QuizzesScreenStudent> createState() => _QuizzesScreenStudentState();
@@ -220,7 +221,7 @@ class _QuizzesScreenStudentState extends State<QuizzesScreenStudent> {
                                                 curve: Curves.bounceInOut);
                                             QuizCubit.get(context).counter();
                                           } else {
-                                            navigateTo(context, SubmissionScreen());
+                                            navigateTo(context, SubmissionScreen(quizzesId: widget.quizId,));
                                           }
                                         },
                                         isUpperCase: true,
