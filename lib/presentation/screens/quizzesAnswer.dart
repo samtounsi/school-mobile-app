@@ -7,7 +7,7 @@ import 'package:mobile_schoolapp/presentation/components%20and%20constants/const
 
 import '../../business logic/cubits/blocQuizzesStudent/cubitQuizzes.dart';
 import '../../business logic/cubits/blocQuizzesStudent/stateQuizzes.dart';
-import '../classes/quizzesStudent.dart';
+import '../../data/models/quizzes_get_student_model.dart';
 
 
 class AnswerOption extends StatelessWidget {
@@ -30,7 +30,7 @@ class AnswerOption extends StatelessWidget {
   ];
   int index;
   VoidCallback onPressed;
-  QModel question;
+  Questions question;
   AnswerOption({
     Key? key,
     required this.index,
@@ -44,7 +44,9 @@ class AnswerOption extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         return InkWell(
-            onTap:question.isSelected?null:onPressed,
+            onTap:
+          question.isSelected?null
+         : onPressed,
             child: ConstrainedBox(
               constraints: BoxConstraints.expand(width: 280,
                 height: 65,),
@@ -56,7 +58,7 @@ class AnswerOption extends StatelessWidget {
                   ],
                   border: Border.all(color:QuizCubit.get(context).getColor(question,index+1),
                   width: 3),
-                  color:question.options[index].isClicked?AppColors.lightOrange:Colors.white
+                  color:question.options[index].isSelected?AppColors.lightOrange:Colors.white
 
                 ),
 

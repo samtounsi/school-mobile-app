@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mobile_schoolapp/business%20logic/cubits/blocQuizzesStudent/cubitQuizzes.dart';
+import '../../business logic/cubits/blocQuizzesStudent/cubitQuizzes.dart';
+import '../../data/models/quizzes_get_student_model.dart';
 import 'package:mobile_schoolapp/presentation/classes/quizzesStudent.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/constants.dart';
 import 'package:mobile_schoolapp/presentation/screens/quizzesAnswer.dart';
 
 import '../../business logic/cubits/blocQuizzesStudent/stateQuizzes.dart';
 
-
-
 class QuestionItem extends StatelessWidget {
-  final QModel questionModel;
+  // final QModel questionModel;
+  final  Questions questions;
 
-  QuestionItem({Key? key, required this.questionModel}) : super(key: key);
+  QuestionItem({Key? key, required this.questions}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class QuestionItem extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(0.0),
                 child: Column(
-                  // mainAxisSize: MainAxisSize.max,
+                    // mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -44,44 +44,44 @@ class QuestionItem extends StatelessWidget {
                           // ],
                           border: Border.all(color: AppColors.borderColor),
                           color: AppColors.lightOrange,
-
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.only(left:30,top: 10,right: 20),
+                          padding: const EdgeInsets.only(
+                              left: 30, top: 10, right: 20),
                           child: Text(
-                            questionModel.question,
-                            style:TextStyle(
-                              color:AppColors.darkBlue,
-                              fontSize: 27
-                            ),
+                            questions.statement,
+                            style: TextStyle(
+                                color: AppColors.darkBlue, fontSize: 27),
                           ),
                         ),
                       ),
-                      SizedBox(height: 30,),
+                      SizedBox(
+                        height: 30,
+                      ),
                       ...List.generate(
-                          questionModel.options.length,
-                              (index)=>Column(
-                            children: [
-                              AnswerOption(
-                                  question:  questionModel,
-                                  index: QuizCubit.get(context).answerIndex(index),
-                                  onPressed: () => QuizCubit.get(context)
-                                      .checkAnswer(questionModel,
-                                      index,true)),
-                              SizedBox(
-                                height: 20,
-                              )
-                            ],
-                          )),
+                          questions.options.length,
+                          (index) => Column(
+                                children: [
+                                  AnswerOption(
+                                      question: questions,
+                                      index: QuizCubit.get(context)
+                                          .answerIndex(index),
+                                      onPressed: () => QuizCubit.get(context)
+                                          .checkAnswer(questions, index
+                                              // ,true
+                                              )),
+                                  SizedBox(
+                                    height: 20,
+                                  )
+                                ],
+                              )),
                       const Spacer(
                         flex: 1,
                       ),
-                    ]
-                ),
+                    ]),
               )),
         );
       },
-
     );
   }
 }

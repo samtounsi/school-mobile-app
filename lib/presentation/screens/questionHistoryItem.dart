@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mdi/mdi.dart';
-import 'package:mobile_schoolapp/business%20logic/cubits/blocQuizzesStudent/cubitQuizzes.dart';
-import 'package:mobile_schoolapp/presentation/classes/quizzesStudent.dart';
+import 'package:mobile_schoolapp/business%20logic/cubits/blocHistoryQuizzes/cubit.dart';
+import 'package:mobile_schoolapp/business%20logic/cubits/blocHistoryQuizzes/state.dart';
+import '../../business logic/cubits/blocQuizzesStudent/cubitQuizzes.dart';
+import '../../data/models/quizzes_history_teacher_post_model.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/constants.dart';
 import 'package:mobile_schoolapp/presentation/screens/answerHistory.dart';
-import 'package:mobile_schoolapp/presentation/screens/quizzesAnswer.dart';
-
-import '../../business logic/cubits/blocQuizzesStudent/stateQuizzes.dart';
 
 
 
 class QuestionHistoryItem extends StatelessWidget {
-  final QModel questionModel;
+  final QuestionHTeacher questionModel;
 
   QuestionHistoryItem({Key? key, required this.questionModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<QuizCubit, QuizState>(
+    return BlocConsumer<QuizzesHistoryCubit, QuizzesHistoryState>(
       listener: (context, state) {},
       builder: (context, state) {
         return SingleChildScrollView(
@@ -51,7 +50,7 @@ class QuestionHistoryItem extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.only(left:30,top: 10,right: 20),
                           child: Text(
-                            questionModel.question,
+                            questionModel.statement,
                             style:TextStyle(
                                 color:AppColors.darkBlue,
                                 fontSize: 27
@@ -63,26 +62,26 @@ class QuestionHistoryItem extends StatelessWidget {
                       Row(
                         children: [
                           Text('True answer:',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: AppColors.darkBlue
-                          ),),
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: AppColors.darkBlue
+                            ),),
                           if(questionModel.answer==1)
                             Icon(
                               Mdi.alphaACircleOutline,
-                              color: AppColors.lightOrange,
+                              color: AppColors.aqua,
                               size: 40,
                             ),
                           if(questionModel.answer==2)
                             Icon(
                               Mdi.alphaBCircleOutline,
-                              color: AppColors.lightOrange,
+                              color: AppColors.aqua,
                               size: 40,
                             ),
                           if(questionModel.answer==3)
                             Icon(
                               Mdi.alphaCCircleOutline,
-                              color: AppColors.lightOrange,
+                              color: AppColors.aqua,
                               size: 40,
                             ),
 
@@ -90,15 +89,13 @@ class QuestionHistoryItem extends StatelessWidget {
                       ),
                       SizedBox(height:15,),
                       ...List.generate(
-                          questionModel.options.length,
+                          questionModel.choices.length,
                               (index)=>Column(
                             children: [
                               AnswerOptionHistory(
-                                  question:  questionModel,
+                                  question: questionModel,
                                   index: QuizCubit.get(context).answerIndex(index),
-                                  onPressed: () => QuizCubit.get(context)
-                                      .checkAnswer(questionModel,
-                                      index,true)),
+                                  ),
                               SizedBox(
                                 height: 20,
                               )

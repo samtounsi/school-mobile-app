@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_schoolapp/business%20logic/cubits/blocTeacher/cubitTeacher.dart';
 import 'package:mobile_schoolapp/presentation/classes/dayNameItem.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/components1.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/constants.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/timeTableTeacherComponent.dart';
-import 'package:mobile_schoolapp/presentation/screens/dayTable.dart';
-
+import 'dayTable.dart';
 
 class TeacherTimeTable extends StatelessWidget {
   List<Items> list = [
@@ -21,10 +21,8 @@ class TeacherTimeTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: Stack(
         children: [
-
           Padding(
             padding: const EdgeInsets.only(top: 50),
             child: Column(
@@ -32,11 +30,13 @@ class TeacherTimeTable extends StatelessWidget {
                 Expanded(
                   child: Padding(
                       padding:
-                      const EdgeInsets.only(top: 50, left: 30, right: 30),
+                          const EdgeInsets.only(top: 50, left: 30, right: 30),
                       child: ListView.separated(
                           itemBuilder: (context, index) {
                             return InkWell(
                                 onTap: () {
+                                  TeacherCubit.get(context)
+                                      .postDayForGetTimeTable(day[index]);
                                   navigateTo(
                                       context,
                                       DayTable(
@@ -45,9 +45,9 @@ class TeacherTimeTable extends StatelessWidget {
                                 },
                                 child: TimeTableTeacherItem(day: day[index]));
                           },
-                          separatorBuilder: (context, index) => SizedBox(
-                            height: 30,
-                          ),
+                          separatorBuilder: (context, index) => const SizedBox(
+                                height: 30,
+                              ),
                           itemCount: 5)),
                 ),
               ],

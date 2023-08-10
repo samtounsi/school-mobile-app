@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/blocParent/stateParent.dart';
 import 'package:mobile_schoolapp/presentation/screens/event.dart';
-import 'package:mobile_schoolapp/presentation/screens/eventS&P.dart';
 import 'package:mobile_schoolapp/presentation/screens/parenthome.dart';
 import 'package:mobile_schoolapp/presentation/screens/parentprofile.dart';
 import 'package:mobile_schoolapp/presentation/screens/setting.dart';
@@ -144,6 +143,34 @@ class ParentCubit extends Cubit<ParentState> {
       emit(AddParentBioErrorState(error));
     }
 
+  }
+  void postFeedBack({required String feedback}) async {
+    emit(FeedbackLoadingState());
+    try {
+      var request = http.MultipartRequest(
+          'POST',
+          Uri.parse(
+              'https://new-school-management-system.onrender.com/mob/send_feedback'));
+      request.fields.addAll({'feedback': feedback});
+      request.headers.addAll({
+        'Accept': '*/*',
+        'Authorization': 'Bearer $token',
+        'Content-type': 'multipart/form-data'
+      });
+      final response = await request.send();
+      var responseString = await response.stream.bytesToString();
+      final myResponse = http.Response(responseString, response.statusCode);
+      final json = jsonDecode(myResponse.body);
+      print(json);
+      print(myResponse.statusCode);
+      if (myResponse.statusCode == 200) {
+        emit(FeedbackSuccessState());
+      } else {
+        throw Exception(json['message'] ?? "an error");
+      }
+    } catch (e) {
+      emit(FeedbackErrorState(errorFeedback: e.toString()));
+    }
   }
 
 }

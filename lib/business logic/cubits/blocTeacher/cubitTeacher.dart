@@ -12,6 +12,8 @@ import 'package:mobile_schoolapp/presentation/screens/teacherhome.dart';
 import 'package:mobile_schoolapp/presentation/screens/teacherprofile.dart';
 import '../../../data/models/add_profile_bio_model.dart';
 import '../../../data/models/add_profile_picture_model.dart';
+import '../../../data/models/get_list_section_teacher_model.dart';
+import '../../../data/models/time_table_teacher_model.dart';
 import '../../../presentation/components and constants/constants.dart';
 import '../../../presentation/screens/contacts.dart';
 import 'package:http/http.dart' as http;
@@ -24,13 +26,14 @@ class TeacherCubit extends Cubit<TeacherState> {
   List<Widget> teacherScreen = [
     TeacherHome(),
 
-    TeacherEvent(),
+    EventScreen(),
+
     TeacherProfile(),
     ChatContacts(),
    Setting(),
   ];
-  GradeTeacher? currentItem;
-  void gradeChangeItem(GradeTeacher value)
+  String? currentItem;
+  void gradeChangeItem(String value)
   {
     currentItem=value;
     emit(ChangeDropDownItem());
@@ -149,6 +152,73 @@ class TeacherCubit extends Cubit<TeacherState> {
   emit(SchoolTeacherAddBioErrorState(error));
   }
 
+  }
+  List<TimeTableTeacherModel>? teacherTimeT;
+
+  void postDayForGetTimeTable(String day) async {
+    emit(TeacherTimeTableLoadingState());
+    try {
+      var request = http.MultipartRequest(
+        'POST',
+        Uri.parse(
+            'https://new-school-management-system.onrender.com/mob/get_teacher_time_table'),
+      );
+      request.fields.addAll({
+        'day': day,
+      });
+      request.headers.addAll({
+        'Accept': '*/*',
+        'Authorization': 'Bearer $token',
+        'Content-type': 'multipart/form-data'
+      });
+      final response = await request.send();
+      var responseString = await response.stream.bytesToString();
+      final myResponse = http.Response(responseString, response.statusCode);
+      final json = jsonDecode(myResponse.body);
+      print(json);
+      print(myResponse.statusCode);
+      if (myResponse.statusCode == 200) {
+        teacherTimeT = (json['lessons'] as List)
+            .map((e) => TimeTableTeacherModel.fromJson(e))
+            .toList();
+        emit(TeacherTimeTableSuccessState(teacherTimeT!));
+      }
+      else
+      {
+        throw Exception(json['message'] ?? "error");
+
+
+      }
+    } catch (e) {
+      emit(TeacherTimeTableErrorState(e.toString()));
+    }
+  }
+  GetSectionTeacherModel? getSection;
+
+  Future<void> getAllSectionForTeacher() async {
+    emit(GetListSectionTeacherLoadingState());
+
+    try {
+      var result = await http.get(
+          Uri.parse(
+              'https://new-school-management-system.onrender.com/mob/get_all_sections'),
+          headers: {
+            'Accept': '*/*',
+            'Authorization': 'Bearer $token',
+          });
+      print(result.body);
+      print(result.statusCode);
+      Map<String, dynamic> json = jsonDecode(result.body);
+      print(json);
+      if (result.statusCode == 200) {
+        getSection = GetSectionTeacherModel.fromJson(json);
+        emit(GetListSectionTeacherSuccessState(getSection!));
+      } else {
+        throw Exception(json['message'] ?? "error");
+      }
+    } catch (e) {
+      emit(GetListSectionTeacherErrorState(e.toString()));
+    }
   }
 
 

@@ -7,7 +7,6 @@ import 'package:mobile_schoolapp/business%20logic/cubits/blocStudent/stateStuden
 import 'package:mobile_schoolapp/data/models/get_absent_students_model.dart';
 import 'package:mobile_schoolapp/data/models/student_profile_model.dart';
 import 'package:mobile_schoolapp/presentation/screens/event.dart';
-import 'package:mobile_schoolapp/presentation/screens/eventS&P.dart';
 import 'package:mobile_schoolapp/presentation/screens/setting.dart';
 import 'package:mobile_schoolapp/presentation/screens/studenthome.dart';
 import 'package:mobile_schoolapp/presentation/screens/studentprofile.dart';

@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/components1.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/markItem.dart';
 import 'package:mobile_schoolapp/presentation/screens/add_quiz.dart';
-import 'package:mobile_schoolapp/presentation/screens/quizzesHistory.dart';
-import 'package:mobile_schoolapp/presentation/screens/quizzesScreenStudent.dart';
-
 import '../components and constants/constants.dart';
+import 'quizzesHistory.dart';
+import 'quizzesScreenStudent.dart';
+import 'quizzes_history_question_student.dart';
+import 'quizzes_history_student.dart';
+import 'package:mobile_schoolapp/presentation/screens/unsolved_quizzes_list_screen.dart';
+
 
 class StudentQuizzesNewOrHistory extends StatelessWidget {
   const StudentQuizzesNewOrHistory({Key? key}) : super(key: key);
@@ -44,7 +47,7 @@ class StudentQuizzesNewOrHistory extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: (){
-                    navigateTo(context, QuizzesScreenStudent());
+                    navigateTo(context, UnSolvedQuizzesListScreen());
 
                   },
                   child: MarkItem(
@@ -59,7 +62,7 @@ class StudentQuizzesNewOrHistory extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    navigateTo(context, QuizzesHistory());
+                    navigateTo(context, QuizzesHistoryStudent());
 
                   },
                   child: MarkItem(

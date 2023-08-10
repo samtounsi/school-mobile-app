@@ -49,3 +49,12 @@ class AddParentBioErrorState extends ParentState
 
   AddParentBioErrorState(this.error);
 }
+class FeedbackSuccessState extends ParentState {}
+
+class FeedbackLoadingState extends ParentState {}
+
+class FeedbackErrorState extends ParentState {
+  final String errorFeedback;
+
+  FeedbackErrorState({required this.errorFeedback});
+}

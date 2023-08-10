@@ -21,6 +21,9 @@ import 'package:mobile_schoolapp/presentation/screens/login.dart';
 import 'package:mobile_schoolapp/presentation/screens/onboard.dart';
 import 'package:mobile_schoolapp/shared/bloc_observer.dart';
 import 'business logic/cubits/attendanceCubit/cubit.dart';
+import 'business logic/cubits/blocEvent/cubit.dart';
+import 'business logic/cubits/blocHistoryQuizzes/cubit.dart';
+import 'business logic/cubits/blocQuizzesStudent/cubitQuizzes.dart';
 
 
 void main() async {
@@ -36,10 +39,10 @@ void main() async {
    print(id);
    print(profileId);
    print(type);
-  //CacheHelper.removeData(key: 'token');
-  //CacheHelper.removeData(key: 'id');
-  //CacheHelper.removeData(key: 'profile_id');
-  //CacheHelper.removeData(key: 'type');
+  // CacheHelper.removeData(key: 'token');
+  // CacheHelper.removeData(key: 'id');
+  // CacheHelper.removeData(key: 'profile_id');
+  // CacheHelper.removeData(key: 'type');
   if (onBoard != null) {
     if (token != null) {
       type = CacheHelper.getData(key: 'type');
@@ -85,7 +88,14 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => ParentCubit()..getParentProfile(id: profileId!)),
           BlocProvider(create: (context) => CalendarCubit()..getSchoolCalendarData(year: (DateTime.now().month>6)?DateTime.now().year+1:DateTime.now().year, newyear: DateTime.now().year)),
           BlocProvider(create: (context) => LoginCubit(),),
-          BlocProvider(create: (context) => SettingsCubit(),)],
+          BlocProvider(create: (context) => SettingsCubit(),),
+          BlocProvider(
+            create: (context) => EventCubit(),
+          ),
+          BlocProvider(
+            create: (context) => QuizCubit(),
+          ),
+          BlocProvider(create: (context) => QuizzesHistoryCubit(),)],
 
         child: MaterialApp(
             debugShowCheckedModeBanner: false,

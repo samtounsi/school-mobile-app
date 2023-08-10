@@ -99,48 +99,7 @@ class Setting extends StatelessWidget {
                 },
                 child: Column(
                   children: [
-                    InkWell(
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            title: Column(
-                              children: [
-                                InkWell(
-                                  onTap: () {},
-                                  child: ListTile(
-                                    title: Text('Arabic',
-                                        style: TextStyle(
-                                            color: AppColors.darkBlue,
-                                            fontSize: 20)),
-                                  ),
-                                ),
-                                InkWell(
-                                  onTap: () {},
-                                  child: ListTile(
-                                    title: Text('English',
-                                        style: TextStyle(
-                                            color: AppColors.darkBlue,
-                                            fontSize: 20)),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                      child: ListTile(
-                        leading: Icon(
-                          Icons.translate,
-                          color: AppColors.lightOrange,
-                        ),
-                        title: Text(
-                          'translation',
-                          style: TextStyle(
-                              fontSize: 22, color: AppColors.lightOrange),
-                        ),
-                      ),
-                    ),
+
                     SizedBox(
                       height: 7,
                     ),
@@ -199,7 +158,7 @@ class Setting extends StatelessWidget {
                     Container(
                         width: 400,
                         height: 400,
-                        child: SvgPicture.asset("images/setting3.svg"))
+                        child: SvgPicture.asset("images/Usability testing-bro (1).svg"))
                   ],
                 ),
               )
