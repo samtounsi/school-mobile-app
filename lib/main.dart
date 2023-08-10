@@ -1,3 +1,8 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:flutter/services.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,6 +21,7 @@ import 'package:mobile_schoolapp/network/cache_helper.dart';
 import 'package:mobile_schoolapp/presentation/animations/parentMotion.dart';
 import 'package:mobile_schoolapp/presentation/animations/studentMotion.dart';
 import 'package:mobile_schoolapp/presentation/animations/teacherMotion.dart';
+import 'package:mobile_schoolapp/presentation/components%20and%20constants/components.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/constants.dart';
 import 'package:mobile_schoolapp/presentation/screens/addEventTeacher.dart';
 import 'package:mobile_schoolapp/presentation/screens/add_marks.dart';
@@ -39,8 +45,31 @@ import 'business logic/cubits/attendanceCubit/cubit.dart';
 import 'presentation/screens/attendance_for_teacher.dart';
 import 'presentation/screens/myClasses.dart';
 
+GlobalKey<NavigatorState> key = GlobalKey<NavigatorState>();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  FirebaseMessaging.instance.getToken().then((value) {
+    print('get token : $value');
+  });
+
+  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+    print('on message opened app : done');
+    Navigator.pushNamed(
+        key.currentState!.context,
+        'push',
+        );
+  });
+
+  FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage? message) {
+    if (message != null) {
+      print('on message opened app : yes');
+      Navigator.pushNamed(key.currentState!.context, 'push',
+          );
+    }
+  });
+
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingHandler);
   await CacheHelper.init();
   Widget? initWidget;
   bool? onBoard = CacheHelper.getData(key: 'onBoard');
@@ -74,6 +103,11 @@ void main() async {
   }
   Bloc.observer = MyBlocObserver();
   runApp(MyApp(start: initWidget));
+}
+
+Future<void> firebaseMessagingHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  print('firebaseMessagingHandler : true');
 }
 
 class MyApp extends StatelessWidget {
@@ -114,7 +148,14 @@ class MyApp extends StatelessWidget {
           BlocProvider(
               create: (context) =>
                   ParentCubit()..getParentProfile(id: profileId!)),
-          BlocProvider(create: (context) => CalendarCubit()..getSchoolCalendarData(year: (DateTime.now().month>6)?DateTime.now().year+1:DateTime.now().year, newyear: DateTime.now().year),),
+          BlocProvider(
+            create: (context) => CalendarCubit()
+              ..getSchoolCalendarData(
+                  year: (DateTime.now().month > 6)
+                      ? DateTime.now().year + 1
+                      : DateTime.now().year,
+                  newyear: DateTime.now().year),
+          ),
           BlocProvider(
             create: (context) => LoginCubit(),
           ),
@@ -123,11 +164,13 @@ class MyApp extends StatelessWidget {
           )
         ],
         child: MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'Motion Tab Bar Sample',
-            theme: ThemeData(
-              primarySwatch: buildMaterialColor(AppColors.darkBlue),
-            ),
-            home: start));
+          debugShowCheckedModeBanner: false,
+          title: 'Motion Tab Bar Sample',
+          theme: ThemeData(
+            primarySwatch: buildMaterialColor(AppColors.darkBlue),
+          ),
+          home: start,
+          routes: {'push': ((context) => const EventScreen())},
+        ));
   }
 }
