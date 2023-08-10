@@ -32,6 +32,7 @@ class Quiz {
   });
 
   late final int numberOfQuestions;
+  late final int timer;
   late final int duration;
   late final String grade;
   late final String subject;
@@ -40,6 +41,7 @@ class Quiz {
   Quiz.fromJson(Map<String, dynamic> json) {
     numberOfQuestions = json['number_of_questions'];
     duration = json['duration'];
+    timer=json['timer'];
     grade = json['grade'];
     subject = json['subject'];
     questions =
@@ -52,6 +54,7 @@ class Quiz {
     _data['duration'] = duration;
     _data['grade'] = grade;
     _data['subject'] = subject;
+    _data['timer'] = timer;
     _data['questions'] = questions.map((e) => e.toJson()).toList();
     return _data;
   }
