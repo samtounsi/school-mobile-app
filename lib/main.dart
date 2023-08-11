@@ -18,6 +18,7 @@ import 'package:mobile_schoolapp/business%20logic/cubits/blocTeacher/cubitTeache
 import 'package:mobile_schoolapp/business%20logic/cubits/logincubit/login_cubit.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/student_time_table/cubit.dart';
 import 'package:mobile_schoolapp/network/cache_helper.dart';
+import 'package:mobile_schoolapp/notification/firebase.dart';
 import 'package:mobile_schoolapp/presentation/animations/parentMotion.dart';
 import 'package:mobile_schoolapp/presentation/animations/studentMotion.dart';
 import 'package:mobile_schoolapp/presentation/animations/teacherMotion.dart';
@@ -30,6 +31,7 @@ import 'package:mobile_schoolapp/presentation/screens/chat_screen.dart';
 import 'package:mobile_schoolapp/presentation/screens/chooseClassTeacher.dart';
 import 'package:mobile_schoolapp/presentation/screens/choose_subject.dart';
 import 'package:mobile_schoolapp/presentation/screens/contacts.dart';
+import 'package:mobile_schoolapp/presentation/screens/event.dart';
 import 'package:mobile_schoolapp/presentation/screens/eventS&P.dart';
 import 'package:mobile_schoolapp/presentation/screens/login.dart';
 import 'package:mobile_schoolapp/presentation/screens/onboard.dart';
@@ -49,27 +51,9 @@ GlobalKey<NavigatorState> key = GlobalKey<NavigatorState>();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  FirebaseMessaging.instance.getToken().then((value) {
-    print('get token : $value');
-  });
+  await FirebaseApi().initNotification();
 
-  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-    print('on message opened app : done');
-    Navigator.pushNamed(
-        key.currentState!.context,
-        'push',
-        );
-  });
-
-  FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage? message) {
-    if (message != null) {
-      print('on message opened app : yes');
-      Navigator.pushNamed(key.currentState!.context, 'push',
-          );
-    }
-  });
-
-  FirebaseMessaging.onBackgroundMessage(firebaseMessagingHandler);
+  //widget navigate and get token and types
   await CacheHelper.init();
   Widget? initWidget;
   bool? onBoard = CacheHelper.getData(key: 'onBoard');
@@ -89,11 +73,17 @@ void main() async {
     if (token != null) {
       type = CacheHelper.getData(key: 'type');
       if (type == 'parent') {
-        initWidget = ParentMotion();
+        initWidget = ParentMotion(initial: 'Home', ind:1);
       } else if (type == 'teacher') {
-        initWidget = TeacherMotion();
+        initWidget = TeacherMotion(
+          initial: 'Home',
+          ind: 1,
+        );
       } else if (type == 'student') {
-        initWidget = StudentMotion();
+        initWidget = StudentMotion(
+          initial: 'Home',
+          ind: 1,
+        );
       }
     } else {
       initWidget = Login();
@@ -105,14 +95,10 @@ void main() async {
   runApp(MyApp(start: initWidget));
 }
 
-Future<void> firebaseMessagingHandler(RemoteMessage message) async {
-  await Firebase.initializeApp();
-  print('firebaseMessagingHandler : true');
-}
-
 class MyApp extends StatelessWidget {
   final Widget? start;
   MyApp({Key? key, this.start}) : super(key: key);
+  static const route = 'to-event';
 
   @override
   Widget build(BuildContext context) {
@@ -170,7 +156,19 @@ class MyApp extends StatelessWidget {
             primarySwatch: buildMaterialColor(AppColors.darkBlue),
           ),
           home: start,
-          routes: {'push': ((context) => const EventScreen())},
+          navigatorKey: key,
+          routes: {
+            'to-event': (context) {
+              if (type == 'teacher') {
+                return TeacherMotion(initial: 'Event', ind: 2);
+              }
+              if (type == 'student') {
+                return StudentMotion(initial: 'Event', ind: 2);
+              }
+              return ParentMotion(initial: 'Event', ind:2);
+            },
+            //StudentMotion.route:(context) => StudentMotion(initial: 'Event', ind: 2,),
+          },
         ));
   }
 }

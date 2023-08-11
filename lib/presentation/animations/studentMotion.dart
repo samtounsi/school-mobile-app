@@ -7,28 +7,34 @@ import 'package:mobile_schoolapp/presentation/components%20and%20constants/const
 import 'package:motion_tab_bar_v2/motion-badge.widget.dart';
 import 'package:motion_tab_bar_v2/motion-tab-bar.dart';
 
-
 class StudentMotion extends StatefulWidget {
-  const StudentMotion({Key? key, this.title}) : super(key: key);
-
+  const StudentMotion(
+      {Key? key, this.title, required this.initial, required this.ind});
+  final String initial;
+  final int ind;
   final String? title;
+  //static const route = '/to-event-student';
 
   @override
-  StudentMotionState createState() => StudentMotionState();
+  StudentMotionState createState() => StudentMotionState(initial, ind);
 }
 
 class StudentMotionState extends State<StudentMotion>
     with TickerProviderStateMixin {
   TabController? _tabController;
+  String initial;
+  int ind;
+  StudentMotionState(this.initial, this.ind);
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(
-      initialIndex: 1,
+      initialIndex: ind,
       length: 5,
       vsync: this,
     );
+    StudentCubit.get(context).currentIndex = ind - 1;
   }
 
   @override
@@ -45,10 +51,10 @@ class StudentMotionState extends State<StudentMotion>
         return SafeArea(
           child: Scaffold(
             bottomNavigationBar: MotionTabBar(
-              initialSelectedTab: "Home",
+              initialSelectedTab: initial,
               useSafeArea: true,
               // default: true, apply safe area wrapper
-              labels: const ["Home", "Event", "Profile", "Chat","Setting"],
+              labels: const ["Home", "Event", "Profile", "Chat", "Setting"],
               icons: const [
                 Icons.home,
                 Icons.event,
@@ -115,8 +121,8 @@ class StudentMotionState extends State<StudentMotion>
                 // ignore: prefer_const_literals_to_create_immutables
                 children: [
                   for (int i = 0; i < 5; i++)
-                    StudentCubit.get(context).studentScreen[
-                        StudentCubit.get(context).currentIndex!],
+                    StudentCubit.get(context)
+                        .studentScreen[StudentCubit.get(context).currentIndex!],
                 ]),
           ),
         );

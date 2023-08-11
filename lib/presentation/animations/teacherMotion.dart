@@ -7,28 +7,35 @@ import 'package:mobile_schoolapp/presentation/components%20and%20constants/const
 import 'package:motion_tab_bar_v2/motion-badge.widget.dart';
 import 'package:motion_tab_bar_v2/motion-tab-bar.dart';
 
-
 class TeacherMotion extends StatefulWidget {
-  const TeacherMotion({Key? key, this.title}) : super(key: key);
-
+  const TeacherMotion(
+      {Key? key, this.title, required this.initial, required this.ind});
+  final String initial;
   final String? title;
+  final int ind;
+  //static const route = '/to-event-tacher';
 
   @override
-  TeacherMotionState createState() => TeacherMotionState();
+  TeacherMotionState createState() => TeacherMotionState(initial, ind);
 }
 
 class TeacherMotionState extends State<TeacherMotion>
     with TickerProviderStateMixin {
   TabController? _tabController;
+  String initial;
+  int ind;
+  TeacherMotionState(this.initial, this.ind);
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(
-      initialIndex: 1,
+      initialIndex: ind,
       length: 5,
       vsync: this,
     );
+    TeacherCubit.get(context).currentIndex = ind-1;
+    print(TeacherCubit.get(context).currentIndex.toString());
   }
 
   @override
@@ -155,10 +162,11 @@ class TeacherMotionState extends State<TeacherMotion>
             // ),
             backgroundColor: Colors.transparent,
             bottomNavigationBar: MotionTabBar(
-              initialSelectedTab: "Home",
+              initialSelectedTab: initial,
+
               useSafeArea: true,
               // default: true, apply safe area wrapper
-              labels: const ["Home", "Event", "Profile", "Chat","Setting"],
+              labels: const ['Home', 'Event', 'Profile', 'Chat', 'Setting'],
               icons: const [
                 Icons.home,
                 Icons.event,
@@ -225,8 +233,8 @@ class TeacherMotionState extends State<TeacherMotion>
                 // ignore: prefer_const_literals_to_create_immutables
                 children: [
                   for (int i = 0; i < 5; i++)
-                    TeacherCubit.get(context).teacherScreen[
-                   TeacherCubit.get(context).currentIndex!],
+                    TeacherCubit.get(context)
+                        .teacherScreen[TeacherCubit.get(context).currentIndex!],
                 ]),
           ),
         );

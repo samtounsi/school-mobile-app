@@ -20,10 +20,9 @@ class TeacherCubit extends Cubit<TeacherState> {
   TeacherCubit() : super(InitialTeacherState());
 
   static TeacherCubit get(context) => BlocProvider.of(context);
-  int? currentIndex = 0;
+  int currentIndex = 0;
   List<Widget> teacherScreen = [
     TeacherHome(),
-
     TeacherEvent(),
     TeacherProfile(),
     ChatContacts(),
