@@ -1,29 +1,29 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile_schoolapp/presentation/components%20and%20constants/components.dart';
 
 import '../../business logic/cubits/blocMark/cubit.dart';
 import '../../business logic/cubits/blocMark/states.dart';
 import '../components and constants/constants.dart';
 import '../components and constants/marks.dart';
+
 var model;
+
 class ShowStudentMarks extends StatelessWidget {
   const ShowStudentMarks({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MarksCubit, MarksStates>(
-      listener: (context, state)
-      {
-        if(state is GetStudentMarksSuccessState)
-        {
-          model=state.studentMarks.marks;
+      listener: (context, state) {
+        if (state is GetStudentMarksSuccessState) {
+          model = state.studentMarks.marks;
         }
       },
       builder: (context, state) {
-        if(state is GetStudentMarksSuccessState)
-        {
-          model=state.studentMarks.marks;
+        if (state is GetStudentMarksSuccessState) {
+          model = state.studentMarks.marks;
         }
         return Container(
           decoration: BoxDecoration(
@@ -32,94 +32,106 @@ class ShowStudentMarks extends StatelessWidget {
               fit: BoxFit.fill,
             ),
           ),
-          child: SafeArea(
-            child: Scaffold(
-              backgroundColor: Colors.transparent,
-              appBar: AppBar(
-                elevation: 0,
-                backgroundColor: Colors.transparent,
-                leading:  IconButton(
-                  onPressed: (){
-                    model=null;
-                    Navigator.pop(context);
-                  },
-                  icon: Icon(Icons.arrow_back,
-                    weight: 2,
-                    size: 35,
-                    color: Colors.white,),),
-                titleSpacing: 15,
-                title: Text('Show Marks',
-                  style: TextStyle(
-                      color:Colors.white,
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            body: Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 15),
+                  child: Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          model = null;
+                          Navigator.pop(context);
+                        },
+                        icon: Icon(
+                          Icons.arrow_back,
+                          weight: 2,
+                          size: 35,
+                          color: AppColors.darkBlue,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      text('Show Marks',
+                          color: Colors.white,
+                          weight: FontWeight.bold,
+                          size: 22)
+                    ],
                   ),
                 ),
-              ),
-              body: ConditionalBuilder(
-                condition: state is ! GetStudentMarksLoadingState&&model!=null,
-                builder: (context)
-                {
-                  model=MarksCubit.get(context).studentMarks!.marks;
-                  return MarksCubit.get(context).studentMarks!.isExist==true?Padding(
-                    padding: EdgeInsetsDirectional.only(top: 30, bottom: 15),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.symmetric(vertical: 25,horizontal: 10),
-                          child: Row(
-                            children: [
-                              buildMarksHeaderItem(
-                                  name: 'Subject', color: AppColors.lightOrange),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              buildMarksHeaderItem(
-                                  width: 65,
-                                  name: 'Obt',
-                                  color: AppColors.lightOrange),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              buildMarksHeaderItem(
-                                  width: 65,
-                                  name: 'Max',
-                                  color: AppColors.lightOrange),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          child: ListView.separated(
-                              scrollDirection: Axis.vertical,
-                              shrinkWrap: true,
-                              // physics: NeverScrollableScrollPhysics(),
-                              itemBuilder: (context, index) {
-                                return buildMarksItem(
-                                    name: model[index].subject,
-                                    obt: model[index].mark.toString(),
-                                    max: model[index].totalMark.toString());
-                              },
-                              separatorBuilder: (context, index) {
-                                return SizedBox(
-                                  height: 25,
-                                );
-                              },
-                              itemCount:
-                              model.length),
-                        )
-                      ],
-                    ),
-                  )
-                      : Center(
-                      child: Text(
-                          'No results found',
-                          style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.w800,
-                              color: AppColors.darkBlue)));
-                },
-                fallback: (context)=>Center(child: CircularProgressIndicator()),
-              ),
+                ConditionalBuilder(
+                  condition:
+                      state is! GetStudentMarksLoadingState && model != null,
+                  builder: (context) {
+                    model = MarksCubit.get(context).studentMarks!.marks;
+                    return MarksCubit.get(context).studentMarks!.isExist == true
+                        ? Padding(
+                            padding:
+                                EdgeInsetsDirectional.only(top: 70, bottom: 15),
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.symmetric(
+                                      vertical: 25, horizontal: 10),
+                                  child: Row(
+                                    children: [
+                                      buildMarksHeaderItem(
+                                          name: 'Subject',
+                                          color: AppColors.lightOrange),
+                                      SizedBox(
+                                        width: 20,
+                                      ),
+                                      buildMarksHeaderItem(
+                                          width: 65,
+                                          name: 'Obt',
+                                          color: AppColors.lightOrange),
+                                      SizedBox(
+                                        width: 20,
+                                      ),
+                                      buildMarksHeaderItem(
+                                          width: 65,
+                                          name: 'Max',
+                                          color: AppColors.lightOrange),
+                                    ],
+                                  ),
+                                ),
+                                Expanded(
+                                  child: ListView.separated(
+                                      scrollDirection: Axis.vertical,
+                                      shrinkWrap: true,
+                                      // physics: NeverScrollableScrollPhysics(),
+                                      itemBuilder: (context, index) {
+                                        return buildMarksItem(
+                                            name: model[index].subject,
+                                            obt: model[index].mark.toString(),
+                                            max: model[index]
+                                                .totalMark
+                                                .toString());
+                                      },
+                                      separatorBuilder: (context, index) {
+                                        return SizedBox(
+                                          height: 25,
+                                        );
+                                      },
+                                      itemCount: model.length),
+                                )
+                              ],
+                            ),
+                          )
+                        : Center(
+                            child: Text('No results found',
+                                style: TextStyle(
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.w800,
+                                    color: AppColors.darkBlue)));
+                  },
+                  fallback: (context) =>
+                      Center(child: CircularProgressIndicator()),
+                ),
+              ],
             ),
           ),
         );

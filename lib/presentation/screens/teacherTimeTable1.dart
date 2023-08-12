@@ -54,7 +54,7 @@ class TeacherTimeTable extends StatelessWidget {
             ),
           ),
           Container(
-            height: 150,
+            height: 130,
             width: MediaQuery.of(context).size.width,
             child: Image.asset(
               'images/head.png',
@@ -62,7 +62,7 @@ class TeacherTimeTable extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
+            padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
             child: IconButton(
                 onPressed: () {
                   Navigator.pop(context);
@@ -70,7 +70,7 @@ class TeacherTimeTable extends StatelessWidget {
                 icon: const Icon(
                   Icons.arrow_back,
                   color: AppColors.darkBlue,
-                  size: 30,
+                  size: 35,
                 )),
           ),
         ],

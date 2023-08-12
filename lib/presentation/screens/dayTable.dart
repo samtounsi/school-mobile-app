@@ -9,7 +9,6 @@ import 'package:mobile_schoolapp/presentation/components%20and%20constants/const
 class DayTable extends StatefulWidget {
   Items name;
 
-
   DayTable({required this.name, Key? key}) : super(key: key);
 
   @override
@@ -33,18 +32,43 @@ class _DayTableState extends State<DayTable> {
         ),
         child: BlocConsumer<TeacherCubit, TeacherState>(
           builder: (BuildContext context, state) {
-            if(state is TeacherTimeTableErrorState)
-              {
-                return Scaffold(body:Center(child: Text("Not Exist"
-                    "",style: TextStyle(
-                  fontSize: 30,
-                  color: AppColors.darkBlue,
-                  fontWeight: FontWeight.w700
-                ),
-                )));
-              }
+            if (state is TeacherTimeTableErrorState) {
+              return Scaffold(
+                  backgroundColor: Colors.transparent,
+                  body: Column(
+                    children: [
+                      SizedBox(
+                        height: 25,
+                      ),
+                      Row(
+                        children: [
+                          IconButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              icon: Icon(
+                                Icons.arrow_back,
+                                color: AppColors.darkBlue,
+                                size: 35,
+                              )),
+                        ],
+                      ),
+                      Spacer(),
+                      Center(
+                          child: Text(
+                        'NOT ADDED YET',
+                        style: TextStyle(
+                            fontSize: 30,
+                            color: AppColors.darkBlue,
+                            fontWeight: FontWeight.w700),
+                      )),
+                      Spacer(),
+                    ],
+                  ));
+            }
             return ConditionalBuilder(
-              condition: state is! TeacherTimeTableLoadingState&&TeacherCubit.get(context).teacherTimeT!=null,
+              condition: state is! TeacherTimeTableLoadingState &&
+                  TeacherCubit.get(context).teacherTimeT != null,
               builder: (BuildContext context) {
                 var modelTeacherTime = TeacherCubit.get(context).teacherTimeT;
                 return Scaffold(
@@ -239,11 +263,11 @@ class _DayTableState extends State<DayTable> {
                                             Expanded(
                                               child: Column(
                                                 mainAxisAlignment:
-                                                MainAxisAlignment.start,
+                                                    MainAxisAlignment.start,
                                                 children: [
                                                   Text(
                                                       modelTeacherTime[index]
-                                                       .subject,
+                                                          .subject,
                                                       style: TextStyle(
                                                           fontSize: 20,
                                                           color: AppColors

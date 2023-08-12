@@ -14,7 +14,7 @@ class AddEventTeacher extends StatelessWidget {
   TextEditingController timeController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
-  var formKey = GlobalKey<FormState>();
+  var formKey4 = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +60,7 @@ class AddEventTeacher extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       top: 120, left: 30, right: 30, bottom: 30),
                   child: Form(
-                    key: formKey,
+                    key: formKey4,
                     child: Column(
                       children: [
                         Container(

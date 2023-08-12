@@ -45,7 +45,7 @@ class _ChooseClassTeacherState extends State<ChooseClassTeacher> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 7, top: 35),
+                          padding: const EdgeInsets.only(left: 5, top: 35),
                           child: CircleAvatar(
                             backgroundColor: Colors.white,
                             child: IconButton(
@@ -55,6 +55,7 @@ class _ChooseClassTeacherState extends State<ChooseClassTeacher> {
                               icon: Icon(
                                 Icons.arrow_back,
                                 color: AppColors.darkBlue,
+                                size: 35,
                               ),
                             ),
                           ),
@@ -69,6 +70,7 @@ class _ChooseClassTeacherState extends State<ChooseClassTeacher> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
+                                    Spacer(),
                                     Text(
                                       "Choose a class",
                                       style: TextStyle(
@@ -76,6 +78,7 @@ class _ChooseClassTeacherState extends State<ChooseClassTeacher> {
                                           fontSize: 25,
                                           fontWeight: FontWeight.w500),
                                     ),
+                                    Spacer(),
                                   ],
                                 ),
                                 SizedBox(
@@ -162,7 +165,11 @@ class _ChooseClassTeacherState extends State<ChooseClassTeacher> {
                                   onPressed: () {
                                     TeacherCubit.get(context)
                                         .getAllSectionForTeacher();
-                                    navigateTo(context, myClasses( teacherClass: gradeValue!,));
+                                    navigateTo(
+                                        context,
+                                        myClasses(
+                                          teacherClass: gradeValue!,
+                                        ));
                                     print(gradeValue);
                                   },
                                   child: Text(

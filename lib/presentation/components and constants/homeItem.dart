@@ -5,22 +5,19 @@ import 'constants.dart';
 class HomeText extends StatelessWidget {
   String text;
   String image;
-  double? numS=22;
-
+  double? numS = 22;
 
   HomeText({
     Key? key,
     required this.text,
     required this.image,
     this.numS,
-
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 320
-      ,
+      width: 320,
       height: 80,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -43,14 +40,12 @@ class HomeText extends StatelessWidget {
             ),
           ),
           Container(
-            height: 80,
-            width: 80,
-
-
+            height: 75,
+            width: 45,
             child: Image.asset(
               image,
-              fit: BoxFit.contain,
-              scale: 0.8,
+              fit: BoxFit.fill,
+              scale: 0.9,
             ),
           ),
         ],

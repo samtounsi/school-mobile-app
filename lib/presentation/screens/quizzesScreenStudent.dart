@@ -15,7 +15,7 @@ import '../../business logic/cubits/blocQuizzesStudent/cubitQuizzes.dart';
 
 class QuizzesScreenStudent extends StatefulWidget {
   int quizId;
-  QuizzesScreenStudent({Key? key,required this.quizId}) : super(key: key);
+  QuizzesScreenStudent({Key? key, required this.quizId}) : super(key: key);
 
   @override
   State<QuizzesScreenStudent> createState() => _QuizzesScreenStudentState();
@@ -38,7 +38,28 @@ class _QuizzesScreenStudentState extends State<QuizzesScreenStudent> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<QuizCubit, QuizState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is QuizzesSuccessState) {
+          QuizCubit.get(context).startTimer(
+              QuizCubit.get(context).quizStudentPostModel!.quiz.timer);
+        }
+        if (state is QuizTimerCountdownState &&
+            QuizCubit.get(context).myDur!.inSeconds == 30) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: text('almost done!!', color: Colors.white),
+            backgroundColor: AppColors.lightOrange,
+          ));
+        }
+        if (state is QuizTimerCountdownState &&
+            QuizCubit.get(context).myDur!.inSeconds == 0) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: text('Time\'s UP', color: Colors.white),
+            backgroundColor: AppColors.aqua,
+          ));
+          QuizCubit.get(context).stopTimer();
+          navigateTo(context, SubmissionScreen(quizzesId: widget.quizId));
+        }
+      },
       builder: (context, state) {
         return Container(
           decoration: BoxDecoration(
@@ -47,10 +68,10 @@ class _QuizzesScreenStudentState extends State<QuizzesScreenStudent> {
                   fit: BoxFit.fill)),
           child: WillPopScope(
             onWillPop: () async {
-    if (QuizCubit.get(context).quizStudentPostModel!.allow == 1) {
-
-    return false;}
-    return true;
+              if (QuizCubit.get(context).quizStudentPostModel!.allow == 1) {
+                return false;
+              }
+              return true;
             },
             child: Scaffold(
               backgroundColor: Colors.transparent,
@@ -214,14 +235,21 @@ class _QuizzesScreenStudentState extends State<QuizzesScreenStudent> {
                                         function: () {
                                           if (QuizCubit.get(context).count !=
                                               QuizCubit.get(context)
-                                                  .quizStudentPostModel!.quiz.numberOfQuestions) {
+                                                  .quizStudentPostModel!
+                                                  .quiz
+                                                  .numberOfQuestions) {
                                             _pageController.nextPage(
-
-                                                duration:Duration(milliseconds: 3),
+                                                duration:
+                                                    Duration(milliseconds: 3),
                                                 curve: Curves.bounceInOut);
                                             QuizCubit.get(context).counter();
                                           } else {
-                                            navigateTo(context, SubmissionScreen(quizzesId: widget.quizId,));
+                                            QuizCubit.get(context).stopTimer();
+                                            navigateTo(
+                                                context,
+                                                SubmissionScreen(
+                                                  quizzesId: widget.quizId,
+                                                ));
                                           }
                                         },
                                         isUpperCase: true,
@@ -235,11 +263,11 @@ class _QuizzesScreenStudentState extends State<QuizzesScreenStudent> {
                       ),
                     );
                   } else {
-                    return  Center(
+                    return Center(
                       child: Text(
                         "The quiz hasn't started yet",
-                        style: TextStyle(
-                            fontSize: 25, color: AppColors.darkBlue),
+                        style:
+                            TextStyle(fontSize: 25, color: AppColors.darkBlue),
                       ),
                     );
                   }

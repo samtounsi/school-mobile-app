@@ -16,7 +16,7 @@ import 'package:mobile_schoolapp/presentation/screens/teacherhome.dart';
 //import 'package:flutter_svg/flutter_svg.dart';
 var usernameController = TextEditingController();
 var passwordController = TextEditingController();
-var formkey = GlobalKey<FormState>();
+var formkey6 = GlobalKey<FormState>();
 
 class Login extends StatelessWidget {
   const Login({super.key});
@@ -29,25 +29,52 @@ class Login extends StatelessWidget {
           if (state.loginModel!.message == 'successful login') {
             CacheHelper.saveData(key: 'token', value: state.loginModel!.token)
                 .then((value) {
-                  token = state.loginModel!.token!;
+              token = state.loginModel!.token!;
               print(token);
               print(state.loginModel!.message);
             }).then((value) {
               CacheHelper.saveData(key: 'id', value: state.loginModel!.id)
                   .then((value) {
-                 id = state.loginModel!.id!;
+                id = state.loginModel!.id!;
                 print(id);
               });
             }).then((value) {
-              CacheHelper.saveData(key: 'profile_id', value: state.loginModel!.profileId)
+              CacheHelper.saveData(
+                      key: 'profile_id', value: state.loginModel!.profileId)
                   .then((value) {
                 profileId = state.loginModel!.profileId!;
                 print(profileId);
               });
             }).then((value) {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Center(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: AppColors.aqua,
+                      borderRadius: BorderRadius.circular(17),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        state.loginModel!.message.toString(),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                behavior: SnackBarBehavior.floating,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                width: MediaQuery.of(context).size.width - 10,
+              ));
               CacheHelper.saveData(key: 'type', value: state.loginModel!.type)
                   .then((value) {
-                 type = state.loginModel!.type!;
+                type = state.loginModel!.type!;
                 print(type);
                 if (type == 'student') {
                   navigateAndFinish(context, StudentMotion());
@@ -84,7 +111,7 @@ class Login extends StatelessWidget {
             behavior: SnackBarBehavior.floating,
             backgroundColor: Colors.transparent,
             elevation: 0,
-            width: MediaQuery.of(context).size.width-10,
+            width: MediaQuery.of(context).size.width - 10,
           ));
         }
       },
@@ -100,7 +127,7 @@ class Login extends StatelessWidget {
             backgroundColor: Colors.transparent,
             body: SingleChildScrollView(
               child: Form(
-                key: formkey,
+                key: formkey6,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -169,7 +196,7 @@ class Login extends StatelessWidget {
                         builder: (context) => defaultButton(
                             text: 'Continue',
                             onPressed: () {
-                              if (formkey.currentState!.validate()) {
+                              if (formkey6.currentState!.validate()) {
                                 LoginCubit.get(context).userLogin(
                                     username: usernameController.text,
                                     password: passwordController.text);

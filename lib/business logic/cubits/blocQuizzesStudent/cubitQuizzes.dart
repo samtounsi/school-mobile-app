@@ -12,34 +12,24 @@ import 'package:mobile_schoolapp/data/models/submission_model.dart';
 import '../../../data/models/quizzes_get_student_model.dart';
 import '../../../presentation/components and constants/constants.dart';
 
-
 class QuizCubit extends Cubit<QuizState> {
   QuizCubit() : super(InitialStateQuizzes()) {
-    startTimer();
+    //startTimer();
   }
 
   //Timer
   Timer? countdown;
-  Duration myDur = Duration(hours: 1);
+  Duration? myDur;
   int reduction = 1;
 
   void countDown() {
-    final seconds = myDur.inSeconds - reduction;
-    if (seconds == 30) {
-      //popup that we're almost done
-    }
-    if (seconds < 0) {
-      stopTimer();
-      //maybe a pop up telling the user that the quiz is done
-      //then
-      //move to scoreboard
-    } else {
+    final seconds = myDur!.inSeconds - reduction;
       myDur = Duration(seconds: seconds);
-    }
     emit(QuizTimerCountdownState());
   }
 
-  void startTimer() {
+  void startTimer(int timer) {
+    myDur = Duration(minutes: timer);
     emit(QuizTimerStartState());
     countdown =
         Timer.periodic(Duration(seconds: reduction), (timer) => countDown());
@@ -48,32 +38,30 @@ class QuizCubit extends Cubit<QuizState> {
   void stopTimer() {
     emit(QuizTimerEndState());
     countdown!.cancel();
+    print(myDur!.inSeconds);
   }
 
   String showHours() {
-    String hours = myDur.inHours.remainder(24).toString().padLeft(2, '0');
+    String hours = myDur!.inHours.remainder(24).toString().padLeft(2, '0');
     return '${hours}';
   }
 
   String showMinutes() {
-    String minutes = myDur.inMinutes.remainder(60).toString().padLeft(2, '0');
+    String minutes = myDur!.inMinutes.remainder(60).toString().padLeft(2, '0');
     return '${minutes}';
   }
 
   String showSeconds() {
-    String seconds = myDur.inSeconds.remainder(60).toString().padLeft(2, '0');
+    String seconds = myDur!.inSeconds.remainder(60).toString().padLeft(2, '0');
     return '${seconds}';
   }
 
   //Quiz
   static QuizCubit get(context) => BlocProvider.of(context);
+
   QuizzesStudentPostModel? quizStudentPostModel;
-
   void quizzesStudentPost(int id) async {
-
-    if(quizStudentPostModel!=null)
-
-      quizStudentPostModel=null;
+    if (quizStudentPostModel != null) quizStudentPostModel = null;
 
     emit(QuizzesLoadingState());
 
@@ -100,7 +88,6 @@ class QuizCubit extends Cubit<QuizState> {
       print(myResponse.statusCode);
 
       if (myResponse.statusCode == 200) {
-
         quizStudentPostModel = QuizzesStudentPostModel.fromJson(json);
 
         emit(QuizzesSuccessState(quiz: quizStudentPostModel!));
@@ -238,11 +225,11 @@ class QuizCubit extends Cubit<QuizState> {
     return Colors.white;
   }
 
+  //unsolved
   List<UnSolvedListModel>? unSolveStudent;
 
   Future<void> getListUnSolved() async {
-    if(unSolveStudent!=null)
-      unSolveStudent=null;
+    if (unSolveStudent != null) unSolveStudent = null;
     emit(QuizzesGetListUnSolvedLoadingState());
     try {
       var request = await http.get(
@@ -264,6 +251,8 @@ class QuizCubit extends Cubit<QuizState> {
       emit(QuizzesGetListUnSolvedErrorState(e.toString()));
     }
   }
+
+  //submit quiz
   void submissionResult(SubmissionModel submissionModel) async {
     emit(SubmissionQuizzesLoadingState());
 
@@ -274,10 +263,10 @@ class QuizCubit extends Cubit<QuizState> {
             "https://new-school-management-system.onrender.com/mob/submission"),
       );
       request.fields.addAll({
-        'quiz_id':submissionModel.quizId.toString(),
-        'number_of_correct_answers':submissionModel.numberOfCorrectAnswer,
-        'submit_duration':submissionModel.submitDuration,
-        'duration':submissionModel.duration,
+        'quiz_id': submissionModel.quizId.toString(),
+        'number_of_correct_answers': submissionModel.numberOfCorrectAnswer,
+        'submit_duration': submissionModel.submitDuration,
+        'duration': submissionModel.duration,
       });
 
       request.headers.addAll({
@@ -295,8 +284,6 @@ class QuizCubit extends Cubit<QuizState> {
       print(myResponse.statusCode);
 
       if (myResponse.statusCode == 201) {
-
-
         emit(SubmissionQuizzesSuccessState());
       } else {
         throw Exception(json['message']);
@@ -305,5 +292,4 @@ class QuizCubit extends Cubit<QuizState> {
       emit(SubmissionQuizzesErrorState(errorSubmission: e.toString()));
     }
   }
-
 }

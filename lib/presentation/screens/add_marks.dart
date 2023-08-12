@@ -15,7 +15,7 @@ import '../components and constants/marks.dart';
 
 
 
-var formKey=GlobalKey<FormState>();
+var formKey1=GlobalKey<FormState>();
 var model;
 var ctl=TextEditingController();
 
@@ -128,7 +128,7 @@ class AddMarks extends StatelessWidget {
                         ),
                         ),
                         Form(
-                        key: formKey,
+                        key: formKey1,
                         child: Expanded(
                         child: ListView.separated(
                   scrollDirection:Axis.vertical ,

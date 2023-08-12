@@ -13,7 +13,7 @@ import '../components and constants/dropdown.dart';
 import '../components and constants/marks.dart';
 
 
-var formKey=GlobalKey<FormState>();
+var formKey3=GlobalKey<FormState>();
 var classController=TextEditingController();
 var numOfQuestionsController=TextEditingController();
 var labelController=TextEditingController();
@@ -71,7 +71,7 @@ class AddQuizScreen extends StatelessWidget {
                 ),
               ),
               body: Form(
-                key: formKey,
+                key: formKey3,
                 child: SingleChildScrollView(
                   child: Padding(
                     padding: EdgeInsetsDirectional.only(start:15,end: 15,bottom: 15,),
@@ -352,7 +352,7 @@ class AddQuizScreen extends StatelessWidget {
                                       color: AppColors.lightOrange),
                                   onTap: ()
                                   {
-                                    if(formKey.currentState!.validate())
+                                    if(formKey3.currentState!.validate())
                                     {
                                       navigateTo(context, AddQuizQuestions(
                                         grade: classValue,

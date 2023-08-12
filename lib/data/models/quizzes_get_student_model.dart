@@ -26,6 +26,7 @@ class Quiz {
   Quiz({
     required this.numberOfQuestions,
     required this.duration,
+    required this.timer,
     required this.grade,
     required this.subject,
     required this.questions,

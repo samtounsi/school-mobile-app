@@ -19,26 +19,26 @@ import 'package:mobile_schoolapp/presentation/animations/teacherMotion.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/constants.dart';
 import 'package:mobile_schoolapp/presentation/screens/login.dart';
 import 'package:mobile_schoolapp/presentation/screens/onboard.dart';
+import 'package:mobile_schoolapp/presentation/screens/submission_screen.dart';
 import 'package:mobile_schoolapp/shared/bloc_observer.dart';
 import 'business logic/cubits/attendanceCubit/cubit.dart';
 import 'business logic/cubits/blocEvent/cubit.dart';
 import 'business logic/cubits/blocHistoryQuizzes/cubit.dart';
 import 'business logic/cubits/blocQuizzesStudent/cubitQuizzes.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
   Widget? initWidget;
   bool? onBoard = CacheHelper.getData(key: 'onBoard');
-   token = CacheHelper.getData(key: 'token');
-   id=CacheHelper.getData(key: 'id');
-   profileId=CacheHelper.getData(key: 'profile_id');
-   type=CacheHelper.getData(key: 'type');
-   print(token);
-   print(id);
-   print(profileId);
-   print(type);
+  token = CacheHelper.getData(key: 'token');
+  id = CacheHelper.getData(key: 'id');
+  profileId = CacheHelper.getData(key: 'profile_id');
+  type = CacheHelper.getData(key: 'type');
+  print(token);
+  print(id);
+  print(profileId);
+  print(type);
   // CacheHelper.removeData(key: 'token');
   // CacheHelper.removeData(key: 'id');
   // CacheHelper.removeData(key: 'profile_id');
@@ -71,32 +71,54 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
         providers: [
-          BlocProvider(create: (context) => MarksCubit(),),
-          BlocProvider(create: (context) => SectionAttendanceCubit(),),
+          BlocProvider(
+            create: (context) => MarksCubit(),
+          ),
+          BlocProvider(
+            create: (context) => SectionAttendanceCubit(),
+          ),
           BlocProvider(create: (context) => StudentTimetableCubit()),
           BlocProvider(create: (context) => StudentAttendanceCubit()),
           BlocProvider(create: (context) => ChatCubit()),
           BlocProvider(create: (context) => ScoreBoardCubit()),
           BlocProvider(create: (context) => StudentAttendanceCubit()),
-          BlocProvider(create: (context) => TeacherCubit()..getTeacherProfile(id: profileId!)),
+          BlocProvider(
+              create: (context) =>
+                  TeacherCubit()..getTeacherProfile(id: profileId!)),
           BlocProvider(create: (context) => AddQuizCubit()),
-          BlocProvider(create: (context) => StudentCubit()..getStudentProfile(
-    id: profileId!,
-    year: (DateTime.now().month > 6)
-    ? DateTime.now().year + 1
-        : DateTime.now().year)),
-          BlocProvider(create: (context) => ParentCubit()..getParentProfile(id: profileId!)),
-          BlocProvider(create: (context) => CalendarCubit()..getSchoolCalendarData(year: (DateTime.now().month>6)?DateTime.now().year+1:DateTime.now().year, newyear: DateTime.now().year)),
-          BlocProvider(create: (context) => LoginCubit(),),
-          BlocProvider(create: (context) => SettingsCubit(),),
+          BlocProvider(
+              create: (context) => StudentCubit()
+                ..getStudentProfile(
+                    id: profileId!,
+                    year: (DateTime.now().month > 6)
+                        ? DateTime.now().year + 1
+                        : DateTime.now().year)),
+          BlocProvider(
+              create: (context) =>
+                  ParentCubit()..getParentProfile(id: profileId!)),
+          BlocProvider(
+              create: (context) => CalendarCubit()
+                ..getSchoolCalendarData(
+                    year: (DateTime.now().month > 6)
+                        ? DateTime.now().year + 1
+                        : DateTime.now().year,
+                    newyear: DateTime.now().year)),
+          BlocProvider(
+            create: (context) => LoginCubit(),
+          ),
+          BlocProvider(
+            create: (context) => SettingsCubit(),
+          ),
           BlocProvider(
             create: (context) => EventCubit(),
           ),
           BlocProvider(
             create: (context) => QuizCubit(),
           ),
-          BlocProvider(create: (context) => QuizzesHistoryCubit(),)],
-
+          BlocProvider(
+            create: (context) => QuizzesHistoryCubit(),
+          )
+        ],
         child: MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Motion Tab Bar Sample',

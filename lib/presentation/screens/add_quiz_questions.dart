@@ -28,7 +28,7 @@ List<TextEditingController> controller10 = List.generate(5, (i) => TextEditingCo
 
 */
 
-var formKey=GlobalKey<FormState>();
+var formKey2=GlobalKey<FormState>();
 int currentIndex=0;
 bool isCompleted=false;
 
@@ -95,7 +95,7 @@ class AddQuizQuestions extends StatelessWidget {
 
               ),
               body: Form(
-                key:formKey,
+                key:formKey2,
                 child: Padding(
                   padding: EdgeInsetsDirectional.only(bottom:15,top:20),
                   child: Theme(
@@ -119,7 +119,7 @@ class AddQuizQuestions extends StatelessWidget {
                             if(isLastStep)
                             {
                               print('Completed');
-                              if(formKey.currentState!.validate())
+                              if(formKey2.currentState!.validate())
                               {
                                 AddQuizCubit.get(context).addQuizQuestions(
                                     nof: numberOfQuestions, quizController: questionList).then(

@@ -1,4 +1,4 @@
-#Thu Aug 10 19:44:12 EEST 2023
-base.0=C\:\\fatima_sama_mobile\\schoolapp\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+#Fri Aug 11 13:31:16 PDT 2023
+base.0=C\:\\Users\\Sama\\Documents\\sms\\schoolapp\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 renamed.0=classes.dex
 path.0=classes.dex
