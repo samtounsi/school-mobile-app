@@ -49,13 +49,13 @@ class Login extends StatelessWidget {
                 type = state.loginModel!.type!;
                 print(type);
                 if (type == 'student') {
-                  navigateAndFinish(context, StudentMotion());
+                  navigateAndFinish(context, StudentMotion(initial: "Home", ind: 1));
                   ChatCubit.get(context).getChatContacts();
                 } else if (type == 'teacher') {
-                  navigateAndFinish(context, TeacherMotion());
+                  navigateAndFinish(context, TeacherMotion(initial: "Home", ind: 1));
                   ChatCubit.get(context).getChatContacts();
                 } else if (type == 'parent') {
-                  navigateAndFinish(context, ParentMotion());
+                  navigateAndFinish(context, ParentMotion(initial: "Home", ind: 1));
                   ChatCubit.get(context).getChatContacts();
                 }
               });

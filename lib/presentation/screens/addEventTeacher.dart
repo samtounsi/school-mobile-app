@@ -23,39 +23,65 @@ class AddEventTeacher extends StatelessWidget {
         children: [
           BlocConsumer<EventCubit, EventState>(
             listener: (context, state) {
-              if(state is AddEventSuccessState)
-                {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Center(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: AppColors.aqua,
-                          borderRadius: BorderRadius.circular(17),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "added event success",
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.white,
-                            ),
+              if (state is AddEventSuccessState) {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Center(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: AppColors.aqua,
+                        borderRadius: BorderRadius.circular(17),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "added event success",
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
                           ),
                         ),
                       ),
                     ),
-                    behavior: SnackBarBehavior.floating,
-                    backgroundColor: Colors.transparent,
-                    elevation: 0,
-                    width: MediaQuery.of(context).size.width-10,
-                  ));
-                }
+                  ),
+                  behavior: SnackBarBehavior.floating,
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  width: MediaQuery.of(context).size.width - 10,
+                ));
+              }
+              if (state is NotiSuccessState) {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Center(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: AppColors.darkBlue,
+                        borderRadius: BorderRadius.circular(17),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          state.mes,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  behavior: SnackBarBehavior.floating,
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  width: MediaQuery.of(context).size.width - 10,
+                ));
+              }
             },
             builder: (context, state) {
-              return SingleChildScrollView
-                (
+              return SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.only(
                       top: 120, left: 30, right: 30, bottom: 30),
@@ -180,7 +206,7 @@ class AddEventTeacher extends StatelessWidget {
                           height: 40,
                         ),
                         ConditionalBuilder(
-                          condition: state is !  AddEventLoadingState,
+                          condition: state is! AddEventLoadingState,
                           builder: (BuildContext context) {
                             return Container(
                                 width: 200,
@@ -199,6 +225,34 @@ class AddEventTeacher extends StatelessWidget {
                                               userId: id!);
                                       EventCubit.get(context)
                                           .addEventTeacher(add);
+                                      if (titleController.text
+                                          .startsWith('Seventh')) {
+                                        EventCubit.get(context)
+                                            .sendNotification(
+                                                titleController.text,
+                                                descriptionController.text,
+                                                'seventh');
+                                      } else if (titleController.text
+                                          .startsWith('Eighth')) {
+                                        EventCubit.get(context)
+                                            .sendNotification(
+                                                titleController.text,
+                                                descriptionController.text,
+                                                'eighth');
+                                      } else if (titleController.text
+                                          .startsWith('Ninth')) {
+                                        EventCubit.get(context)
+                                            .sendNotification(
+                                                titleController.text,
+                                                descriptionController.text,
+                                                'ninth');
+                                      } else {
+                                        EventCubit.get(context)
+                                            .sendNotification(
+                                                titleController.text,
+                                                descriptionController.text,
+                                                'all');
+                                      }
                                     },
                                     child: Text(
                                       'Add Event',

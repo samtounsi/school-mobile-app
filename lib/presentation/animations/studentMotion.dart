@@ -8,26 +8,34 @@ import 'package:motion_tab_bar_v2/motion-badge.widget.dart';
 import 'package:motion_tab_bar_v2/motion-tab-bar.dart';
 
 class StudentMotion extends StatefulWidget {
-  const StudentMotion({Key? key, this.title}) : super(key: key);
+  const StudentMotion(
+      {Key? key, this.title, required this.initial, required this.ind})
+      : super(key: key);
 
   final String? title;
+  final String initial;
+  final int ind;
 
   @override
-  StudentMotionState createState() => StudentMotionState();
+  StudentMotionState createState() => StudentMotionState(initial, ind);
 }
 
 class StudentMotionState extends State<StudentMotion>
     with TickerProviderStateMixin {
   TabController? _tabController;
+  String initial;
+  int ind;
+  StudentMotionState(this.initial, this.ind);
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(
-      initialIndex: 1,
+      initialIndex: ind,
       length: 5,
       vsync: this,
     );
+    StudentCubit.get(context).currentIndex = ind - 1;
   }
 
   @override
@@ -43,7 +51,7 @@ class StudentMotionState extends State<StudentMotion>
       builder: (context, state) {
         return Scaffold(
           bottomNavigationBar: MotionTabBar(
-            initialSelectedTab: "Home",
+            initialSelectedTab: initial,
             useSafeArea: false,
             // default: true, apply safe area wrapper
             labels: const ["Home", "Event", "Profile", "Chat", "Setting"],

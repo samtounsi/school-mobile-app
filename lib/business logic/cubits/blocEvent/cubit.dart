@@ -96,4 +96,34 @@ class EventCubit extends Cubit<EventState> {
       emit(DeleteEventErrorState(errorDeleteEvent: e.toString()));
     }
   }
+
+  void sendNotification(String title, String body, String topic) async {
+    emit(NotiLoadingState());
+    var request = http.MultipartRequest(
+        'POST',
+        Uri.parse(
+            'https://new-school-management-system.onrender.com/send_notifications'));
+    request.fields.addAll({
+      'title': title,
+      'body': body,
+      'topic': topic,
+    });
+    request.headers.addAll({
+      'Accept': '*/*',
+      'Authorization': 'Bearer $token',
+      'Content-type': 'multipart/form-data'
+    });
+    final response = await request.send();
+    if (response.statusCode == 200) {
+      var message = jsonDecode(await response.stream.bytesToString())['message']
+          .toString();
+      print('$message $topic');
+      emit(NotiSuccessState(message));
+    } else {
+      var error = jsonDecode(await response.stream.bytesToString())['message']
+          .toString();
+      print('$error $topic');
+      emit(NotiErrorState(error));
+    }
+  }
 }

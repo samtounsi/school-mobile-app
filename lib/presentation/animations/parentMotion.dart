@@ -9,26 +9,34 @@ import '../../business logic/cubits/blocParent/cubitParent.dart';
 import '../../business logic/cubits/blocParent/stateParent.dart';
 
 class ParentMotion extends StatefulWidget {
-  const ParentMotion({Key? key, this.title}) : super(key: key);
+  const ParentMotion(
+      {Key? key, this.title, required this.initial, required this.ind})
+      : super(key: key);
 
   final String? title;
+  final String initial;
+  final int ind;
 
   @override
-  ParentMotionState createState() => ParentMotionState();
+  ParentMotionState createState() => ParentMotionState(initial, ind);
 }
 
 class ParentMotionState extends State<ParentMotion>
     with TickerProviderStateMixin {
   TabController? _tabController;
+  String initial;
+  int ind;
+  ParentMotionState(this.initial, this.ind);
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(
-      initialIndex: 1,
+      initialIndex: ind,
       length: 5,
       vsync: this,
     );
+    ParentCubit.get(context).currentIndex = ind - 1;
   }
 
   @override
@@ -44,7 +52,7 @@ class ParentMotionState extends State<ParentMotion>
       builder: (context, state) {
         return Scaffold(
           bottomNavigationBar: MotionTabBar(
-            initialSelectedTab: "Home",
+            initialSelectedTab: initial,
             useSafeArea: false,
             // default: true, apply safe area wrapper
             labels: const ["Home", "Event", "Profile", "Chat", "Setting"],

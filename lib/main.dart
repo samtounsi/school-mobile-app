@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/SettingsCubit/cubit.dart';
@@ -19,16 +20,19 @@ import 'package:mobile_schoolapp/presentation/animations/teacherMotion.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/constants.dart';
 import 'package:mobile_schoolapp/presentation/screens/login.dart';
 import 'package:mobile_schoolapp/presentation/screens/onboard.dart';
-import 'package:mobile_schoolapp/presentation/screens/submission_screen.dart';
 import 'package:mobile_schoolapp/shared/bloc_observer.dart';
 import 'business logic/cubits/attendanceCubit/cubit.dart';
 import 'business logic/cubits/blocEvent/cubit.dart';
 import 'business logic/cubits/blocHistoryQuizzes/cubit.dart';
 import 'business logic/cubits/blocQuizzesStudent/cubitQuizzes.dart';
 import 'business logic/cubits/exam_schedule_cubit/cubit.dart';
+import 'notifications/firebase.dart';
 
+GlobalKey<NavigatorState> key = GlobalKey<NavigatorState>();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  await FirebaseApi().initNotification();
   await CacheHelper.init();
   Widget? initWidget;
   bool? onBoard = CacheHelper.getData(key: 'onBoard');
@@ -48,11 +52,11 @@ void main() async {
     if (token != null) {
       type = CacheHelper.getData(key: 'type');
       if (type == 'parent') {
-        initWidget = ParentMotion();
+        initWidget = ParentMotion(initial: "Home", ind: 1);
       } else if (type == 'teacher') {
-        initWidget = TeacherMotion();
+        initWidget = TeacherMotion(initial: "Home", ind: 1);
       } else if (type == 'student') {
-        initWidget = StudentMotion();
+        initWidget = StudentMotion(initial: "Home", ind: 1);
       }
     } else {
       initWidget = Login();
@@ -66,6 +70,7 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   final Widget? start;
+  static const route = 'to-event';
   MyApp({Key? key, this.start}) : super(key: key);
 
   @override
@@ -112,6 +117,20 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               primarySwatch: buildMaterialColor(AppColors.darkBlue),
             ),
-            home: start));
+            home: start,
+            navigatorKey: key,
+          routes: {
+            'to-event': (context) {
+              if (type == 'teacher') {
+                return TeacherMotion(initial: 'Event', ind: 2);
+              }
+              if (type == 'student') {
+                return StudentMotion(initial: 'Event', ind: 2);
+              }
+              return ParentMotion(initial: 'Event', ind:2);
+            },
+            //StudentMotion.route:(context) => StudentMotion(initial: 'Event', ind: 2,),
+          },
+            ));
   }
 }

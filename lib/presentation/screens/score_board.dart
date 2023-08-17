@@ -67,7 +67,7 @@ class ScoreBoard extends StatelessWidget {
                                       {
                                         if(isSubmission)
                                         {
-                                          navigateAndFinish(context, StudentMotion());
+                                          navigateAndFinish(context, StudentMotion(initial: "Home", ind: 1));
                                           isSubmission=false;
                                           print(isSubmission);
                                         }
