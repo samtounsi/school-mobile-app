@@ -1,11 +1,17 @@
 
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile_schoolapp/business%20logic/cubits/blocChat/cubit.dart';
+import 'package:mobile_schoolapp/business%20logic/cubits/blocChat/states.dart';
 
+import '../../data/models/chat_contacts_model.dart';
 import '../components and constants/components.dart';
 import '../components and constants/constants.dart';
 import 'chat_screen.dart';
 
-
+var model;
 class ChatContacts extends StatelessWidget {
   const ChatContacts({Key? key}) : super(key: key);
 
@@ -19,27 +25,48 @@ class ChatContacts extends StatelessWidget {
           ),
           child: Padding(
             padding: EdgeInsetsDirectional.all(15),
-            child: Column(
-              children: [
-                AppBar(
-                  backgroundColor: Colors.transparent,
-                  elevation: 0,
-                  title: Text('My Contacts ',
-                    style: TextStyle(
-                        color:AppColors.darkBlue,
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold
-                    ),
-                  ),
-                ),
-                SizedBox(height: 10,),
-                ListView.separated(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemBuilder:(context,index)=>buildContactItem(context,index)
-                      , separatorBuilder:(context ,index)=>SizedBox(height: 32.0),
-                      itemCount:15),
-              ],
+            child: BlocConsumer<ChatCubit,ChatStates>(
+              listener: (context,state)
+              {
+                if(state is ChatContactsSuccessState)
+                {
+                  model=ChatCubit.get(context).chatContactsModel?.contacts;
+                }
+              },
+              builder: (context,state)
+              {
+                return ConditionalBuilder(
+                  condition: state is ! ChatContactsLoadingState
+                      &&ChatCubit.get(context).chatContactsModel!=null,
+                  builder: (context)
+                  {
+                    model=ChatCubit.get(context).chatContactsModel?.contacts;
+                    return Column(
+                      children: [
+                        AppBar(
+                          backgroundColor: Colors.transparent,
+                          elevation: 0,
+                          title: Text('My Contacts ',
+                            style: TextStyle(
+                                color:AppColors.lightOrange,
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 10,),
+                        ListView.separated(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemBuilder:(context,index)=>buildContactItem(context,index,model)
+                            , separatorBuilder:(context ,index)=>SizedBox(height: 32.0),
+                            itemCount:15),
+                      ],
+                    );
+                  },
+                  fallback: (context)=>Center(child: CircularProgressIndicator()),
+                );
+              },
             ),
           ),
         ),
@@ -48,16 +75,17 @@ class ChatContacts extends StatelessWidget {
 
   }
 
-  buildContactItem(context,index)
+  buildContactItem(context,index,List<Contacts>contacts)
   {
     return GestureDetector(
       onTap: ()
       {
-        navigateTo(context, ChatScreen());
+        navigateTo(context, ChatScreen(chatModel: contacts[index]));
+        ChatCubit.get(context).getMessages(id:contacts[index].userId! );
       },
       child: Container(
         width: 340,
-        height: 120,
+        height: 85,
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           border:  Border.all(color: AppColors.shadow),
@@ -71,11 +99,20 @@ class ChatContacts extends StatelessWidget {
             SizedBox(
               height: 10.0,
             ),
-            CircleAvatar(
-              radius: 50.0,
-              backgroundImage: NetworkImage(
-                'https://media1.popsugar-assets.com/files/thumbor/hnVKqXE-xPM5bi3w8RQLqFCDw_E/475x60:1974x1559/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2019/09/09/023/n/1922398/9f849ffa5d76e13d154137.01128738_/i/Taylor-Swift.jpg',
-              ),
+            CachedNetworkImage(
+              imageUrl: contacts[index].photo.toString(),
+              imageBuilder: (context, imageProvider) => Container(
+                height: 40,
+                width: 40,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(60),
+                  image: DecorationImage(
+                    image: imageProvider,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ), placeholder: (context, url) => const CircularProgressIndicator(),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
             SizedBox(
               width: 20.0,
@@ -84,38 +121,24 @@ class ChatContacts extends StatelessWidget {
               child:Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Taylor Swift',
-                    style:TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.darkBlue
-                    ) ,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,),
-                  SizedBox(
-                    height: 20.0,
-                  ),
                   Row(
                     children: [
-                      Expanded(
-                        child: Text('You\'re on your own kid,you always have been',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,),
+                      Text( contacts[index].fullName.toString(),
+                        style:TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.darkBlue
+                        ) ,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,),
+                      Spacer(),
+                      Text( contacts[index].type.toString(),
+                        style:TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.lightOrange
+                        ) ,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 10.0,
-                        ),
-                        child: Container(
-                          width: 7.0,
-                          height: 7.0,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: AppColors.darkBlue,
-                          ),
-                        ),
-                      ),
-                      Text('02:00 PM ')
                     ],
                   ),
                 ],

@@ -3,6 +3,7 @@ import 'package:mobile_schoolapp/data/models/student_profile_model.dart';
 
 import '../../../data/models/add_profile_bio_model.dart';
 import '../../../data/models/add_profile_picture_model.dart';
+import '../../../data/models/get_years_model.dart';
 
 class StudentState {}
 class InitialStudentState extends StudentState{}
@@ -36,7 +37,7 @@ class AddStudentPictureErrorState extends StudentState
   AddStudentPictureErrorState(this.error);
 
 }
-
+class ChangeYearState extends StudentState{}
 class   AddStudentBioLoadingState extends StudentState{}
 class AddStudentBioSuccessState extends StudentState
 {
@@ -50,4 +51,18 @@ class AddStudentBioErrorState extends StudentState
 
   AddStudentBioErrorState(this.error);
 
+}
+
+class GetYearsLoadingState extends StudentState {}
+class GetYearsSuccessState extends StudentState
+{
+  final GetYearsModel getYearsModel;
+
+  GetYearsSuccessState(this.getYearsModel);
+}
+class GetYearsErrorState extends StudentState
+{
+  final String error;
+
+  GetYearsErrorState(this.error);
 }

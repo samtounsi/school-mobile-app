@@ -18,19 +18,7 @@ class QuizzesHistory extends StatefulWidget {
 }
 
 class _QuizzesHistoryState extends State<QuizzesHistory> {
-  List<QuizzesHistoryS> quizzesHistory = [
-    QuizzesHistoryS(name: 'Math Quiz', date: '16 /6/2024'),
-    QuizzesHistoryS(name: 'Arabic Quiz', date: '15/4/2024'),
-    QuizzesHistoryS(name: 'English Quiz', date: '16/4/2024'),
-    QuizzesHistoryS(name: 'Math Quiz', date: '20/4/2024'),
-    QuizzesHistoryS(name: 'French Quiz', date: '15/5/2024'),
-    QuizzesHistoryS(name: 'Programming Quiz', date: '1/4/2024'),
-    QuizzesHistoryS(name: 'Art Quiz', date: '17/1/2024'),
-    QuizzesHistoryS(name: 'Music Quiz', date: '15/4/2024'),
-    QuizzesHistoryS(name: 'Physic Quiz', date: '15/4/2024'),
-    QuizzesHistoryS(name: ' Chemistry Quiz', date: '15/4/2024'),
-    QuizzesHistoryS(name: 'Science Quiz', date: '15/4/2024'),
-  ];
+
 
   @override
   void initState() {
@@ -66,7 +54,7 @@ class _QuizzesHistoryState extends State<QuizzesHistory> {
                             QuizzesHistoryCubit.get(context)
                                 .postTeacherQuizzesHistoryQuestion(
                                     modelTQHL[index].id);
-                            navigateTo(context, QuizzesScreenHQ());
+                            navigateTo(context, QuizzesScreenHQ(quizId: modelTQHL[index].id,));
                           },
                           child: Padding(
                             padding: const EdgeInsets.only(

@@ -82,7 +82,7 @@ class AddMarks extends StatelessWidget {
                                  (value)
                                    {
                                      AddMarksModel data= AddMarksModel(
-                                       grade: 'seventh',
+                                       grade: gradeSection,
                                        section: 1,
                                        semester: semester,
                                        subject: subject,

@@ -54,6 +54,7 @@ Widget defaultTextButton({
 Widget defaultformfeild({
   required TextEditingController controller,
   required TextInputType type,
+  bool readOnly=false,
   int max=3,
   double width=340,
   double height=100,
@@ -64,7 +65,7 @@ Widget defaultformfeild({
   bool ispassword=false,
   VoidCallback? suffixpressed,
   required String label,
-   IconData? prefix,
+  IconData? prefix,
   required FormFieldValidator validate,
   IconData? suffix,
   TextStyle? textStyle,
@@ -87,7 +88,7 @@ Widget defaultformfeild({
     padding: const EdgeInsets.all(8.0),
     child: TextFormField(
       maxLines: max,
-
+      readOnly: readOnly,
       inputFormatters: maxChars,
 
       textDirection: TextDirection.ltr,
@@ -120,17 +121,17 @@ Widget defaultformfeild({
 
         labelText: label,
         labelStyle: TextStyle(
-          color: AppColors.darkBlue
+            color: AppColors.darkBlue
         ),
         enabledBorder: OutlineInputBorder(
 
-          borderRadius: BorderRadius.circular(50.0),
+            borderRadius: BorderRadius.circular(50.0),
 
-          borderSide: BorderSide(
+            borderSide: BorderSide(
 
-            color: Colors.white
+                color: Colors.white
 
-          )
+            )
 
         ),
 
@@ -165,9 +166,9 @@ navigateAndFinish(context,widget)=>Navigator.pushAndRemoveUntil(
         (route) => false);
 
 Widget myDivider(
-{
-  Color dividerColor=Colors.grey
-}
+    {
+      Color dividerColor=Colors.grey
+    }
     ){
   return Padding(
     padding: EdgeInsetsDirectional.symmetric(vertical: 10,),
@@ -247,7 +248,7 @@ Widget formFeild({
       enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(circular),
           borderSide: BorderSide(
-              color: bordersidecolor,
+            color: bordersidecolor,
             //width: 2
           )
       ),

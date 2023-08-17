@@ -9,6 +9,9 @@ import 'package:mobile_schoolapp/presentation/components%20and%20constants/compo
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/constants.dart';
 import 'package:mobile_schoolapp/presentation/screens/myClasses.dart';
 
+import '../../business logic/cubits/attendanceCubit/cubit.dart';
+import '../../business logic/cubits/blocMark/cubit.dart';
+
 class ChooseClassTeacher extends StatefulWidget {
   ChooseClassTeacher({Key? key}) : super(key: key);
 
@@ -165,11 +168,9 @@ class _ChooseClassTeacherState extends State<ChooseClassTeacher> {
                                   onPressed: () {
                                     TeacherCubit.get(context)
                                         .getAllSectionForTeacher();
-                                    navigateTo(
-                                        context,
-                                        myClasses(
-                                          teacherClass: gradeValue!,
-                                        ));
+                                    SectionAttendanceCubit.get(context).changeGrade(gradeValue);
+                                    MarksCubit.get(context).getStudentsNames(gradeSection:gradeValue ).then((value) =>
+                                        navigateTo(context, myClasses(teacherClass: gradeValue!,)));
                                     print(gradeValue);
                                   },
                                   child: Text(

@@ -21,33 +21,36 @@ class Setting extends StatelessWidget {
           }).then((value) {
             CacheHelper.removeData(key: 'id').then((value) {
               CacheHelper.removeData(key: 'profile_id');
-            });
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Center(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: AppColors.aqua,
-                    borderRadius: BorderRadius.circular(17),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      state.logoutModel!.messege.toString(),
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
+            }).then((value) {
+              print(profileId.toString());
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Center(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: AppColors.aqua,
+                      borderRadius: BorderRadius.circular(17),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        state.logoutModel!.messege.toString(),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              behavior: SnackBarBehavior.floating,
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              width: MediaQuery.of(context).size.width - 10,
-            ));
+                behavior: SnackBarBehavior.floating,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                width: MediaQuery.of(context).size.width - 10,
+              ));
+            });
+
           }).then((value) => navigateAndFinish(context, Login()));
         } else if (state is SettingsLogoutErrorState) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(

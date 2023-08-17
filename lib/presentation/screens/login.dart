@@ -10,13 +10,12 @@ import 'package:mobile_schoolapp/presentation/animations/studentMotion.dart';
 import 'package:mobile_schoolapp/presentation/animations/teacherMotion.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/componentslogin.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/constants.dart';
+import '../../business logic/cubits/blocChat/cubit.dart';
+import '../components and constants/components.dart';
 
-import 'package:mobile_schoolapp/presentation/screens/teacherhome.dart';
-
-//import 'package:flutter_svg/flutter_svg.dart';
 var usernameController = TextEditingController();
 var passwordController = TextEditingController();
-var formkey6 = GlobalKey<FormState>();
+var formkey = GlobalKey<FormState>();
 
 class Login extends StatelessWidget {
   const Login({super.key});
@@ -39,49 +38,25 @@ class Login extends StatelessWidget {
                 print(id);
               });
             }).then((value) {
-              CacheHelper.saveData(
-                      key: 'profile_id', value: state.loginModel!.profileId)
+              CacheHelper.saveData(key: 'profile_id', value: state.loginModel!.profileId)
                   .then((value) {
                 profileId = state.loginModel!.profileId!;
                 print(profileId);
               });
             }).then((value) {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Center(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.aqua,
-                      borderRadius: BorderRadius.circular(17),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        state.loginModel!.message.toString(),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                behavior: SnackBarBehavior.floating,
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                width: MediaQuery.of(context).size.width - 10,
-              ));
               CacheHelper.saveData(key: 'type', value: state.loginModel!.type)
                   .then((value) {
                 type = state.loginModel!.type!;
                 print(type);
                 if (type == 'student') {
                   navigateAndFinish(context, StudentMotion());
+                  ChatCubit.get(context).getChatContacts();
                 } else if (type == 'teacher') {
                   navigateAndFinish(context, TeacherMotion());
+                  ChatCubit.get(context).getChatContacts();
                 } else if (type == 'parent') {
                   navigateAndFinish(context, ParentMotion());
+                  ChatCubit.get(context).getChatContacts();
                 }
               });
             });
@@ -111,7 +86,7 @@ class Login extends StatelessWidget {
             behavior: SnackBarBehavior.floating,
             backgroundColor: Colors.transparent,
             elevation: 0,
-            width: MediaQuery.of(context).size.width - 10,
+            width: MediaQuery.of(context).size.width-10,
           ));
         }
       },
@@ -127,7 +102,7 @@ class Login extends StatelessWidget {
             backgroundColor: Colors.transparent,
             body: SingleChildScrollView(
               child: Form(
-                key: formkey6,
+                key: formkey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -137,7 +112,7 @@ class Login extends StatelessWidget {
                       child: Text(
                         'Welcome here\nLog in with your account',
                         style:
-                            TextStyle(fontSize: 23, color: AppColors.darkBlue),
+                        TextStyle(fontSize: 23, color: AppColors.darkBlue),
                       ),
                     ),
                     SizedBox(
@@ -196,7 +171,7 @@ class Login extends StatelessWidget {
                         builder: (context) => defaultButton(
                             text: 'Continue',
                             onPressed: () {
-                              if (formkey6.currentState!.validate()) {
+                              if (formkey.currentState!.validate()) {
                                 LoginCubit.get(context).userLogin(
                                     username: usernameController.text,
                                     password: passwordController.text);

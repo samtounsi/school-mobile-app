@@ -12,6 +12,7 @@ import 'package:mobile_schoolapp/presentation/screens/studenthome.dart';
 import 'package:mobile_schoolapp/presentation/screens/studentprofile.dart';
 import '../../../data/models/add_profile_bio_model.dart';
 import '../../../data/models/add_profile_picture_model.dart';
+import '../../../data/models/get_years_model.dart';
 import '../../../presentation/components and constants/constants.dart';
 import '../../../presentation/screens/contacts.dart';
 import 'package:http/http.dart' as http;
@@ -35,6 +36,10 @@ class StudentCubit extends Cubit<StudentState> {
 
   StudentProfileModel? studentProfileModel;
   Future getStudentProfile({required int id, required int year}) async {
+    if(studentProfileModel!=null)
+    {
+      studentProfileModel=null;
+    }
     emit(GetStudentProfileLoadingState());
     var headers = {'Authorization': 'Bearer $token'};
     var request = http.MultipartRequest(
@@ -131,5 +136,42 @@ class StudentCubit extends Cubit<StudentState> {
       print(error);
       emit(AddStudentBioErrorState(error));
     }
+  }
+
+  String? yearValue;
+  String changeYear(yearValue)
+  {
+    this.yearValue=yearValue;
+    emit(ChangeYearState());
+    print(yearValue);
+    return yearValue;
+  }
+  GetYearsModel? getYearsModel;
+  Future getYears({studentId})async
+  {
+    emit(GetYearsLoadingState());
+    var headers = {
+      'Authorization': 'Bearer $token'
+    };
+    var request = http.Request('GET', Uri.parse('https://new-school-management-system.onrender.com/get_years/$studentId'));
+
+    request.headers.addAll(headers);
+
+    var response = await request.send();
+
+    if (response.statusCode == 200) {
+      getYearsModel=GetYearsModel.fromJson(jsonDecode(await response.stream.bytesToString()));
+      print(response.statusCode);
+      print(getYearsModel?.toJson().toString());
+      emit(GetYearsSuccessState(getYearsModel!));
+    }
+    else {
+      print(studentId);
+      String error=jsonDecode(await response.stream.bytesToString())['message'];
+      print(response.statusCode);
+      print(error);
+      emit(GetYearsErrorState(error));
+    }
+
   }
 }

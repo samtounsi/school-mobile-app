@@ -47,11 +47,15 @@ class ParentCubit extends Cubit<ParentState> {
   ParentProfileModel? parentProfileModel;
   Future getParentProfile({required int id})async
   {
+    if(parentProfileModel!=null)
+    {
+      parentProfileModel=null;
+    }
     emit(GetParentProfileLoadingState());
     var headers = {
       'Authorization': 'Bearer $token'
     };
-    var request = http.MultipartRequest('GET', Uri.parse('https://new-school-management-system.onrender.com/mob/parent_profile/$profileId'));
+    var request = http.MultipartRequest('GET', Uri.parse('https://new-school-management-system.onrender.com/mob/parent_profile/$id'));
 
     request.headers.addAll(headers);
 

@@ -19,18 +19,23 @@ class SectionAttendanceCubit extends Cubit<SectionAttendanceStates>
   static SectionAttendanceCubit get(context)=>BlocProvider.of(context);
 
   DateTime today=DateTime.now();
-
+  String? gradeSection;
+  Future changeGrade(gradeSection)async
+  {
+    this.gradeSection=gradeSection;
+    emit(GradeChangeState());
+  }
    void onDaySelected(DateTime day,DateTime focusedDay)
   {
       today=day;
       print(today);
-      getAbsentStudent(grade: 'seventh',section: '2',date: today);
+      getAbsentStudent(grade: gradeSection,date: today);
       emit(SectionAttendanceOnSelectedDayState());
   }
 
   List<String> emptyAbsent=[];
   GetAbsentStudents? getAbsentStudents;
-  Future getAbsentStudent({grade,section,date})async
+  Future getAbsentStudent({grade,date})async
   {
     if(getAbsentStudents!=null)
     {
@@ -43,7 +48,7 @@ class SectionAttendanceCubit extends Cubit<SectionAttendanceStates>
     var request = http.MultipartRequest('POST', Uri.parse('https://new-school-management-system.onrender.com/mob/show_section_absence'));
     request.fields.addAll({
       'date': today.toString().split(" ")[0],
-      'grade_section': grade+' '+ section
+      'grade_section': grade
     });
 
     request.headers.addAll(headers);
@@ -52,7 +57,7 @@ class SectionAttendanceCubit extends Cubit<SectionAttendanceStates>
 
     if (response.statusCode == 201) {
       print(grade);
-      print(section);
+      //print(section);
       getAbsentStudents=GetAbsentStudents.fromJson(jsonDecode(await response.stream.bytesToString()));
       print(response.statusCode);
       print(getAbsentStudents?.toJson().toString());

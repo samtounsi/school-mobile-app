@@ -87,13 +87,4 @@ Widget defultTextFormField({
       ),
     );
 
-navigateAndFinish(context, widget) => Navigator.pushAndRemoveUntil(
-    context,
-    MaterialPageRoute(builder: (context) => widget),
-    (Route<dynamic> route) => false);
 
-navigateTo(context, widget) => Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => widget,
-    ));

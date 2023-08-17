@@ -4,52 +4,53 @@ import 'package:flutter/material.dart';
 import 'constants.dart';
 
 Widget buildDropdown(
-{
-  required String label,
-  required List list,
- // required List<DropdownMenuItem<Object>>? list,
-  required ValueChanged<Object?>? onChanged,
-  required int maxLength,
-  required Object value,
-  Color labelColor=AppColors.darkBlue
-}
+    {
+      double width= 160,
+      required String label,
+      required List list,
+      Text? hintText,
+      // required List<DropdownMenuItem<Object>>? list,
+      required ValueChanged<Object?>? onChanged,
+      required int maxLength,
+      Object? value,
+      Color labelColor=AppColors.darkBlue
+    }
     ){
 
   return Padding(
     padding: EdgeInsetsDirectional.all(10),
     child: Column(
       mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(label,
           style: TextStyle(
-              fontSize: 25,
+              fontSize: 20,
               fontWeight: FontWeight.w600,
               color: labelColor
           ),
         ),
         SizedBox(
-          height: 17,
+          height: 10,
         ),
         Container(
           padding: EdgeInsets.only(left: 10),
-          width: 280,
-          height: 60,
+          width: width,
           decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(color: Colors.grey),
-              borderRadius: BorderRadius.circular(10)),
+              borderRadius: BorderRadius.circular(7)),
           child: DropdownButton(
             value: value,
-
+            hint: hintText,
             items: list.map((option) {
-    return DropdownMenuItem(
-    child: Text("$option"),
-    value: option,
-    );
-    }).toList(),
+              return DropdownMenuItem(
+                child: Text("$option"),
+                value: option,
+              );
+            }).toList(),
             onChanged: onChanged
-           ,
+            ,
             icon: Padding(
               //Icon at tail, arrow bottom is default icon
                 padding: EdgeInsets.only(
@@ -60,7 +61,7 @@ Widget buildDropdown(
                   AppColors.darkBlue,
                 )),
             style: TextStyle(
-                fontSize: 22,
+                fontSize: 20,
                 color: AppColors.darkBlue
             ),
             dropdownColor:

@@ -31,10 +31,11 @@ class SettingsCubit extends Cubit<SettingsStates> {
       emit(SettingsLogoutSuccessState(model!));
       print(model!.messege);
     } else {
+      String error =jsonDecode(await response.stream.bytesToString())['messege']
+          .toString();
       emit(SettingsLogoutErrorState(
-          error: jsonDecode(await response.stream.bytesToString())['messege']
-              .toString()));
-      print('Error');
+          error: error));
+      print(error);
     }
 
     // CacheHelper.removeData(key: 'token');

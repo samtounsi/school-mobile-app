@@ -1,11 +1,14 @@
-
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-
+import 'package:mobile_schoolapp/data/models/chat_contacts_model.dart';
 import '../components and constants/constants.dart';
 
 
 class OnMessageCard extends StatelessWidget {
-  const OnMessageCard({Key? key}) : super(key: key);
+  final String message;
+  final String time;
+  final  model;
+  const OnMessageCard({super.key, required this.message, required this.model, required this.time});
 
   @override
   Widget build(BuildContext context) {
@@ -31,11 +34,11 @@ class OnMessageCard extends StatelessWidget {
                   child: Stack(
                     children: [
                       Padding(
-                          padding: EdgeInsetsDirectional.only(start: 30,end: 10,top: 5,bottom: 20),
+                        padding: EdgeInsetsDirectional.only(start: 30,end: 10,top: 5,bottom: 20),
                         child: Text(
-                          'Hey, When are you going to release speak now Taylor\'s version??',
+                          message,
                           style: TextStyle(
-                            fontSize: 20,
+                              fontSize: 20,
                               fontWeight: FontWeight.w600,
                               height: 1.5,
                               color: AppColors.darkBlue
@@ -47,10 +50,8 @@ class OnMessageCard extends StatelessWidget {
                         right: 10,
                         child: Row(
                           children: [
-                            Text('20:58',
-                              style: TextStyle(fontSize: 13,color: Colors.white,fontWeight: FontWeight.bold),),
-                            SizedBox(width: 5,),
-                            Icon(Icons.done,size: 20,),
+                            Text(time,
+                              style: TextStyle(fontSize: 13,color: AppColors.aqua,fontWeight: FontWeight.bold),),
                           ],
                         ),
                       )
@@ -62,11 +63,20 @@ class OnMessageCard extends StatelessWidget {
             SizedBox(width: 5,),
             Padding(
               padding:  EdgeInsetsDirectional.only(start: 5.0),
-              child: CircleAvatar(
-                  radius: 30,
-                  backgroundImage: NetworkImage(
-                    'https://image.gala.de/21817264/t/Uh/v9/w960/r0.6667/-/teaser-harry-styles.jpg',
-                  )
+              child:  CachedNetworkImage(
+                imageUrl: model.photo.toString(),
+                imageBuilder: (context, imageProvider) => Container(
+                  height: 40,
+                  width: 40,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(60),
+                    image: DecorationImage(
+                      image: imageProvider,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ), placeholder: (context, url) => const CircularProgressIndicator(),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
             ),
 

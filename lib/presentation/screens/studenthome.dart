@@ -11,6 +11,9 @@ import 'package:mobile_schoolapp/presentation/screens/section_time_table.dart';
 import 'package:mobile_schoolapp/presentation/screens/student_time_table.dart';
 import 'package:mobile_schoolapp/presentation/screens/teacherMarksSemesteroneOrtwo.dart';
 
+import '../../business logic/cubits/blocStudent/cubitStudent.dart';
+import 'exam_schedule_student.dart';
+
 
 class StudentHome extends StatelessWidget {
   @override
@@ -84,6 +87,18 @@ class StudentHome extends StatelessWidget {
                 navigateTo(context, SchoolCalendarScreen());
               },
                 child: HomeText(text: 'Calender',numS: 22, image: 'images/calendar (1).png')),
+            SizedBox(
+              height: 30,
+            ),
+            InkWell(
+                onTap: (){
+                  navigateTo(context, ExamStudentSchedule(grade:StudentCubit.get(context).studentProfileModel?.gradeName));
+                },
+                child: HomeText(
+                    text: 'Exam Schedule', numS: 22,image: 'images/exam2.png')),
+            SizedBox(
+              height: 30,
+            ),
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [

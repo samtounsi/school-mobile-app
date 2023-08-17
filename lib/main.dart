@@ -25,6 +25,7 @@ import 'business logic/cubits/attendanceCubit/cubit.dart';
 import 'business logic/cubits/blocEvent/cubit.dart';
 import 'business logic/cubits/blocHistoryQuizzes/cubit.dart';
 import 'business logic/cubits/blocQuizzesStudent/cubitQuizzes.dart';
+import 'business logic/cubits/exam_schedule_cubit/cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -79,45 +80,31 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(create: (context) => StudentTimetableCubit()),
           BlocProvider(create: (context) => StudentAttendanceCubit()),
-          BlocProvider(create: (context) => ChatCubit()),
+          BlocProvider(create: (context) => ChatCubit()..getChatContacts()),
           BlocProvider(create: (context) => ScoreBoardCubit()),
           BlocProvider(create: (context) => StudentAttendanceCubit()),
-          BlocProvider(
-              create: (context) =>
-                  TeacherCubit()..getTeacherProfile(id: profileId!)),
+          BlocProvider(create: (context) => TeacherCubit()
+            ..getTeacherProfile(id: profileId!)),
           BlocProvider(create: (context) => AddQuizCubit()),
-          BlocProvider(
-              create: (context) => StudentCubit()
+          BlocProvider(create: (context) => StudentCubit()
                 ..getStudentProfile(
                     id: profileId!,
                     year: (DateTime.now().month > 6)
                         ? DateTime.now().year + 1
                         : DateTime.now().year)),
-          BlocProvider(
-              create: (context) =>
-                  ParentCubit()..getParentProfile(id: profileId!)),
-          BlocProvider(
-              create: (context) => CalendarCubit()
+          BlocProvider(create: (context) => ParentCubit()..getParentProfile(id: profileId!)),
+          BlocProvider(create: (context) => CalendarCubit()
                 ..getSchoolCalendarData(
                     year: (DateTime.now().month > 6)
                         ? DateTime.now().year + 1
                         : DateTime.now().year,
                     newyear: DateTime.now().year)),
-          BlocProvider(
-            create: (context) => LoginCubit(),
-          ),
-          BlocProvider(
-            create: (context) => SettingsCubit(),
-          ),
-          BlocProvider(
-            create: (context) => EventCubit(),
-          ),
-          BlocProvider(
-            create: (context) => QuizCubit(),
-          ),
-          BlocProvider(
-            create: (context) => QuizzesHistoryCubit(),
-          )
+          BlocProvider(create: (context) => LoginCubit(),),
+          BlocProvider(create: (context) => SettingsCubit(),),
+          BlocProvider(create: (context) => EventCubit(),),
+          BlocProvider(create: (context) => QuizCubit(),),
+          BlocProvider(create: (context) => QuizzesHistoryCubit(),),
+          BlocProvider(create: (context) => ExamCubit(),),
         ],
         child: MaterialApp(
             debugShowCheckedModeBanner: false,

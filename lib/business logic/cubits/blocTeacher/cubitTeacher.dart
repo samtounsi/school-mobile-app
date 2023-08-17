@@ -51,33 +51,35 @@ class TeacherCubit extends Cubit<TeacherState> {
   }
 
   TeacherProfileModel? teacherProfileModel;
-  Future getTeacherProfile({required int id}) async {
+  Future getTeacherProfile({required int id})async
+  {
+    if(teacherProfileModel!=null)
+    {
+      teacherProfileModel=null;
+    }
     emit(SchoolTeacherProfileLoadingState());
-    var headers = {'Authorization': 'Bearer $token'};
-    var request = http.MultipartRequest(
-        'GET',
-        Uri.parse(
-            'https://new-school-management-system.onrender.com/mob/teacher_profile/$profileId'));
+    var headers = {
+      'Authorization': 'Bearer $token'
+    };
+    var request = http.MultipartRequest('GET', Uri.parse('https://new-school-management-system.onrender.com/mob/teacher_profile/$id'));
 
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 201) {
-      teacherProfileModel = TeacherProfileModel.fromJson(
-          jsonDecode(await response.stream.bytesToString()));
+      teacherProfileModel=TeacherProfileModel.fromJson(jsonDecode(await response.stream.bytesToString()));
       print(response.statusCode);
       print(id);
       print(teacherProfileModel?.toJson().toString());
       emit(SchoolTeacherProfileSuccessState(teacherProfileModel!));
-    } else {
-      String error =
-          jsonDecode(await response.stream.bytesToString())['message'];
+    }
+    else {
+      String error=jsonDecode(await response.stream.bytesToString())['message'];
       print(response.statusCode);
       print(error);
-      emit(SchoolTeacherProfileErrorState(error: error));
-    }
-  }
+      emit(SchoolTeacherProfileErrorState(error:error));
+    }}
 
   AddProfilePictureResponse? addProfilePictureResponse;
   postProfilePicture({required id, required File profilePhoto}) async {

@@ -66,7 +66,7 @@ class TeacherMarksAddOrShow extends StatelessWidget {
                     onTap: ()
                     {
                       MarksCubit.get(context).getStudentsMarks(
-                          gradeSection: gradeSection!,
+                          gradeSection: gradeSection,
                           semester: semester,
                           type: type,
                           subject: subject).then((value) => navigateTo(context, ShowMarks()));

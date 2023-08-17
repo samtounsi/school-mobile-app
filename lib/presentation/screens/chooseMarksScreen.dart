@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mobile_schoolapp/business%20logic/cubits/blocStudent/cubitStudent.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/components.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/constants.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/containerItem.dart';
 import 'package:mobile_schoolapp/presentation/screens/choose_subject.dart';
+import 'package:mobile_schoolapp/presentation/screens/choose_year_student.dart';
 import 'package:mobile_schoolapp/presentation/screens/show_marks_for_student.dart';
 
 import '../../business logic/cubits/blocMark/cubit.dart';
@@ -74,20 +76,15 @@ class ChooseMarks extends StatelessWidget {
                               ));
                         }
                         if (type == 'student') {
-                          MarksCubit.get(context).getStudentMarks(
-                              semester: semester,
-                              type: 'monthly_test',
-                              id: profileId!);
-                          navigateTo(context, ShowStudentMarks());
+                          StudentCubit.get(context).getYears(studentId: profileId).then((value)
+                          => navigateTo(context, ChooseYear(semester: semester,examType:'monthly_test' ,)));
                         }
                         if (type == 'parent') {
-                          MarksCubit.get(context).getStudentMarks(
-                              semester: semester,
-                              type: 'monthly_test',
-                              id: ParentCubit.get(context).childId);
-                          navigateTo(context, ShowStudentMarks());
+    if (type == 'student') {
+    StudentCubit.get(context).getYears(studentId: ParentCubit.get(context).childId).then((value)
+    => navigateTo(context, ChooseYear(semester: semester,examType:'monthly_test' ,)));
                         }
-                      },
+                      }},
                       child: ContainerItem(
                         title: 'Monthly Test Marks',
                         fontSize: 25,
@@ -107,17 +104,16 @@ class ChooseMarks extends StatelessWidget {
                             ));
                       }
                       if (type == 'student') {
-                        MarksCubit.get(context).getStudentMarks(
-                            semester: semester, type: 'final', id: profileId!);
-                        navigateTo(context, ShowStudentMarks());
+                        print(id);
+                        StudentCubit.get(context).getYears(studentId: profileId).then((value)
+                        =>
+                        navigateTo(context, ChooseYear(semester: semester,examType:'final' ,)));
                       }
 
                       if (type == 'parent') {
-                        MarksCubit.get(context).getStudentMarks(
-                            semester: semester,
-                            type: 'final',
-                            id: ParentCubit.get(context).childId);
-                        navigateTo(context, ShowStudentMarks());
+                        StudentCubit.get(context).getYears(studentId:ParentCubit.get(context).childId).then((value)
+                        =>
+                            navigateTo(context, ChooseYear(semester: semester,examType:'final' ,)));
                       }
                     },
                     child: ContainerItem(

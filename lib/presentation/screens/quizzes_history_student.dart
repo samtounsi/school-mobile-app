@@ -58,7 +58,7 @@ class _QuizzesHistoryStudentState extends State<QuizzesHistoryStudent> {
                             QuizzesHistoryCubit.get(context)
                                 .postStudentQuizzesHistoryQuestion(
                                 modelSQHL[index].id);
-                            navigateTo(context, QuizzesScreenHQStudent());
+                            navigateTo(context, QuizzesScreenHQStudent(quizId:modelSQHL[index].id));
                           },
                           child: Padding(
                             padding: const EdgeInsets.only(

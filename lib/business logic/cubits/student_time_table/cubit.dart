@@ -30,7 +30,7 @@ class StudentTimetableCubit extends Cubit<StudentTimetableStates>
 
     http.StreamedResponse response = await request.send();
 
-    if (response.statusCode == 201) {
+    if (response.statusCode == 200) {
       sectionTimetable = SectionTimetable.fromJson(
           jsonDecode(await response.stream.bytesToString()));
       print(sectionTimetable?.toJson().toString());
@@ -103,6 +103,7 @@ class StudentTimetableCubit extends Cubit<StudentTimetableStates>
     else {
       String error=jsonDecode(await response.stream.bytesToString())['message'];
       print(error);
+      print(response.statusCode);
       emit(GetSectionTimetableErrorState(error));
     }
   }

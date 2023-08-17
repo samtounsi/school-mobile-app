@@ -54,7 +54,7 @@ class myClasses extends StatelessWidget {
               children: [
                 InkWell(
                     onTap: () {
-                      StudentTimetableCubit.get(context).getSectionTimetable(gradeSection: 'seventh 2')
+                      StudentTimetableCubit.get(context).getSectionTimetable(gradeSection: teacherClass)
                       .then((value) => navigateTo(context, SectionTimeTable()));
                     },
                     child: HomeText(
@@ -70,7 +70,7 @@ class myClasses extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     SectionAttendanceCubit.get(context).
-                    getAbsentStudent(grade: 'seventh',section: '2',date: SectionAttendanceCubit.get(context).today)
+                    getAbsentStudent(grade:teacherClass ,date: SectionAttendanceCubit.get(context).today)
                         .then((value) => navigateTo(context, SectionAttendance()));
                   },
                   child: HomeText(

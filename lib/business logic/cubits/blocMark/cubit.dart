@@ -27,7 +27,7 @@ class MarksCubit extends Cubit<MarksStates> {
   }
 
   GetStudentsModel? getStudentsModel;
-  Future getStudentsNames()async
+  Future getStudentsNames({String? gradeSection})async
   {
     emit(GetStudentsLoadingState());
     var headers = {
@@ -35,8 +35,7 @@ class MarksCubit extends Cubit<MarksStates> {
     };
     var request = http.MultipartRequest('POST', Uri.parse('https://new-school-management-system.onrender.com/mob/get_students_names'));
     request.fields.addAll({
-      'section': '1',
-      'grade': 'seventh'
+      'grade_section':gradeSection!
     });
 
     request.headers.addAll(headers);
@@ -72,6 +71,7 @@ class MarksCubit extends Cubit<MarksStates> {
   }
   else {
      String error= jsonDecode(await response.body)['message'];
+     print(error);
       emit(AddStudentMarksErrorState(error));
   }
 
@@ -116,7 +116,7 @@ class MarksCubit extends Cubit<MarksStates> {
   }
 
   StudentMarks? studentMarks;
-  Future getStudentMarks({required String semester,required type, required int  id})async
+  Future getStudentMarks({required String semester,required type,required year, required int  id})async
   {
     emit(GetStudentMarksLoadingState());
     var headers = {
@@ -126,7 +126,8 @@ class MarksCubit extends Cubit<MarksStates> {
     request.fields.addAll({
       'student_id': id.toString(),
       'test_type': type,
-      'semester': semester.toString()
+      'semester': semester.toString(),
+      'year_date':year
     });
 
     request.headers.addAll(headers);

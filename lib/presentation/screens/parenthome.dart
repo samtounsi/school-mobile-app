@@ -13,6 +13,7 @@ import 'package:mobile_schoolapp/presentation/screens/teacherMarksSemesteroneOrt
 import '../../business logic/cubits/blocParent/cubitParent.dart';
 import '../../business logic/cubits/student_time_table/cubit.dart';
 import 'chooseMarksScreen.dart';
+import 'exam_schedule_student.dart';
 
 class ParentHome extends StatelessWidget {
   @override
@@ -97,6 +98,18 @@ class ParentHome extends StatelessWidget {
                   image: 'images/feedback2.png',
                 ),
               ),
+              SizedBox(
+                height: 30,
+              ),
+              InkWell(
+                  onTap: (){
+                    StudentTimetableCubit.get(context).getParentStudentTimetable(
+                        id:ParentCubit.get(context).childId)
+                        .then((value) =>
+                        navigateTo(context, ExamStudentSchedule(grade:StudentCubit.get(context).studentProfileModel?.gradeName)));
+                  },
+                  child: HomeText(
+                      text: 'Exam Schedule', numS: 22,image: 'images/exam2.png')),
               SizedBox(
                 height: 40,
               ),

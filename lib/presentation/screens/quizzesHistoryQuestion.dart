@@ -4,19 +4,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/blocHistoryQuizzes/cubit.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/blocHistoryQuizzes/state.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/constants.dart';
+import 'package:mobile_schoolapp/presentation/screens/score_board.dart';
+import '../../business logic/cubits/score_board_cubit/cubit.dart';
 import '../components and constants/components.dart';
 import 'questionHistoryItem.dart';
 
 class QuizzesScreenHQ extends StatefulWidget {
-  QuizzesScreenHQ({
-    Key? key,
-  }) : super(key: key);
+  int? quizId;
+  QuizzesScreenHQ({this.quizId});
 
   @override
-  State<QuizzesScreenHQ> createState() => _QuizzesScreenHQState();
+  State<QuizzesScreenHQ> createState() => _QuizzesScreenHQState(quizId: this.quizId);
 }
 
 class _QuizzesScreenHQState extends State<QuizzesScreenHQ> {
+  int? quizId;
+  _QuizzesScreenHQState({this.quizId});
   int currentPage = 0;
   final PageController _pageController = PageController(initialPage: 0);
 
@@ -68,13 +71,33 @@ class _QuizzesScreenHQState extends State<QuizzesScreenHQ> {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(right: 10),
-                                  child: Text(
-                                    QuizzesHistoryCubit.get(context)
-                                        .quizzesHistoryTeacherQuestionPostModel!
-                                        .questions
-                                        .startTime,
-                                    style: const TextStyle(
-                                        fontSize: 20, color: AppColors.aqua),
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        QuizzesHistoryCubit.get(context)
+                                            .quizzesHistoryTeacherQuestionPostModel!
+                                            .questions
+                                            .startTime,
+                                        style: const TextStyle(
+                                            fontSize: 20, color: AppColors.aqua),
+                                      ),
+                        SizedBox(
+                        height: 5,
+                        ),
+                        defaultTextButton(function: ()
+                        {
+                        ScoreBoardCubit.get(context).getScoreBoard(quizId: quizId)
+                            .then((value) =>navigateTo(context, ScoreBoard(isSubmission: false,)));
+
+                        }, text: 'Score Board',
+                            textSize: 12,
+                            textColor: Colors.white, radius: 10.0,
+                            width : 100,
+                            height:30,
+                            background: AppColors.aqua
+
+                        ),
+                                    ],
                                   ),
                                 ),
                               ],

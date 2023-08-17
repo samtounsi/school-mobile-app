@@ -8,6 +8,8 @@ import 'package:mobile_schoolapp/presentation/screens/school_calendar.dart';
 import 'package:mobile_schoolapp/presentation/screens/teacherAddQuizesOrHistory.dart';
 import 'package:mobile_schoolapp/presentation/screens/teacherTimeTable1.dart';
 
+import 'exam_schedule.dart';
+
 
 class TeacherHome extends StatelessWidget {
   @override
@@ -61,8 +63,18 @@ class TeacherHome extends StatelessWidget {
                   navigateTo(context, SchoolCalendarScreen());
                 },
                 child: HomeText(text: 'Calender',numS: 22, image: 'images/calendar (1).png')),
+
             SizedBox(
-              height: 15,
+              height: 30,
+            ),
+            InkWell(
+                onTap: (){
+                  navigateTo(context, ExamSchedule());
+                },
+                child: HomeText(
+                    text: 'Exam Schedule', numS: 22,image: 'images/exam2.png')),
+            SizedBox(
+              height: 30,
             ),
             Center(
               child: SvgPicture.asset(

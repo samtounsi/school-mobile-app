@@ -1,10 +1,15 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile_schoolapp/data/models/chat_contacts_model.dart';
 
 import '../components and constants/constants.dart';
 
 
 class ReplyCard extends StatelessWidget {
-  const ReplyCard({Key? key}) : super(key: key);
+  final String message;
+  final String time;
+  final Contacts model;
+  const ReplyCard({super.key, required this.message, required this.model, required this.time});
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +22,20 @@ class ReplyCard extends StatelessWidget {
           children: [
             Padding(
               padding:  EdgeInsetsDirectional.only(start: 10.0),
-              child: CircleAvatar(
-                  radius: 30,
-                  backgroundImage: NetworkImage(
-                    'https://media1.popsugar-assets.com/files/thumbor/hnVKqXE-xPM5bi3w8RQLqFCDw_E/475x60:1974x1559/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2019/09/09/023/n/1922398/9f849ffa5d76e13d154137.01128738_/i/Taylor-Swift.jpg',
-                  )
+              child:  CachedNetworkImage(
+                imageUrl: model.photo.toString(),
+                imageBuilder: (context, imageProvider) => Container(
+                  height: 40,
+                  width: 40,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(60),
+                    image: DecorationImage(
+                      image: imageProvider,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ), placeholder: (context, url) => const CircularProgressIndicator(),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
             ),
             SizedBox(width: 5,),
@@ -40,7 +54,7 @@ class ReplyCard extends StatelessWidget {
                     Padding(
                       padding: EdgeInsetsDirectional.only(start: 30,end: 10,top: 5,bottom: 20),
                       child: Text(
-                        'I\'ll do it july seventh.. Start counting down!!',
+                        message,
                         style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w500,
@@ -52,7 +66,7 @@ class ReplyCard extends StatelessWidget {
                     Positioned(
                       bottom: 4,
                       right: 10,
-                      child: Text('20:58',
+                      child: Text(time,
                         style: TextStyle(fontSize: 13,color: Colors.white),),
                     )
                   ],

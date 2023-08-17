@@ -4,20 +4,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/blocHistoryQuizzes/cubit.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/blocHistoryQuizzes/state.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/constants.dart';
+import 'package:mobile_schoolapp/presentation/screens/score_board.dart';
+import '../../business logic/cubits/score_board_cubit/cubit.dart';
 import '../components and constants/components.dart';
+import '../components and constants/componentslogin.dart';
 import 'questionHistoryItem.dart';
 
 class QuizzesScreenHQStudent extends StatefulWidget {
-  QuizzesScreenHQStudent({
-    Key? key,
-  }) : super(key: key);
+  int? quizId;
+  QuizzesScreenHQStudent({this.quizId});
 
   @override
-  State<QuizzesScreenHQStudent> createState() => _QuizzesScreenHQStudentState();
+  State<QuizzesScreenHQStudent> createState() => _QuizzesScreenHQStudentState(quizId: this.quizId);
 }
 
 class _QuizzesScreenHQStudentState extends State<QuizzesScreenHQStudent> {
   int currentPage = 0;
+  int? quizId;
+  _QuizzesScreenHQStudentState({ this.quizId});
   final PageController _pageController = PageController(initialPage: 0);
 
   void dispose() {
@@ -68,13 +72,34 @@ class _QuizzesScreenHQStudentState extends State<QuizzesScreenHQStudent> {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(right: 10),
-                                  child: Text(
-                                    QuizzesHistoryCubit.get(context)
-                                        .quizzesHistoryStudentQuestionPM!
-                                        .questions
-                                        .startTime,
-                                    style: const TextStyle(
-                                        fontSize: 20, color: AppColors.aqua),
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        QuizzesHistoryCubit.get(context)
+                                            .quizzesHistoryStudentQuestionPM!
+                                            .questions
+                                            .startTime,
+                                        style: const TextStyle(
+                                            fontSize: 20, color: AppColors.aqua),
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      defaultTextButton(function: ()
+                                      {
+                                        ScoreBoardCubit.get(context).getScoreBoard(quizId: quizId)
+                                            .then((value) =>navigateTo(context, ScoreBoard(isSubmission: false,)));
+
+                                      },
+                                          text: 'Score Board',
+                                          textSize: 12,
+                                          textColor: Colors.white, radius: 10.0,
+                                           width : 100,
+                                           height:30,
+                                          background: AppColors.aqua
+
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ],
@@ -197,7 +222,9 @@ class _QuizzesScreenHQStudentState extends State<QuizzesScreenHQStudent> {
                                     isUpperCase: true,
                                     background: AppColors.darkBlue),
                               ],
-                            )
+                            ),
+
+
                           ],
                         );
                       },

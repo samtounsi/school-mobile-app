@@ -4,9 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/score_board_cubit/cubit.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/score_board_cubit/states.dart';
+import 'package:mobile_schoolapp/presentation/screens/quizzes_history_question_student.dart';
 
 import '../../data/models/score_board_model.dart';
+import '../animations/studentMotion.dart';
 import '../classes/student.dart';
+import '../components and constants/components.dart';
 import '../components and constants/constants.dart';
 import '../../shared/utils.dart';
 
@@ -14,17 +17,18 @@ final columns = ['Name', 'True Ans', 'Time'];
 
 var model;
 class ScoreBoard extends StatelessWidget {
-  const ScoreBoard({Key? key}) : super(key: key);
+  bool isSubmission=false;
+   ScoreBoard({super.key, required this.isSubmission}) ;
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ScoreBoardCubit,ScoreBoardStates>(
       listener: (context,state)
       {
-       if(state is ScoreBoardSuccessState)
-       {
-         model=state.scoreBoardModel.scoreboard;
-       }
+        if(state is ScoreBoardSuccessState)
+        {
+          model=state.scoreBoardModel.scoreboard;
+        }
       },
       builder: (context,state)
       {
@@ -61,7 +65,17 @@ class ScoreBoard extends StatelessWidget {
                                     child: IconButton(
                                       onPressed: ()
                                       {
-                                        Navigator.pop(context);
+                                        if(isSubmission)
+                                        {
+                                          navigateAndFinish(context, StudentMotion());
+                                          isSubmission=false;
+                                          print(isSubmission);
+                                        }
+                                        else
+                                        {
+                                          Navigator.pop(context);
+                                          print(isSubmission);
+                                        }
                                       },
                                       icon: Icon(
                                         Icons.arrow_back,
@@ -96,7 +110,7 @@ class ScoreBoard extends StatelessWidget {
                                         rows: getRows(model),
                                         border: TableBorder.all(
                                             width: 1, color: Colors.grey),
-                                        columnSpacing: 20,
+                                        columnSpacing: 10,
                                         dataRowHeight: 60,
                                         headingRowColor: MaterialStateColor.resolveWith(
                                               (states) => Colors.white,
@@ -134,14 +148,14 @@ class ScoreBoard extends StatelessWidget {
     return columns.map((String column) {
       return DataColumn(
           label: Flexible(
-        child: Text(
-          column,
-          style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w700,
-              color: AppColors.lightOrange),
-        ),
-      ));
+            child: Text(
+              column,
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.lightOrange),
+            ),
+          ));
     }).toList();
   }
 
@@ -150,18 +164,26 @@ class ScoreBoard extends StatelessWidget {
       final cells = [student.name, student.numberOfAnswers, student.time];
       return DataRow(
           cells: Utils.modelBuilder(cells, (index, cell) {
-        return DataCell(Center(
-          child: Flexible(
-            child: Text(
-              '$cell',
-              style: TextStyle(
-                  color: AppColors.darkBlue,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold),
-            ),
-          ),
-        ));
-      }));
+            return DataCell(Center(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Center(
+                      child: Text(
+                        '$cell',
+                        style: TextStyle(
+                            color: AppColors.darkBlue,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ));
+          }));
     }).toList();
   }
 }

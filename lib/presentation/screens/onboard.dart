@@ -6,6 +6,8 @@ import 'package:mobile_schoolapp/presentation/components%20and%20constants/const
 
 import 'package:mobile_schoolapp/presentation/screens/login.dart';
 
+import '../components and constants/components.dart';
+
 //import 'package:flutter_svg/flutter_svg.dart';
 
 class Onboard extends StatelessWidget {

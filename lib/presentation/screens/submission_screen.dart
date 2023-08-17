@@ -1,9 +1,11 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile_schoolapp/business%20logic/cubits/score_board_cubit/cubit.dart';
 import 'package:mobile_schoolapp/data/models/submission_model.dart';
 import 'package:mobile_schoolapp/presentation/animations/studentMotion.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/components.dart';
+import 'package:mobile_schoolapp/presentation/screens/score_board.dart';
 import '../../business logic/cubits/blocQuizzesStudent/cubitQuizzes.dart';
 import '../../business logic/cubits/blocQuizzesStudent/stateQuizzes.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/constants.dart';
@@ -67,7 +69,9 @@ class SubmissionScreen extends StatelessWidget {
                   elevation: 0,
                   width: MediaQuery.of(context).size.width - 10,
                 ));
-                navigateAndFinish(context, StudentMotion());
+                ScoreBoardCubit.get(context).getScoreBoard(quizId: quizzesId)
+                    .then((value) =>navigateTo(context, ScoreBoard(isSubmission: true,)));
+
               }
             },
             builder: (context, state) {
