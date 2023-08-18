@@ -34,7 +34,7 @@ class ParentHome extends StatelessWidget {
                   onTap: () {
                     StudentTimetableCubit.get(context)
                         .getParentStudentTimetable(
-                            id: ParentCubit.get(context).childId)
+                        id: ParentCubit.get(context).childId!)
                         .then(
                             (value) => navigateTo(context, ParentTimeTable()));
                   },
@@ -52,7 +52,7 @@ class ParentHome extends StatelessWidget {
                 onTap: () {
                   StudentCubit.get(context)
                       .getStudentProfile(
-                          id: ParentCubit.get(context).childId, year: 2023)
+                      id: ParentCubit.get(context).childId!, year: 2023)
                       .then(
                           (value) => navigateTo(context, StudentAttendance()));
                 },
@@ -104,7 +104,7 @@ class ParentHome extends StatelessWidget {
               InkWell(
                   onTap: (){
                     StudentTimetableCubit.get(context).getParentStudentTimetable(
-                        id:ParentCubit.get(context).childId)
+                        id:ParentCubit.get(context).childId!)
                         .then((value) =>
                         navigateTo(context, ExamStudentSchedule(grade:StudentCubit.get(context).studentProfileModel?.gradeName)));
                   },

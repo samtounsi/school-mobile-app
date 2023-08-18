@@ -1,8 +1,6 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../business logic/cubits/blocAttendance/cubit.dart';
 import '../../business logic/cubits/blocStudent/cubitStudent.dart';
 import '../../business logic/cubits/blocStudent/stateStudent.dart';
 import '../components and constants/constants.dart';

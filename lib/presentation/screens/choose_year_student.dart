@@ -85,21 +85,21 @@ class ChooseYear extends StatelessWidget {
                                 Column(
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.only(
-                                          right: 20, left: 20),
-                                      child:  buildDropdown(label: '',
-                                          width: 250,
-                                          labelColor: AppColors.lightOrange,
-                                          list:StudentCubit.get(context).getYearsModel!.years!,
-                                          hintText: Text('Select Year',
-                                            style: TextStyle(fontSize: 15,color: AppColors.darkBlue),),
-                                          onChanged: (value){
-                                            StudentCubit.get(context).changeYear(value!);
-                                            yearValue =StudentCubit.get(context).yearValue;
-                                          },
-                                          maxLength: StudentCubit.get(context).getYearsModel!.years!.length ,
-                                          value: yearValue
-                                      )
+                                        padding: const EdgeInsets.only(
+                                            right: 20, left: 20),
+                                        child:  buildDropdown(label: '',
+                                            width: 250,
+                                            labelColor: AppColors.lightOrange,
+                                            list:StudentCubit.get(context).getYearsModel!.years!,
+                                            hintText: Text('Select Year',
+                                              style: TextStyle(fontSize: 15,color: AppColors.darkBlue),),
+                                            onChanged: (value){
+                                              StudentCubit.get(context).changeYear(value!);
+                                              yearValue =StudentCubit.get(context).yearValue;
+                                            },
+                                            maxLength: StudentCubit.get(context).getYearsModel!.years!.length ,
+                                            value: yearValue
+                                        )
                                     ),
                                     SizedBox(
                                       height: 20,
@@ -123,14 +123,14 @@ class ChooseYear extends StatelessWidget {
                                     }
                                     if(type=='parent')
                                     {
-                                    MarksCubit.get(context).getStudentMarks(
-                                    semester: semester!,
-                                    type: examType,
-                                    year: yearValue,
-                                    id: ParentCubit.get(context).childId);
-                                    navigateTo(context, ShowStudentMarks());
+                                      MarksCubit.get(context).getStudentMarks(
+                                          semester: semester!,
+                                          type: examType,
+                                          year: yearValue,
+                                          id: ParentCubit.get(context).childId!);
+                                      navigateTo(context, ShowStudentMarks());
                                     }
-                                    },
+                                  },
                                   child: Text(
                                     'submit',
                                     style: TextStyle(

@@ -1,14 +1,9 @@
 
 import 'dart:convert';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/attendanceCubit/states.dart';
-import 'package:mobile_schoolapp/presentation/screens/studentprofile.dart';
-
 import '../../../data/models/get_absent_students_model.dart';
-
 import 'package:http/http.dart' as http;
-
 import '../../../presentation/components and constants/constants.dart';
 
 

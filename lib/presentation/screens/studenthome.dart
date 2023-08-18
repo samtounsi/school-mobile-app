@@ -3,11 +3,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/student_time_table/cubit.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/components1.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/homeItem.dart';
-import 'package:mobile_schoolapp/presentation/screens/chooseMarksScreen.dart';
 import 'package:mobile_schoolapp/presentation/screens/school_calendar.dart';
 import 'package:mobile_schoolapp/presentation/screens/studentHistoryQuizOrNew.dart';
 import 'package:mobile_schoolapp/presentation/screens/student_attendance.dart';
-import 'package:mobile_schoolapp/presentation/screens/section_time_table.dart';
 import 'package:mobile_schoolapp/presentation/screens/student_time_table.dart';
 import 'package:mobile_schoolapp/presentation/screens/teacherMarksSemesteroneOrtwo.dart';
 

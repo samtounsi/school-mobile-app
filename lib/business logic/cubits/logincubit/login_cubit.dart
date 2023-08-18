@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/logincubit/login_states.dart';
 import 'package:mobile_schoolapp/data/models/login_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:mobile_schoolapp/notifications/firebase.dart';
 
 class LoginCubit extends Cubit<SchoolLoginStates> {
   LoginCubit() : super(SchoolLoginInitialState());
@@ -32,7 +33,7 @@ class LoginCubit extends Cubit<SchoolLoginStates> {
         Uri.parse(
             'https://new-school-management-system.onrender.com/mob/login'));
     request.fields.addAll({'username': username, 'password': password,
-      'fcm_token':'el8bq0juQe6ow-o9ioFa-5:APA91bEK7Rllt7q__mW8QA5gqY8SqPNZ_6I7ZbRMufDVJAMsKcpLjC3G9ClGfjd70G2rIPOD5C1yzzW91FoPNz082QTulHAb6Q1vDt5hrVGpx2HC2cef-jpzD0jp2dmcIGJxg8YFm2Pw'});
+      'fcm_token':fCMToken.toString()});
 
 
 

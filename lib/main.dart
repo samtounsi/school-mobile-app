@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/SettingsCubit/cubit.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/blocAddQuizzes/cubit.dart';
-import 'package:mobile_schoolapp/business%20logic/cubits/blocAttendance/cubit.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/blocCalender/cubit.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/blocChat/cubit.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/blocMark/cubit.dart';
@@ -44,10 +43,10 @@ void main() async {
   print(id);
   print(profileId);
   print(type);
-  // CacheHelper.removeData(key: 'token');
-  // CacheHelper.removeData(key: 'id');
-  // CacheHelper.removeData(key: 'profile_id');
-  // CacheHelper.removeData(key: 'type');
+   CacheHelper.removeData(key: 'token');
+   CacheHelper.removeData(key: 'id');
+   CacheHelper.removeData(key: 'profile_id');
+   CacheHelper.removeData(key: 'type');
   if (onBoard != null) {
     if (token != null) {
       type = CacheHelper.getData(key: 'type');
@@ -84,10 +83,8 @@ class MyApp extends StatelessWidget {
             create: (context) => SectionAttendanceCubit(),
           ),
           BlocProvider(create: (context) => StudentTimetableCubit()),
-          BlocProvider(create: (context) => StudentAttendanceCubit()),
           BlocProvider(create: (context) => ChatCubit()..getChatContacts()),
           BlocProvider(create: (context) => ScoreBoardCubit()),
-          BlocProvider(create: (context) => StudentAttendanceCubit()),
           BlocProvider(create: (context) => TeacherCubit()
             ..getTeacherProfile(id: profileId!)),
           BlocProvider(create: (context) => AddQuizCubit()),
@@ -120,17 +117,19 @@ class MyApp extends StatelessWidget {
             home: start,
             navigatorKey: key,
           routes: {
-            'to-event': (context) {
+            '/to-event': (context) {
               if (type == 'teacher') {
                 return TeacherMotion(initial: 'Event', ind: 2);
               }
               if (type == 'student') {
                 return StudentMotion(initial: 'Event', ind: 2);
+              } else if (type == 'parent') {
+                return ParentMotion(initial: 'Event', ind: 2);
               }
-              return ParentMotion(initial: 'Event', ind:2);
+              return Login();
             },
-            //StudentMotion.route:(context) => StudentMotion(initial: 'Event', ind: 2,),
           },
+
             ));
   }
 }
