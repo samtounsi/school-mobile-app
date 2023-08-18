@@ -9,15 +9,15 @@ import 'package:motion_tab_bar_v2/motion-tab-bar.dart';
 
 class TeacherMotion extends StatefulWidget {
   const TeacherMotion(
-      {Key? key, this.title, required this.initial, required this.ind})
+      {Key? key, this.title,  this.initial,  this.ind})
       : super(key: key);
 
   final String? title;
-  final String initial;
-  final int ind;
+  final String? initial;
+  final int? ind;
 
   @override
-  TeacherMotionState createState() => TeacherMotionState(initial, ind);
+  TeacherMotionState createState() => TeacherMotionState(initial!, ind!);
 }
 
 class TeacherMotionState extends State<TeacherMotion>

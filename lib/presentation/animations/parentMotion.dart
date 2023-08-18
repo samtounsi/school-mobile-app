@@ -10,15 +10,15 @@ import '../../business logic/cubits/blocParent/stateParent.dart';
 
 class ParentMotion extends StatefulWidget {
   const ParentMotion(
-      {Key? key, this.title, required this.initial, required this.ind})
+      {Key? key, this.title, this.initial,  this.ind})
       : super(key: key);
 
   final String? title;
-  final String initial;
-  final int ind;
+  final String? initial;
+  final int? ind;
 
   @override
-  ParentMotionState createState() => ParentMotionState(initial, ind);
+  ParentMotionState createState() => ParentMotionState(initial!, ind!);
 }
 
 class ParentMotionState extends State<ParentMotion>

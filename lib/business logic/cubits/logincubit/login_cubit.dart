@@ -33,7 +33,7 @@ class LoginCubit extends Cubit<SchoolLoginStates> {
         Uri.parse(
             'https://new-school-management-system.onrender.com/mob/login'));
     request.fields.addAll({'username': username, 'password': password,
-      'fcm_token':fCMToken.toString()});
+      'fcm_token':'czA5TnffSkyCq1f3o8sh-l:APA91bHv-sJrJEp6Q4u4cnXLCsXnsfvG6FfQsvX-0KzcXwLO0-BF5O0qfMkwq0EJckWFGlZbsrugGwIbCjeESOiYwuccEnP4oEu9iobDL0Fea_xHZoQjY0HbMRwN15eHlXLIYFzgDHmz'});
 
 
 

@@ -72,8 +72,8 @@ class ExamCubit extends Cubit<ExamStates> {
         examScheduleModel=null;
       }
       examScheduleModel=ExamScheduleModel.fromJson(jsonDecode(await response.stream.bytesToString()));
-      print(response.statusCode);
-      print(examScheduleModel?.toJson().toString());
+      // print(response.statusCode);
+      // print(examScheduleModel?.toJson().toString());
       emit(ExamGetExamScheduleSuccessState(examScheduleModel!));
     }
     if (response.statusCode == 401) {
@@ -95,14 +95,14 @@ class ExamCubit extends Cubit<ExamStates> {
           ],
           message: "exam table has not been added yet"
       );
-      print(response.statusCode);
-      print(examScheduleModel?.toJson().toString());
+      // print(response.statusCode);
+      // print(examScheduleModel?.toJson().toString());
       emit(ExamGetExamScheduleSuccessState(examScheduleModel!));
     }
     else {
       String error=jsonDecode(await response.stream.bytesToString())['message'];
-      print(response.statusCode);
-      print(error);
+      // print(response.statusCode);
+      // print(error);
       emit(ExamGetExamScheduleErrorState(error));
     }
 

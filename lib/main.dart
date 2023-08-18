@@ -43,10 +43,10 @@ void main() async {
   print(id);
   print(profileId);
   print(type);
-   CacheHelper.removeData(key: 'token');
-   CacheHelper.removeData(key: 'id');
-   CacheHelper.removeData(key: 'profile_id');
-   CacheHelper.removeData(key: 'type');
+   // CacheHelper.removeData(key: 'token');
+   // CacheHelper.removeData(key: 'id');
+   // CacheHelper.removeData(key: 'profile_id');
+   // CacheHelper.removeData(key: 'type');
   if (onBoard != null) {
     if (token != null) {
       type = CacheHelper.getData(key: 'type');
@@ -116,19 +116,19 @@ class MyApp extends StatelessWidget {
             ),
             home: start,
             navigatorKey: key,
-          routes: {
-            '/to-event': (context) {
-              if (type == 'teacher') {
-                return TeacherMotion(initial: 'Event', ind: 2);
-              }
-              if (type == 'student') {
-                return StudentMotion(initial: 'Event', ind: 2);
-              } else if (type == 'parent') {
-                return ParentMotion(initial: 'Event', ind: 2);
-              }
-              return Login();
-            },
-          },
+          // routes: {
+          //   '/to-event': (context) {
+          //     if (type == 'teacher') {
+          //       return TeacherMotion(initial: 'Event', ind: 2);
+          //     }
+          //     if (type == 'student') {
+          //       return StudentMotion(initial: 'Event', ind: 2);
+          //     } else if (type == 'parent') {
+          //       return ParentMotion(initial: 'Event', ind: 2);
+          //     }
+          //     return Login();
+          //   },
+          // },
 
             ));
   }

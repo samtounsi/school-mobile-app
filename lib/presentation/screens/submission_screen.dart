@@ -70,7 +70,7 @@ class SubmissionScreen extends StatelessWidget {
                   width: MediaQuery.of(context).size.width - 10,
                 ));
                 ScoreBoardCubit.get(context).getScoreBoard(quizId: quizzesId)
-                    .then((value) =>navigateTo(context, ScoreBoard(isSubmission: true,)));
+                    .then((value) =>navigateAndFinish(context, ScoreBoard(isSubmission: true,)));
 
               }
             },
@@ -157,7 +157,6 @@ class SubmissionScreen extends StatelessWidget {
                                           .duration
                                           .toString());
                                   QuizCubit.get(context).submissionResult(s);
-                                  //navigateTo(context, StudentMotion());
                                 },
                                 child: Text(
                                   'Submit',
