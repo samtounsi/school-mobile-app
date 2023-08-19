@@ -21,9 +21,9 @@ class ChooseMarks extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('images/Wallpaper 2.png'),
-            fit: BoxFit.fill,
-          )),
+        image: AssetImage('images/Wallpaper 2.png'),
+        fit: BoxFit.fill,
+      )),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Column(
@@ -80,12 +80,12 @@ class ChooseMarks extends StatelessWidget {
                           => navigateTo(context, ChooseYear(semester: semester,examType:'monthly_test' ,)));
                         }
                         if (type == 'parent') {
-                          StudentCubit.get(context).getYears(studentId: ParentCubit.get(context).childProfileId).then((value)
-                          {
-                            print(ParentCubit.get(context).childId);
-                            navigateTo(context, ChooseYear(semester: semester,examType:'monthly_test' ,));
-                          });
-                        }},
+    StudentCubit.get(context).getYears(studentId: ParentCubit.get(context).childProfileId).then((value)
+    {
+      print(ParentCubit.get(context).childId);
+      navigateTo(context, ChooseYear(semester: semester,examType:'monthly_test' ,));
+    });
+                      }},
                       child: ContainerItem(
                         title: 'Monthly Test Marks',
                         fontSize: 25,
@@ -108,7 +108,7 @@ class ChooseMarks extends StatelessWidget {
                         print(id);
                         StudentCubit.get(context).getYears(studentId: profileId).then((value)
                         =>
-                            navigateTo(context, ChooseYear(semester: semester,examType:'final' ,)));
+                        navigateTo(context, ChooseYear(semester: semester,examType:'final' ,)));
                       }
 
                       if (type == 'parent') {

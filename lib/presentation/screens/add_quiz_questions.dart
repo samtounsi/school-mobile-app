@@ -7,6 +7,7 @@ import 'package:mobile_schoolapp/presentation/screens/teacherAddQuizesOrHistory.
 
 import '../../business logic/cubits/blocAddQuizzes/cubit.dart';
 import '../../business logic/cubits/blocAddQuizzes/states.dart';
+import '../animations/teacherMotion.dart';
 import '../components and constants/addQuiz.dart';
 import '../components and constants/constants.dart';
 
@@ -53,6 +54,37 @@ class AddQuizQuestions extends StatelessWidget {
     return BlocConsumer<AddQuizCubit,AddQuizStates>(
       listener: (context,state)
       {
+        if(state is AddTeacherQuizSuccessState)
+          {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Center(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.darkBlue,
+                    borderRadius: BorderRadius.circular(17),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                     'added quiz success',
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              width: MediaQuery.of(context).size.width - 10,
+            ));
+          }
+
+
 
       },
       builder: (context,state)
@@ -139,7 +171,7 @@ class AddQuizQuestions extends StatelessWidget {
                                       );
                                       print(model.toJson(model).toString());
                                       AddQuizCubit.get(context).postQuiz(data: model);
-                                    }).then((value) => navigateTo(context, TeacherQuizzesAddOrHistory()));
+                                    }).then((value) => navigateAndFinish(context, TeacherMotion()));
 
                               }
 

@@ -44,6 +44,7 @@ class MarksCubit extends Cubit<MarksStates> {
 
     if (response.statusCode == 200) {
       getStudentsModel=GetStudentsModel.fromJson(jsonDecode(await response.stream.bytesToString()));
+      print(getStudentsModel?.toJson().toString());
       emit(GetStudentsSuccessState(getStudentsModel!));
     }
   else {

@@ -2,6 +2,8 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mobile_schoolapp/business%20logic/cubits/blocParent/cubitParent.dart';
+import 'package:mobile_schoolapp/business%20logic/cubits/blocStudent/cubitStudent.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/logincubit/login_cubit.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/logincubit/login_states.dart';
 import 'package:mobile_schoolapp/network/cache_helper.dart';
@@ -11,6 +13,7 @@ import 'package:mobile_schoolapp/presentation/animations/teacherMotion.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/componentslogin.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/constants.dart';
 import '../../business logic/cubits/blocChat/cubit.dart';
+import '../../business logic/cubits/blocTeacher/cubitTeacher.dart';
 import '../components and constants/components.dart';
 
 var usernameController = TextEditingController();
@@ -49,13 +52,18 @@ class Login extends StatelessWidget {
                 type = state.loginModel!.type!;
                 print(type);
                 if (type == 'student') {
-                  navigateAndFinish(context, StudentMotion(initial: "Home", ind: 1));
+                  StudentCubit.get(context).getStudentProfile( id: state.loginModel!.profileId!,
+                      year: (DateTime.now().month > 6)
+                          ? DateTime.now().year + 1
+                          : DateTime.now().year).then((value) => navigateAndFinish(context, StudentMotion()));
                   ChatCubit.get(context).getChatContacts();
                 } else if (type == 'teacher') {
-                  navigateAndFinish(context, TeacherMotion(initial: "Home", ind: 1));
+                  TeacherCubit.get(context).getTeacherProfile(id: state.loginModel!.profileId!)
+                      .then((value) =>navigateAndFinish(context, TeacherMotion()));
                   ChatCubit.get(context).getChatContacts();
                 } else if (type == 'parent') {
-                  navigateAndFinish(context, ParentMotion(initial: "Home", ind: 1));
+                  ParentCubit.get(context).getParentProfile(id: state.loginModel!.profileId!)
+                      .then((value) => navigateAndFinish(context, ParentMotion()));
                   ChatCubit.get(context).getChatContacts();
                 }
               });
