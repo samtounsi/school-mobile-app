@@ -12,7 +12,6 @@ import 'package:mobile_schoolapp/presentation/screens/teacherMarksSemesteroneOrt
 import '../../business logic/cubits/blocStudent/cubitStudent.dart';
 import 'exam_schedule_student.dart';
 
-
 class StudentHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -20,21 +19,22 @@ class StudentHome extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('images/Wallpaper 2.png'),
-                fit: BoxFit.fill)),
+                image: AssetImage('images/Wallpaper 2.png'), fit: BoxFit.fill)),
         child: Column(
-
           children: [
             SizedBox(
-              height: 140,
+              height: 110,
             ),
             InkWell(
-                onTap: (){
-                  StudentTimetableCubit.get(context).getStudentTimetable()
-                  .then((value) =>  navigateTo(context, StudentTimeTable()));
+                onTap: () {
+                  StudentTimetableCubit.get(context)
+                      .getStudentTimetable()
+                      .then((value) => navigateTo(context, StudentTimeTable()));
                 },
                 child: HomeText(
-                    text: 'Time Table',numS: 22, image: 'images/schedule.png')),
+                    text: 'Time Table',
+                    numS: 22,
+                    image: 'images/schedule.png')),
             SizedBox(
               height: 30,
               child: ColoredBox(
@@ -42,12 +42,13 @@ class StudentHome extends StatelessWidget {
               ),
             ),
             InkWell(
-              onTap: (){
+              onTap: () {
                 navigateTo(context, StudentAttendance());
               },
               child: HomeText(
-                numS: 18,
-                  text: 'Attendance monitoring ', image: 'images/moitor.png'),
+                  numS: 18,
+                  text: 'Attendance monitoring ',
+                  image: 'images/moitor.png'),
             ),
             SizedBox(
               height: 30,
@@ -56,44 +57,54 @@ class StudentHome extends StatelessWidget {
               ),
             ),
             InkWell(
-                onTap: (){
+                onTap: () {
                   navigateTo(context, StudentQuizzesNewOrHistory());
-
-                },
-                child: HomeText(numS:22,text: 'Quizzes', image: 'images/exam.png')),
-            SizedBox(
-              height: 30,
-              child: ColoredBox(
-                color: Colors.white,
-              ),
-            ),
-            InkWell(
-              onTap: (){
-                navigateTo(context, TeacherMarksSemesters());
-                },
-              child: HomeText(
-                  text: 'Marks',numS: 22, image: 'images/grade.png'),
-            ),
-            SizedBox(
-              height: 30,
-              child: ColoredBox(
-                color: Colors.white,
-              ),
-            ),
-            InkWell(
-              onTap: (){
-                navigateTo(context, SchoolCalendarScreen());
-              },
-                child: HomeText(text: 'Calender',numS: 22, image: 'images/calendar (1).png')),
-            SizedBox(
-              height: 30,
-            ),
-            InkWell(
-                onTap: (){
-                  navigateTo(context, ExamStudentSchedule(grade:StudentCubit.get(context).studentProfileModel?.gradeName));
                 },
                 child: HomeText(
-                    text: 'Exam Schedule', numS: 22,image: 'images/exam2.png')),
+                    numS: 22, text: 'Quizzes', image: 'images/exam.png')),
+            SizedBox(
+              height: 30,
+              child: ColoredBox(
+                color: Colors.white,
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                navigateTo(context, TeacherMarksSemesters());
+              },
+              child:
+                  HomeText(text: 'Marks', numS: 22, image: 'images/grade.png'),
+            ),
+            SizedBox(
+              height: 30,
+              child: ColoredBox(
+                color: Colors.white,
+              ),
+            ),
+            InkWell(
+                onTap: () {
+                  navigateTo(context, SchoolCalendarScreen());
+                },
+                child: HomeText(
+                    text: 'Calender',
+                    numS: 22,
+                    image: 'images/calendar (1).png')),
+            SizedBox(
+              height: 30,
+            ),
+            InkWell(
+                onTap: () {
+                  navigateTo(
+                      context,
+                      ExamStudentSchedule(
+                          grade: StudentCubit.get(context)
+                              .studentProfileModel
+                              ?.gradeName));
+                },
+                child: HomeText(
+                    text: 'Exam Schedule',
+                    numS: 22,
+                    image: 'images/exam2.png')),
             SizedBox(
               height: 30,
             ),
@@ -102,11 +113,9 @@ class StudentHome extends StatelessWidget {
               children: [
                 Container(
                   width: 300,
-                 height: 200,
+                  height: 200,
                   child: SvgPicture.asset(
                     'images/Kids Studying from Home-pana BLUE.svg',
-
-
                   ),
                 ),
               ],

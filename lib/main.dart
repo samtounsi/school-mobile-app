@@ -43,10 +43,11 @@ void main() async {
   print(id);
   print(profileId);
   print(type);
-   CacheHelper.removeData(key: 'token');
-   CacheHelper.removeData(key: 'id');
-   CacheHelper.removeData(key: 'profile_id');
-   CacheHelper.removeData(key: 'type');
+  //  CacheHelper.removeData(key: 'token');
+  //  CacheHelper.removeData(key: 'id');
+  //  CacheHelper.removeData(key: 'profile_id');
+  //  CacheHelper.removeData(key: 'type');
+  //  CacheHelper.removeData(key: 'onBoard');
   if (onBoard != null) {
     if (token != null) {
       type = CacheHelper.getData(key: 'type');
@@ -69,7 +70,7 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   final Widget? start;
-  static const route = 'to-event';
+  //static const route = 'to-event';
   MyApp({Key? key, this.start}) : super(key: key);
 
   @override
@@ -115,7 +116,7 @@ class MyApp extends StatelessWidget {
               primarySwatch: buildMaterialColor(AppColors.darkBlue),
             ),
             home: start,
-            navigatorKey: key,
+            //navigatorKey: key,
           // routes: {
           //   '/to-event': (context) {
           //     if (type == 'teacher') {

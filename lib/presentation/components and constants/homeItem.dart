@@ -17,7 +17,7 @@ class HomeText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 320,
+      width: 340,
       height: 80,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(

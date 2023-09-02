@@ -14,7 +14,8 @@ class QuizzesScreenHQ extends StatefulWidget {
   QuizzesScreenHQ({this.quizId});
 
   @override
-  State<QuizzesScreenHQ> createState() => _QuizzesScreenHQState(quizId: this.quizId);
+  State<QuizzesScreenHQ> createState() =>
+      _QuizzesScreenHQState(quizId: this.quizId);
 }
 
 class _QuizzesScreenHQState extends State<QuizzesScreenHQ> {
@@ -40,197 +41,235 @@ class _QuizzesScreenHQState extends State<QuizzesScreenHQ> {
                   fit: BoxFit.fill)),
           child: Scaffold(
             backgroundColor: Colors.transparent,
-            body: Padding(
-              padding: const EdgeInsets.only(top: 70, left: 18),
-              child: Stack(
-                alignment: Alignment.topCenter,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                    ),
-                  ),
-                  SafeArea(
-                    child: ConditionalBuilder(
-                      condition:
-                          state is! TeacherQuizzesHistoryQuizzesLoadingState,
-                      builder: (BuildContext context) {
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  QuizzesHistoryCubit.get(context)
-                                      .quizzesHistoryTeacherQuestionPostModel!
-                                      .questions
-                                      .title,
-                                  style: const TextStyle(
-                                      fontSize: 30, color: AppColors.darkBlue),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 10),
-                                  child: Column(
-                                    children: [
-                                      Text(
-                                        QuizzesHistoryCubit.get(context)
-                                            .quizzesHistoryTeacherQuestionPostModel!
-                                            .questions
-                                            .startTime,
-                                        style: const TextStyle(
-                                            fontSize: 20, color: AppColors.aqua),
-                                      ),
-                        SizedBox(
-                        height: 5,
-                        ),
-                        defaultTextButton(function: ()
-                        {
-                        ScoreBoardCubit.get(context).getScoreBoard(quizId: quizId)
-                            .then((value) =>navigateTo(context, ScoreBoard(isSubmission: false,)));
-
-                        }, text: 'Score Board',
-                            textSize: 12,
-                            textColor: Colors.white, radius: 10.0,
-                            width : 100,
-                            height:30,
-                            background: AppColors.aqua
-
-                        ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                            // Padding(
-                            //   padding: const EdgeInsets.only(top: 10),
-                            //   child: Row(
-                            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            //     children: [
-                            //       RichText(
-                            //           text: TextSpan(
-                            //               style: TextStyle(
-                            //                   fontSize: 25,
-                            //                   color: AppColors.aqua),
-                            //               text: 'Questions',
-                            //               children: [
-                            //                 TextSpan(
-                            //                   text:
-                            //                   ' ${QuizCubit.get(context).count}',
-                            //                 ),
-                            //                 TextSpan(text: '/'),
-                            //                 TextSpan(
-                            //                     text:
-                            //                     '${QuizCubit.get(context).counterOfQuestion}'),
-                            //               ])),
-                            //     ],
-                            //   ),
-                            //
-                            //   // ProgressTimer(),
-                            // ),
-                            SizedBox(
-                              height: 40,
-                            ),
-                            SizedBox(
-                              height: 450,
-                              child: PageView.builder(
-                                onPageChanged: (index) {
-                                  setState(() {
-                                    currentPage = index;
-                                  });
-                                },
-                                controller: _pageController,
-                                scrollDirection: Axis.horizontal,
-                                physics: NeverScrollableScrollPhysics(),
-                                itemBuilder: (context, index) {
-                                  return QuestionHistoryItem(
-                                      questionModel: QuizzesHistoryCubit.get(
-                                              context)
-                                          .quizzesHistoryTeacherQuestionPostModel!
-                                          .questions
-                                          .questions[index]);
-                                },
-                                itemCount: QuizzesHistoryCubit.get(context)
-                                    .quizzesHistoryTeacherQuestionPostModel!
-                                    .questions
-                                    .questions
-                                    .length,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                defaultTextButton(
-                                    width: 150,
-                                    radius: 25.0,
-                                    text: 'back',
-                                    textColor: AppColors.lightOrange,
-                                    function: () {
-                                      _pageController.previousPage(
-                                          duration: Duration(milliseconds: 3),
-                                          curve: Curves.bounceInOut);
-                                      QuizzesHistoryCubit.get(context)
-                                          .minusCounterTeacher();
-                                    },
-                                    isUpperCase: true,
-                                    background: AppColors.darkBlue),
-                                defaultTextButton(
-                                    width: 150,
-                                    radius: 25.0,
-                                    text: 'next',
-                                    textColor: AppColors.lightOrange,
-                                    function: () {
-                                      if (QuizzesHistoryCubit.get(context)
-                                              .counter !=
-                                          QuizzesHistoryCubit.get(context)
-                                              .quizzesHistoryTeacherQuestionPostModel!
-                                              .questions
-                                              .questions
-                                              .length) {
-                                        _pageController.nextPage(
-                                            duration: Duration(milliseconds: 3),
-                                            curve: Curves.bounceInOut);
-                                        QuizzesHistoryCubit.get(context)
-                                        .countTeacher();
-                                      }
-                                      // } else {
-                                      //   showDialog(
-                                      //     context: context,
-                                      //     builder: (context) => AlertDialog(
-                                      //       actions: [
-                                      //         TextButton(
-                                      //             onPressed: () {
-                                      //               navigateTo(context,
-                                      //                   QuizzesHistory());
-                                      //             },
-                                      //             child: Center(
-                                      //                 child: Text(
-                                      //               'Come back',
-                                      //               style:
-                                      //                   TextStyle(fontSize: 25),
-                                      //             )))
-                                      //       ],
-                                      //     ),
-                                      //   );
-                                      // }
-                                    },
-                                    isUpperCase: true,
-                                    background: AppColors.darkBlue),
-                              ],
-                            )
-                          ],
-                        );
+            body: Column(
+              children: [
+                SizedBox(
+                  height: 30,
+                ),
+                Row(
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
                       },
-                      fallback: (BuildContext context) => Center(
-                        child: CircularProgressIndicator(),
+                      icon: Icon(
+                        Icons.arrow_back,
+                        color: AppColors.darkBlue,
+                        size: 35,
                       ),
                     ),
+                    Spacer(),
+                  ],
+                ),
+                Spacer(),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 20,
                   ),
-                ],
-              ),
+                  child: Stack(
+                    alignment: Alignment.topCenter,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                        ),
+                      ),
+                      SafeArea(
+                        child: ConditionalBuilder(
+                          condition: state
+                              is! TeacherQuizzesHistoryQuizzesLoadingState,
+                          builder: (BuildContext context) {
+                            return Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      QuizzesHistoryCubit.get(context)
+                                          .quizzesHistoryTeacherQuestionPostModel!
+                                          .questions
+                                          .title,
+                                      style: const TextStyle(
+                                          fontSize: 30,
+                                          color: AppColors.darkBlue),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 10),
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            QuizzesHistoryCubit.get(context)
+                                                .quizzesHistoryTeacherQuestionPostModel!
+                                                .questions
+                                                .startTime,
+                                            style: const TextStyle(
+                                                fontSize: 20,
+                                                color: AppColors.aqua),
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          defaultTextButton(
+                                              function: () {
+                                                ScoreBoardCubit.get(context)
+                                                    .getScoreBoard(
+                                                        quizId: quizId)
+                                                    .then((value) => navigateTo(
+                                                        context,
+                                                        ScoreBoard(
+                                                          isSubmission: false,
+                                                        )));
+                                              },
+                                              text: 'Score Board',
+                                              textSize: 12,
+                                              textColor: Colors.white,
+                                              radius: 10.0,
+                                              width: 140,
+                                              height: 30,
+                                              background: AppColors.aqua),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                // Padding(
+                                //   padding: const EdgeInsets.only(top: 10),
+                                //   child: Row(
+                                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                //     children: [
+                                //       RichText(
+                                //           text: TextSpan(
+                                //               style: TextStyle(
+                                //                   fontSize: 25,
+                                //                   color: AppColors.aqua),
+                                //               text: 'Questions',
+                                //               children: [
+                                //                 TextSpan(
+                                //                   text:
+                                //                   ' ${QuizCubit.get(context).count}',
+                                //                 ),
+                                //                 TextSpan(text: '/'),
+                                //                 TextSpan(
+                                //                     text:
+                                //                     '${QuizCubit.get(context).counterOfQuestion}'),
+                                //               ])),
+                                //     ],
+                                //   ),
+                                //
+                                //   // ProgressTimer(),
+                                // ),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                SizedBox(
+                                  height: 440,
+                                  child: PageView.builder(
+                                    onPageChanged: (index) {
+                                      setState(() {
+                                        currentPage = index;
+                                      });
+                                    },
+                                    controller: _pageController,
+                                    scrollDirection: Axis.horizontal,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemBuilder: (context, index) {
+                                      return QuestionHistoryItem(
+                                          questionModel: QuizzesHistoryCubit
+                                                  .get(context)
+                                              .quizzesHistoryTeacherQuestionPostModel!
+                                              .questions
+                                              .questions[index]);
+                                    },
+                                    itemCount: QuizzesHistoryCubit.get(context)
+                                        .quizzesHistoryTeacherQuestionPostModel!
+                                        .questions
+                                        .questions
+                                        .length,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    defaultTextButton(
+                                        width: 150,
+                                        radius: 25.0,
+                                        text: 'back',
+                                        textColor: AppColors.lightOrange,
+                                        function: () {
+                                          _pageController.previousPage(
+                                              duration:
+                                                  Duration(milliseconds: 3),
+                                              curve: Curves.bounceInOut);
+                                          QuizzesHistoryCubit.get(context)
+                                              .minusCounterTeacher();
+                                        },
+                                        isUpperCase: true,
+                                        background: AppColors.darkBlue),
+                                    defaultTextButton(
+                                        width: 150,
+                                        radius: 25.0,
+                                        text: 'next',
+                                        textColor: AppColors.lightOrange,
+                                        function: () {
+                                          if (QuizzesHistoryCubit.get(context)
+                                                  .counter !=
+                                              QuizzesHistoryCubit.get(context)
+                                                  .quizzesHistoryTeacherQuestionPostModel!
+                                                  .questions
+                                                  .questions
+                                                  .length) {
+                                            _pageController.nextPage(
+                                                duration:
+                                                    Duration(milliseconds: 3),
+                                                curve: Curves.bounceInOut);
+                                            QuizzesHistoryCubit.get(context)
+                                                .countTeacher();
+                                          }
+                                          // } else {
+                                          //   showDialog(
+                                          //     context: context,
+                                          //     builder: (context) => AlertDialog(
+                                          //       actions: [
+                                          //         TextButton(
+                                          //             onPressed: () {
+                                          //               navigateTo(context,
+                                          //                   QuizzesHistory());
+                                          //             },
+                                          //             child: Center(
+                                          //                 child: Text(
+                                          //               'Come back',
+                                          //               style:
+                                          //                   TextStyle(fontSize: 25),
+                                          //             )))
+                                          //       ],
+                                          //     ),
+                                          //   );
+                                          // }
+                                        },
+                                        isUpperCase: true,
+                                        background: AppColors.darkBlue),
+                                  ],
+                                ),
+                              ],
+                            );
+                          },
+                          fallback: (BuildContext context) => Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Spacer(),
+                Spacer(),
+              ],
             ),
           ),
         );

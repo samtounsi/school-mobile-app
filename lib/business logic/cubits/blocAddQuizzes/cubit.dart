@@ -1,4 +1,8 @@
+
+
+
 import 'dart:convert';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/blocAddQuizzes/states.dart';
 import 'package:http/http.dart' as http;
@@ -30,7 +34,7 @@ class AddQuizCubit extends Cubit<AddQuizStates>
 
 
 
-  List<Question> quiz=[];
+ // List<Question> quiz=[];
 
    List<String>quizPost=[];
    Future addQuizQuestions({required nof, required quizController})async
@@ -48,7 +52,7 @@ class AddQuizCubit extends Cubit<AddQuizStates>
      return quizPost;
    }
 
-  postQuiz({required AddQuizModel data})async
+  Future postQuiz({required AddQuizModel data})async
   {
     emit(AddTeacherQuizLoadingState());
     var request = http.post(
@@ -68,8 +72,9 @@ class AddQuizCubit extends Cubit<AddQuizStates>
       emit(AddTeacherQuizSuccessState());
   }
   else {
-    print(jsonDecode(await response.body)['message']);
-    emit(AddTeacherQuizErrorState());
+    String error=jsonDecode(await response.body)['message'];
+    print(error);
+    emit(AddTeacherQuizErrorState(error));
   }
 
   }

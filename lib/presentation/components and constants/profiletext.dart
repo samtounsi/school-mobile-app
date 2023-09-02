@@ -1,7 +1,4 @@
-
-
 import 'package:flutter/material.dart';
-
 import 'constants.dart';
 
 class ProfileText extends StatelessWidget {
@@ -10,7 +7,6 @@ class ProfileText extends StatelessWidget {
 
   ProfileText({
     Key? key,
-
     required this.text1,
     required this.text2,
   }) : super(key: key);
@@ -20,12 +16,12 @@ class ProfileText extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(text1,
-        style: TextStyle(
-          fontSize: 27,
-          fontWeight: FontWeight.w700,
-          color: AppColors.lightOrange
-        ),
+        Text(
+          text1,
+          style: TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.w700,
+              color: AppColors.lightOrange),
         ),
         SizedBox(
           height: 17,
@@ -35,26 +31,22 @@ class ProfileText extends StatelessWidget {
           height: 85,
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            border:  Border.all(color: AppColors.borderColor),
-            boxShadow: [BoxShadow(blurRadius: 10,
-                color: AppColors.shadow,
-                spreadRadius: 15)],
+            border: Border.all(color: AppColors.borderColor),
+            boxShadow: [
+              BoxShadow(
+                  blurRadius: 10, color: AppColors.shadow, spreadRadius: 15)
+            ],
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
-
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Text(
-                text2,
-                style: const TextStyle(
-                  color: AppColors.darkBlue,
-                  fontSize: 22,
-                  fontWeight: FontWeight.w500,
-
-                ),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Text(
+              text2,
+              style: const TextStyle(
+                color: AppColors.darkBlue,
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
               ),
             ),
           ),

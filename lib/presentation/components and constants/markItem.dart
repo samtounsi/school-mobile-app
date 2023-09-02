@@ -5,9 +5,8 @@ import 'constants.dart';
 class MarkItem extends StatelessWidget {
   String text;
   String image;
-  double? numS=22;
+  double? numS = 22;
   double? radius;
-
 
   MarkItem({
     Key? key,
@@ -15,14 +14,12 @@ class MarkItem extends StatelessWidget {
     required this.image,
     this.numS,
     required this.radius,
-
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 320
-      ,
+      width: 342,
       height: 80,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -45,12 +42,9 @@ class MarkItem extends StatelessWidget {
             ),
           ),
           Container(
-
-
             child: Image.asset(
               image,
               fit: BoxFit.contain,
-
             ),
           ),
         ],

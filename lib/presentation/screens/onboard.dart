@@ -29,6 +29,7 @@ class Onboard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Spacer(),
               Padding(
                 padding: const EdgeInsets.fromLTRB(50, 60, 0, 0),
                 child: Text(
@@ -36,9 +37,10 @@ class Onboard extends StatelessWidget {
                   style: TextStyle(fontSize: 33, color: AppColors.darkBlue),
                 ),
               ),
-              SizedBox(
-                height: 40,
-              ),
+              // SizedBox(
+              //   height: 40,
+              // ),
+              Spacer(),
               Row(
                 children: [
                   Spacer(),
@@ -46,17 +48,19 @@ class Onboard extends StatelessWidget {
                   Spacer(),
                 ],
               ),
-              SizedBox(
-                height: 40,
-              ),
+              // SizedBox(
+              //   height: 40,
+              // ),
+              Spacer(),
               Row(
                 children: [
                   Spacer(),
                   defaultButton(
                       text: 'Continue',
                       onPressed: () {
-                        CacheHelper.saveData(key: 'onBoard', value: true).then((value){
-                          if(value){
+                        CacheHelper.saveData(key: 'onBoard', value: true)
+                            .then((value) {
+                          if (value) {
                             navigateAndFinish(context, Login());
                           }
                         });
@@ -64,6 +68,7 @@ class Onboard extends StatelessWidget {
                   Spacer(),
                 ],
               ),
+              Spacer(),
             ],
           ),
         ),

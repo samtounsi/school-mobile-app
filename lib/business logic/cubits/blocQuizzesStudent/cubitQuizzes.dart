@@ -1,7 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_schoolapp/business%20logic/cubits/blocQuizzesStudent/stateQuizzes.dart';
@@ -13,9 +11,7 @@ import '../../../data/models/quizzes_get_student_model.dart';
 import '../../../presentation/components and constants/constants.dart';
 
 class QuizCubit extends Cubit<QuizState> {
-  QuizCubit() : super(InitialStateQuizzes()) {
-    //startTimer();
-  }
+  QuizCubit() : super(InitialStateQuizzes());
 
   //Timer
   Timer? countdown;
@@ -23,9 +19,10 @@ class QuizCubit extends Cubit<QuizState> {
   int reduction = 1;
 
   void countDown() {
-    final seconds = myDur!.inSeconds - reduction;
-      myDur = Duration(seconds: seconds);
+     dynamic seconds = myDur!.inSeconds - reduction;
+    myDur = Duration(seconds: seconds);
     emit(QuizTimerCountdownState());
+    print(countdown!.tick.toString());
   }
 
   void startTimer(int timer) {

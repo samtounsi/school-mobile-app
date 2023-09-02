@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/constants.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-
-
 Widget calendar(
     {double size = 18,
     bool Function(DateTime)? holidayPredicate,
@@ -31,15 +29,15 @@ Widget calendar(
         formatButtonVisible: false,
         titleCentered: true,
         titleTextStyle: TextStyle(
-          fontSize: 26,
+          fontSize: 24,
         ),
         headerMargin: EdgeInsets.all(8.0)),
     daysOfWeekStyle: DaysOfWeekStyle(
       weekdayStyle: TextStyle(
-        fontSize: size - 2,
+        fontSize: size - 4,
       ),
       weekendStyle: TextStyle(
-        fontSize: size - 2,
+        fontSize: size - 4,
         color: const Color.fromARGB(255, 129, 157, 172),
       ),
     ),

@@ -35,6 +35,65 @@ class AddMarks extends StatelessWidget {
         if(state is GetStudentsSuccessState)
         {
          model=state.getStudentsModel;
+
+        }
+        if(state is AddStudentMarksSuccessState)
+        {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Center(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: AppColors.aqua,
+                  borderRadius: BorderRadius.circular(17),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'added successfully',
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            behavior: SnackBarBehavior.floating,
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            width: MediaQuery.of(context).size.width - 10,
+          ));
+
+        }
+        else if (state is AddStudentMarksErrorState) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Center(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: AppColors.lightOrange,
+                  borderRadius: BorderRadius.circular(17),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    state.error.toString(),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            behavior: SnackBarBehavior.floating,
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            width: MediaQuery.of(context).size.width-10,
+          ));
         }
       },
       builder: (context,state)
@@ -57,6 +116,10 @@ class AddMarks extends StatelessWidget {
                     backgroundColor: Colors.transparent,
                     leading:  IconButton(
                       onPressed: (){
+                        for(int i=0; i<controller.length;i++)
+                        {
+                          controller[i].clear();
+                        }
                         Navigator.pop(context);
                       },
                       icon: Icon(Icons.arrow_back,

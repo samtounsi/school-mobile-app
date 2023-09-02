@@ -8,6 +8,7 @@ import '../../../data/models/get_years_model.dart';
 class StudentState {}
 class InitialStudentState extends StudentState{}
 class ChangeIndexMotionTabBarState extends StudentState{}
+class ChangeIndexToProfileState extends StudentState{}
 class GetStudentProfileLoadingState extends StudentState{}
 class GetStudentProfileSuccessState extends StudentState
 {

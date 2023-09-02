@@ -8,12 +8,11 @@ import '../../data/models/quizzes_history_teacher_post_model.dart';
 import 'package:mobile_schoolapp/presentation/components%20and%20constants/constants.dart';
 import 'package:mobile_schoolapp/presentation/screens/answerHistory.dart';
 
-
-
 class QuestionHistoryItem extends StatelessWidget {
   final QuestionHTeacher questionModel;
 
-  QuestionHistoryItem({Key? key, required this.questionModel}) : super(key: key);
+  QuestionHistoryItem({Key? key, required this.questionModel})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,12 +30,12 @@ class QuestionHistoryItem extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(0.0),
                 child: Column(
-                  // mainAxisSize: MainAxisSize.max,
+                    // mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        width: 450,
+                        width: 440,
                         height: 100,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(35),
@@ -45,71 +44,69 @@ class QuestionHistoryItem extends StatelessWidget {
                           // ],
                           border: Border.all(color: AppColors.borderColor),
                           color: AppColors.lightOrange,
-
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.only(left:30,top: 10,right: 20),
+                          padding: const EdgeInsets.only(
+                              left: 30, top: 10, right: 20),
                           child: Text(
                             questionModel.statement,
-                            style:TextStyle(
-                                color:AppColors.darkBlue,
-                                fontSize: 27
-                            ),
+                            style: TextStyle(
+                                color: AppColors.darkBlue, fontSize: 27),
                           ),
                         ),
                       ),
-                      SizedBox(height: 15),
+                      SizedBox(height: 10),
                       Row(
                         children: [
-                          Text('True answer:',
+                          Text(
+                            'True answer:',
                             style: TextStyle(
-                                fontSize: 20,
-                                color: AppColors.darkBlue
-                            ),),
-                          if(questionModel.answer==1)
+                                fontSize: 20, color: AppColors.darkBlue),
+                          ),
+                          if (questionModel.answer == 1)
                             Icon(
                               Mdi.alphaACircleOutline,
                               color: AppColors.aqua,
                               size: 40,
                             ),
-                          if(questionModel.answer==2)
+                          if (questionModel.answer == 2)
                             Icon(
                               Mdi.alphaBCircleOutline,
                               color: AppColors.aqua,
                               size: 40,
                             ),
-                          if(questionModel.answer==3)
+                          if (questionModel.answer == 3)
                             Icon(
                               Mdi.alphaCCircleOutline,
                               color: AppColors.aqua,
                               size: 40,
                             ),
-
                         ],
                       ),
-                      SizedBox(height:15,),
+                      SizedBox(
+                        height: 15,
+                      ),
                       ...List.generate(
                           questionModel.choices.length,
-                              (index)=>Column(
-                            children: [
-                              AnswerOptionHistory(
-                                  question: questionModel,
-                                  index: QuizCubit.get(context).answerIndex(index),
+                          (index) => Column(
+                                children: [
+                                  AnswerOptionHistory(
+                                    question: questionModel,
+                                    index: QuizCubit.get(context)
+                                        .answerIndex(index),
                                   ),
-                              SizedBox(
-                                height: 20,
-                              )
-                            ],
-                          )),
+                                  SizedBox(
+                                    height: 20,
+                                  )
+                                ],
+                              )),
                       const Spacer(
                         flex: 1,
                       ),
-                    ]
-                ),
+                    ]),
               )),
         );
       },
-
     );
   }
 }

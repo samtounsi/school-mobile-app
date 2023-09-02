@@ -60,7 +60,7 @@ class ChatContacts extends StatelessWidget {
                             shrinkWrap: true,
                             itemBuilder:(context,index)=>buildContactItem(context,index,model)
                             , separatorBuilder:(context ,index)=>SizedBox(height: 32.0),
-                            itemCount:15),
+                            itemCount:model.length),
                       ],
                     );
                   },

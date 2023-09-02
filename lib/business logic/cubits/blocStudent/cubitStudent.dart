@@ -31,14 +31,16 @@ class StudentCubit extends Cubit<StudentState> {
   ];
   void changeIndex(int index) {
     currentIndex = index;
-    emit(ChangeIndexMotionTabBarState());
+    if (currentIndex != 2)
+      emit(ChangeIndexMotionTabBarState());
+    else
+      emit(ChangeIndexToProfileState());
   }
 
   StudentProfileModel? studentProfileModel;
   Future getStudentProfile({required int id, required int year}) async {
-    if(studentProfileModel!=null)
-    {
-      studentProfileModel=null;
+    if (studentProfileModel != null) {
+      studentProfileModel = null;
     }
     emit(GetStudentProfileLoadingState());
     var headers = {'Authorization': 'Bearer $token'};
@@ -49,7 +51,7 @@ class StudentCubit extends Cubit<StudentState> {
 
     request.headers.addAll(headers);
     request.fields.addAll({
-      'id':id.toString(),
+      'id': id.toString(),
       'year': year.toString(),
     });
     var response = await request.send();
@@ -62,7 +64,7 @@ class StudentCubit extends Cubit<StudentState> {
       emit(GetStudentProfileSuccessState(studentProfileModel!));
     } else {
       String error =
-      jsonDecode(await response.stream.bytesToString())['message'];
+          jsonDecode(await response.stream.bytesToString())['message'];
       print(response.statusCode);
       print(error);
       emit(GetStudentProfileErrorState(error));
@@ -101,14 +103,14 @@ class StudentCubit extends Cubit<StudentState> {
       print(profilePhoto.path);
       print(response.statusCode);
       String error =
-      jsonDecode(await response.stream.bytesToString())['message'];
+          jsonDecode(await response.stream.bytesToString())['message'];
       print(error);
       emit(AddStudentPictureErrorState(error));
     }
   }
 
   AddProfileBioResponse? addProfileBioResponse;
-  postBio({required int id, required String bio}) async {
+  Future postBio({required int id, required String bio}) async {
     emit(AddStudentBioLoadingState());
     var headers = {'Authorization': 'Bearer $token'};
     var request = http.MultipartRequest(
@@ -132,46 +134,46 @@ class StudentCubit extends Cubit<StudentState> {
     } else {
       print(response.statusCode);
       String error =
-      jsonDecode(await response.stream.bytesToString())['message'];
+          jsonDecode(await response.stream.bytesToString())['message'];
       print(error);
       emit(AddStudentBioErrorState(error));
     }
   }
 
   String? yearValue;
-  String changeYear(yearValue)
-  {
-    this.yearValue=yearValue;
+  String changeYear(yearValue) {
+    this.yearValue = yearValue;
     emit(ChangeYearState());
     print(yearValue);
     return yearValue;
   }
+
   GetYearsModel? getYearsModel;
-  Future getYears({studentId})async
-  {
+  Future getYears({studentId}) async {
     emit(GetYearsLoadingState());
-    var headers = {
-      'Authorization': 'Bearer $token'
-    };
-    var request = http.Request('GET', Uri.parse('https://new-school-management-system.onrender.com/get_years/$studentId'));
+    var headers = {'Authorization': 'Bearer $token'};
+    var request = http.Request(
+        'GET',
+        Uri.parse(
+            'https://new-school-management-system.onrender.com/get_years/$studentId'));
 
     request.headers.addAll(headers);
 
     var response = await request.send();
 
     if (response.statusCode == 200) {
-      getYearsModel=GetYearsModel.fromJson(jsonDecode(await response.stream.bytesToString()));
+      getYearsModel = GetYearsModel.fromJson(
+          jsonDecode(await response.stream.bytesToString()));
       print(response.statusCode);
       print(getYearsModel?.toJson().toString());
       emit(GetYearsSuccessState(getYearsModel!));
-    }
-    else {
+    } else {
       print(studentId);
-      String error=jsonDecode(await response.stream.bytesToString())['message'];
+      String error =
+          jsonDecode(await response.stream.bytesToString())['message'];
       print(response.statusCode);
       print(error);
       emit(GetYearsErrorState(error));
     }
-
   }
 }

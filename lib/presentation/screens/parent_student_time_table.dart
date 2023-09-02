@@ -135,7 +135,6 @@ class ParentTimeTable extends StatelessWidget {
                              children: [
                                buildSubject('Math:M'),
                                buildSubject('Physics:P'),
-                               buildSubject('Chemistry:Ch'),
                              ],
                            ),
                            SizedBox(

@@ -12,8 +12,8 @@ Future<void> handleBackgroundMessage(RemoteMessage message) async {
 
 void handleMessage(RemoteMessage? message) {
   if (message == null) return;
-  key.currentState?.pushNamedAndRemoveUntil('to-event', (route) => false,
-      arguments: message);
+  //key.currentState?.pushNamedAndRemoveUntil('to-event', (route) => false,
+      //arguments: message);
 }
 
 Future initPushNotifications() async {

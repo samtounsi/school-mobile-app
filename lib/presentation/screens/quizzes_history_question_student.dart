@@ -15,13 +15,14 @@ class QuizzesScreenHQStudent extends StatefulWidget {
   QuizzesScreenHQStudent({this.quizId});
 
   @override
-  State<QuizzesScreenHQStudent> createState() => _QuizzesScreenHQStudentState(quizId: this.quizId);
+  State<QuizzesScreenHQStudent> createState() =>
+      _QuizzesScreenHQStudentState(quizId: this.quizId);
 }
 
 class _QuizzesScreenHQStudentState extends State<QuizzesScreenHQStudent> {
   int currentPage = 0;
   int? quizId;
-  _QuizzesScreenHQStudentState({ this.quizId});
+  _QuizzesScreenHQStudentState({this.quizId});
   final PageController _pageController = PageController(initialPage: 0);
 
   void dispose() {
@@ -42,7 +43,7 @@ class _QuizzesScreenHQStudentState extends State<QuizzesScreenHQStudent> {
           child: Scaffold(
             backgroundColor: Colors.transparent,
             body: Padding(
-              padding: const EdgeInsets.only(top: 70, left: 18),
+              padding: const EdgeInsets.only(top: 90, left: 18),
               child: Stack(
                 alignment: Alignment.topCenter,
                 children: [
@@ -54,7 +55,7 @@ class _QuizzesScreenHQStudentState extends State<QuizzesScreenHQStudent> {
                   SafeArea(
                     child: ConditionalBuilder(
                       condition:
-                      state is! StudentQuizzesHistoryQuizzesLoadingState,
+                          state is! StudentQuizzesHistoryQuizzesLoadingState,
                       builder: (BuildContext context) {
                         return Column(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -80,25 +81,29 @@ class _QuizzesScreenHQStudentState extends State<QuizzesScreenHQStudent> {
                                             .questions
                                             .startTime,
                                         style: const TextStyle(
-                                            fontSize: 20, color: AppColors.aqua),
+                                            fontSize: 20,
+                                            color: AppColors.aqua),
                                       ),
                                       SizedBox(
                                         height: 5,
                                       ),
-                                      defaultTextButton(function: ()
-                                      {
-                                        ScoreBoardCubit.get(context).getScoreBoard(quizId: quizId)
-                                            .then((value) =>navigateTo(context, ScoreBoard(isSubmission: false,)));
-
-                                      },
+                                      defaultTextButton(
+                                          function: () {
+                                            ScoreBoardCubit.get(context)
+                                                .getScoreBoard(quizId: quizId)
+                                                .then((value) => navigateTo(
+                                                    context,
+                                                    ScoreBoard(
+                                                      isSubmission: false,
+                                                    )));
+                                          },
                                           text: 'Score Board',
                                           textSize: 12,
-                                          textColor: Colors.white, radius: 10.0,
-                                           width : 100,
-                                           height:30,
-                                          background: AppColors.aqua
-
-                                      ),
+                                          textColor: Colors.white,
+                                          radius: 10.0,
+                                          width: 120,
+                                          height: 30,
+                                          background: AppColors.aqua),
                                     ],
                                   ),
                                 ),
@@ -146,11 +151,11 @@ class _QuizzesScreenHQStudentState extends State<QuizzesScreenHQStudent> {
                                 physics: NeverScrollableScrollPhysics(),
                                 itemBuilder: (context, index) {
                                   return QuestionHistoryItem(
-                                      questionModel: QuizzesHistoryCubit.get(
-                                          context)
-                                          .quizzesHistoryStudentQuestionPM!
-                                          .questions
-                                          .questions[index]);
+                                      questionModel:
+                                          QuizzesHistoryCubit.get(context)
+                                              .quizzesHistoryStudentQuestionPM!
+                                              .questions
+                                              .questions[index]);
                                 },
                                 itemCount: QuizzesHistoryCubit.get(context)
                                     .quizzesHistoryStudentQuestionPM!
@@ -186,7 +191,7 @@ class _QuizzesScreenHQStudentState extends State<QuizzesScreenHQStudent> {
                                     textColor: AppColors.lightOrange,
                                     function: () {
                                       if (QuizzesHistoryCubit.get(context)
-                                          .counter !=
+                                              .counter !=
                                           QuizzesHistoryCubit.get(context)
                                               .quizzesHistoryStudentQuestionPM!
                                               .questions
@@ -223,8 +228,6 @@ class _QuizzesScreenHQStudentState extends State<QuizzesScreenHQStudent> {
                                     background: AppColors.darkBlue),
                               ],
                             ),
-
-
                           ],
                         );
                       },

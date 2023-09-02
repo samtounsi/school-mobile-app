@@ -6,17 +6,16 @@ import '../../business logic/cubits/blocStudent/stateStudent.dart';
 import '../components and constants/constants.dart';
 
 var model;
+
 class StudentAttendance extends StatelessWidget {
   StudentAttendance({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<StudentCubit,StudentState>(
-      listener: (context, state)
-      {
-        if(state is GetStudentProfileSuccessState)
-        {
-          model=state.studentProfileModel;
+    return BlocConsumer<StudentCubit, StudentState>(
+      listener: (context, state) {
+        if (state is GetStudentProfileSuccessState) {
+          model = state.studentProfileModel;
         }
       },
       builder: (context, state) => Scaffold(
@@ -24,23 +23,27 @@ class StudentAttendance extends StatelessWidget {
         body: Stack(
           children: [
             ConditionalBuilder(
-              condition: StudentCubit.get(context).studentProfileModel!=null,
-              builder: (context)
-              {
-                model=StudentCubit.get(context).studentProfileModel;
+              condition: StudentCubit.get(context).studentProfileModel != null,
+              builder: (context) {
+                model = StudentCubit.get(context).studentProfileModel;
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      height: 120,
+                      height: 190,
                     ),
                     Row(
                       children: [
                         SizedBox(
                           width: 20,
                         ),
-                        Text('Absence:',
-                          style: TextStyle(fontSize: 25, color:  AppColors.lightOrange, fontWeight: FontWeight.bold),),
+                        Text(
+                          'Absence:',
+                          style: TextStyle(
+                              fontSize: 25,
+                              color: AppColors.lightOrange,
+                              fontWeight: FontWeight.bold),
+                        ),
                         SizedBox(
                           width: 20,
                         ),
@@ -51,31 +54,46 @@ class StudentAttendance extends StatelessWidget {
                             borderRadius: BorderRadius.circular(5),
                             color: Colors.white,
                             border: Border.all(
-                              color:  AppColors.darkBlue,
+                              color: AppColors.darkBlue,
                               width: 2,
                             ),
                           ),
-                          child: Center(child: Text(model.numberOfAbsenceDays.toString(), style: TextStyle(fontSize: 22, color: AppColors.darkBlue),)),
+                          child: Center(
+                              child: Text(
+                            model.numberOfAbsenceDays.toString(),
+                            style: TextStyle(
+                                fontSize: 22, color: AppColors.darkBlue),
+                          )),
                         ),
                         SizedBox(
                           width: 20,
                         ),
-                        Text('days.',style: TextStyle( fontSize: 19, color:  AppColors.darkBlue),),
+                        Text(
+                          'days.',
+                          style: TextStyle(
+                              fontSize: 19, color: AppColors.darkBlue),
+                        ),
                       ],
                     ),
                     SizedBox(
                       height: 30,
                     ),
                     Padding(
-                      padding: EdgeInsetsDirectional.all( 20),
-                      child: Text('Dates of Absence:',
-                        style: TextStyle( color: AppColors.lightOrange, fontWeight: FontWeight.bold, fontSize: 25),),
+                      padding: EdgeInsetsDirectional.all(20),
+                      child: Text(
+                        'Dates of Absence:',
+                        style: TextStyle(
+                            color: AppColors.lightOrange,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25),
+                      ),
                     ),
                     Container(
                       child: Expanded(
                         child: ListView.separated(
                           physics: BouncingScrollPhysics(),
-                          itemBuilder: (context, index) => buildItem(model.absences[index]),
+                          itemBuilder: (context, index) =>
+                              buildItem(model.absences[index]),
                           separatorBuilder: (context, index) => SizedBox(
                             height: 20,
                           ),
@@ -86,19 +104,20 @@ class StudentAttendance extends StatelessWidget {
                   ],
                 );
               },
-              fallback: (context)=>Center(child: CircularProgressIndicator()),
+              fallback: (context) => Center(child: CircularProgressIndicator()),
             ),
             Container(
-              height: 190,
+              height: 240,
               width: MediaQuery.of(context).size.width,
               child: Image.asset(
                 'images/head.png',
                 fit: BoxFit.fill,
               ),
             ),
-
             Padding(
-              padding:  EdgeInsetsDirectional.only(top:10.0,),
+              padding: EdgeInsetsDirectional.only(
+                top: 30.0,
+              ),
               child: Row(
                 children: [
                   IconButton(
@@ -107,12 +126,17 @@ class StudentAttendance extends StatelessWidget {
                       },
                       icon: Icon(
                         Icons.arrow_back,
-                        color:  AppColors.darkBlue,
-                        size: 30,
+                        color: Colors.white,
+                        size: 35,
                       )),
-                  SizedBox(width: 15,),
-                  Text('Attendance', style: TextStyle(fontSize: 25, color: Colors.white),),
-                Spacer()
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Text(
+                    'Attendance',
+                    style: TextStyle(fontSize: 25, color: Colors.white),
+                  ),
+                  Spacer()
                 ],
               ),
             ),
@@ -133,16 +157,16 @@ class StudentAttendance extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
               color: Colors.white,
-              border: Border.all(color:  AppColors.darkBlue, width: 2),
+              border: Border.all(color: AppColors.darkBlue, width: 2),
             ),
             child: Center(
-                child: Text('${date.day} / ${date.month} / ${date.year}',
-                    style: TextStyle(fontSize: 22, color:  AppColors.darkBlue),)),
+                child: Text(
+              '${date.day} / ${date.month} / ${date.year}',
+              style: TextStyle(fontSize: 22, color: AppColors.darkBlue),
+            )),
           ),
         ],
       ),
     );
   }
-
-  
 }

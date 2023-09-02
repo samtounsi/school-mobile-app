@@ -98,7 +98,7 @@ class EventCubit extends Cubit<EventState> {
   }
 
   void sendNotification(String title, String body, String topic) async {
-    emit(NotiLoadingState());
+    emit(AddEventLoadingState());
     var request = http.MultipartRequest(
         'POST',
         Uri.parse(
@@ -114,7 +114,7 @@ class EventCubit extends Cubit<EventState> {
       'Content-type': 'multipart/form-data'
     });
     final response = await request.send();
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
       var message = jsonDecode(await response.stream.bytesToString())['message']
           .toString();
       print('$message $topic');

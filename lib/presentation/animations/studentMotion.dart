@@ -47,7 +47,15 @@ class StudentMotionState extends State<StudentMotion>
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<StudentCubit, StudentState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is ChangeIndexToProfileState) {
+        StudentCubit.get(context).getStudentProfile(
+            id: profileId!,
+            year: (DateTime.now().month > 6)
+                ? DateTime.now().year + 1
+                : DateTime.now().year);
+      }
+      },
       builder: (context, state) {
         return Scaffold(
           bottomNavigationBar: MotionTabBar(

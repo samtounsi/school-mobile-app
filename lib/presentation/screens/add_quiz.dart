@@ -32,7 +32,19 @@ class AddQuizScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AddQuizCubit,AddQuizStates>(
-      listener: (context,state){},
+      listener: (context,state)
+      {
+        if(state is AddTeacherQuizSuccessState)
+        {
+          numOfQuestionsController.clear();
+          labelController.clear();
+          subjectController.clear();
+          dateController.clear();
+          startTimeController.clear();
+          endTimeController.clear();
+          //Navigator.pop(context);
+        }
+      },
       builder: (context,state)
       {
         return Container(
@@ -52,6 +64,12 @@ class AddQuizScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(top:15.0),
                   child: IconButton(
                     onPressed: (){
+                      numOfQuestionsController.clear();
+                      labelController.clear();
+                      subjectController.clear();
+                      dateController.clear();
+                      startTimeController.clear();
+                      endTimeController.clear();
                       Navigator.pop(context);
                     },
                     icon: Icon(Icons.arrow_back,

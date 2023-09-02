@@ -22,7 +22,7 @@ class TeacherMarksSemesters extends StatelessWidget {
         body: Stack(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 25),
+              padding: const EdgeInsets.only(top: 30),
               child: Row(
                 children: [
                   IconButton(
@@ -44,9 +44,10 @@ class TeacherMarksSemesters extends StatelessWidget {
               padding: const EdgeInsets.only(top: 25, left: 25, right: 25),
               child: Column(
                 children: [
-                  SizedBox(
-                    height: 50,
-                  ),
+                  // SizedBox(
+                  //   height: 50,
+                  // ),
+                  Spacer(),
                   Center(
                     child: Text(
                       'Select Semester',
@@ -56,9 +57,10 @@ class TeacherMarksSemesters extends StatelessWidget {
                           fontWeight: FontWeight.w600),
                     ),
                   ),
-                  SizedBox(
-                    height: 30,
-                  ),
+                  // SizedBox(
+                  //   height: 30,
+                  // ),
+                  Spacer(),
                   InkWell(
                       onTap: () {
                         navigateTo(
@@ -97,6 +99,7 @@ class TeacherMarksSemesters extends StatelessWidget {
                     height: 350,
                     width: 400,
                   ),
+                  Spacer(),
                 ],
               ),
             ),

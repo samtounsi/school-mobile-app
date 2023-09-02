@@ -1,3 +1,4 @@
+//teacherprofile
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -98,7 +99,7 @@ class _TeacherProfileState extends State<TeacherProfile> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
-                            height: 10,
+                            height: 30,
                           ),
                           Center(
                             child: uploadAvatar(context, state, model),

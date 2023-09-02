@@ -1,4 +1,3 @@
-
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,7 +37,7 @@ class SchoolCalendarScreen extends StatelessWidget {
                   //   height: 10,
                   // ),
                   Container(
-                    width: MediaQuery.of(context).size.width / 3,
+                    width: MediaQuery.of(context).size.width / 2.66,
                     height: 50,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(17),
@@ -65,8 +64,8 @@ class SchoolCalendarScreen extends StatelessWidget {
                                         print(year.year.toString());
                                         CalendarCubit.get(context)
                                             .getSchoolCalendarData(
-                                            year: year.year + 1,
-                                            newyear: year.year);
+                                                year: year.year + 1,
+                                                newyear: year.year);
                                       }),
                                 ),
                               );
@@ -103,7 +102,7 @@ class SchoolCalendarScreen extends StatelessWidget {
                               .isNotEmpty) {
                             return CalendarCubit.get(context).isYearHoliday(day,
                                 holidays:
-                                CalendarCubit.get(context).model!.holidays);
+                                    CalendarCubit.get(context).model!.holidays);
                           }
                           return false;
                         },
@@ -116,47 +115,47 @@ class SchoolCalendarScreen extends StatelessWidget {
                                 startWork: CalendarCubit.get(context)
                                     .model!
                                     .work![CalendarCubit.get(context)
-                                    .model!
-                                    .work!
-                                    .length -
-                                    1]
+                                            .model!
+                                            .work!
+                                            .length -
+                                        1]
                                     .startDate,
                                 endWork: CalendarCubit.get(context)
                                     .model!
                                     .work![CalendarCubit.get(context)
-                                    .model!
-                                    .work!
-                                    .length -
-                                    1]
+                                            .model!
+                                            .work!
+                                            .length -
+                                        1]
                                     .endDate);
                           }
                           return false;
                         },
                         startRange: (CalendarCubit.get(context)
-                            .model!
-                            .exams!
-                            .isNotEmpty)
+                                .model!
+                                .exams!
+                                .isNotEmpty)
                             ? CalendarCubit.get(context)
-                            .model!
-                            .exams![CalendarCubit.get(context)
-                            .model!
-                            .exams!
-                            .length -
-                            1]
-                            .startDate
+                                .model!
+                                .exams![CalendarCubit.get(context)
+                                        .model!
+                                        .exams!
+                                        .length -
+                                    1]
+                                .startDate
                             : DateTime(1995, 1, 1),
                         endRange: (CalendarCubit.get(context)
-                            .model!
-                            .exams!
-                            .isNotEmpty)
+                                .model!
+                                .exams!
+                                .isNotEmpty)
                             ? CalendarCubit.get(context)
-                            .model!
-                            .exams![CalendarCubit.get(context)
-                            .model!
-                            .exams!
-                            .length -
-                            1]
-                            .endDate
+                                .model!
+                                .exams![CalendarCubit.get(context)
+                                        .model!
+                                        .exams!
+                                        .length -
+                                    1]
+                                .endDate
                             : DateTime(1995, 1, 2),
                         eventLoader: (day) {
                           if (CalendarCubit.get(context)
@@ -168,18 +167,18 @@ class SchoolCalendarScreen extends StatelessWidget {
                                 startRegister: CalendarCubit.get(context)
                                     .model!
                                     .registration![CalendarCubit.get(context)
-                                    .model!
-                                    .registration!
-                                    .length -
-                                    1]
+                                            .model!
+                                            .registration!
+                                            .length -
+                                        1]
                                     .startDate,
                                 endRegister: CalendarCubit.get(context)
                                     .model!
                                     .registration![CalendarCubit.get(context)
-                                    .model!
-                                    .registration!
-                                    .length -
-                                    1]
+                                            .model!
+                                            .registration!
+                                            .length -
+                                        1]
                                     .endDate);
                           }
                           return [];
@@ -287,7 +286,7 @@ class SchoolCalendarScreen extends StatelessWidget {
                       SizedBox(
                         width: 23,
                       ),
-                      text('Start/End of School Registration',
+                      text('Start/End of School\n Registration',
                           size: 18, color: AppColors.darkBlue),
                     ],
                   ),
@@ -312,17 +311,17 @@ class SchoolCalendarScreen extends StatelessWidget {
                         Navigator.pop(context);
                       },
                       icon: Padding(
-                        padding: const EdgeInsets.only(top:20.0),
+                        padding: const EdgeInsets.only(top: 25.0),
                         child: Icon(
                           Icons.arrow_back,
                           color: AppColors.darkBlue,
-                          size: 30,
+                          size: 35,
                         ),
                       )),
                   Padding(
-                    padding: const EdgeInsets.only(top:40.0),
+                    padding: const EdgeInsets.only(top: 50.0),
                     child: text('School Calendar',
-                        size: 24,
+                        size: 22,
                         color: AppColors.darkBlue,
                         weight: FontWeight.w400),
                   ),

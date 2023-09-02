@@ -1,37 +1,33 @@
-
 import 'package:flutter/material.dart';
 
 import 'constants.dart';
 
-Widget buildAttendance(text,number)
-{
-
+Widget buildAttendance(text, number) {
   return Padding(
     padding: EdgeInsetsDirectional.all(10),
     child: Row(
       children: [
-        Text(text,
+        Text(
+          text,
           style: TextStyle(
-              fontSize: 28,
+              fontSize: 24,
               //fontWeight: FontWeight.bold,
-              color: AppColors.lightOrange
-          ),
+              color: AppColors.lightOrange),
         ),
         Container(
           height: 35,
-          width: 100,
+          width: 90,
           decoration: BoxDecoration(
-            border: Border.all(color: AppColors.darkBlue,width: 2),
+            border: Border.all(color: AppColors.darkBlue, width: 2),
             borderRadius: BorderRadius.circular(10.0),
-
           ),
           child: Center(
-            child: Text(number,
+            child: Text(
+              number,
               style: TextStyle(
-                  fontSize: 25,
+                  fontSize: 23,
                   //fontWeight: FontWeight.bold,
-                  color: AppColors.lightOrange
-              ),
+                  color: AppColors.lightOrange),
             ),
           ),
         ),
@@ -39,5 +35,3 @@ Widget buildAttendance(text,number)
     ),
   );
 }
-
-

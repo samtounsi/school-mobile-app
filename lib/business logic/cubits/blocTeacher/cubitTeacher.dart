@@ -121,7 +121,7 @@ class TeacherCubit extends Cubit<TeacherState> {
   }
 
   AddProfileBioResponse? addProfileBioResponse;
-  postBio({required int id, required String bio}) async {
+  Future postBio({required int id, required String bio}) async {
     emit(SchoolTeacherAddBioLoadingState());
     var headers = {'Authorization': 'Bearer $token'};
     var request = http.MultipartRequest(

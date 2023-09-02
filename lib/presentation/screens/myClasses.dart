@@ -16,7 +16,7 @@ import '../../business logic/cubits/student_time_table/cubit.dart';
 
 class myClasses extends StatelessWidget {
   String teacherClass;
-   myClasses({super.key,required this.teacherClass});
+  myClasses({super.key, required this.teacherClass});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,6 +41,7 @@ class myClasses extends StatelessWidget {
                       icon: Icon(
                         Icons.arrow_back,
                         color: AppColors.darkBlue,
+                        size: 30,
                       ),
                     ),
                   ),
@@ -54,47 +55,54 @@ class myClasses extends StatelessWidget {
               children: [
                 InkWell(
                     onTap: () {
-                      StudentTimetableCubit.get(context).getSectionTimetable(gradeSection: teacherClass)
-                      .then((value) => navigateTo(context, SectionTimeTable()));
+                      StudentTimetableCubit.get(context)
+                          .getSectionTimetable(gradeSection: teacherClass)
+                          .then((value) =>
+                              navigateTo(context, SectionTimeTable()));
                     },
                     child: HomeText(
                         text: 'Time Table',
                         numS: 22,
                         image: 'images/schedule.png')),
                 SizedBox(
-                  height: 30,
+                  height: 20,
                   child: ColoredBox(
                     color: Colors.white,
                   ),
                 ),
                 InkWell(
                   onTap: () {
-                    SectionAttendanceCubit.get(context).
-                    getAbsentStudent(grade:teacherClass ,date: SectionAttendanceCubit.get(context).today)
-                        .then((value) => navigateTo(context, SectionAttendance()));
+                    SectionAttendanceCubit.get(context)
+                        .getAbsentStudent(
+                            grade: teacherClass,
+                            date: SectionAttendanceCubit.get(context).today)
+                        .then((value) =>
+                            navigateTo(context, SectionAttendance()));
                   },
                   child: HomeText(
-                      numS: 18,
-                      text: 'Attendance monitoring ',
-                      image: 'images/moitor.png'),
+                      numS: 22, text: 'Attendance', image: 'images/moitor.png'),
                 ),
                 SizedBox(
-                  height: 30,
+                  height: 20,
                   child: ColoredBox(
                     color: Colors.white,
                   ),
                 ),
                 InkWell(
                   onTap: () {
-                    navigateTo(context, TeacherMarksSemesters(gradeSection: teacherClass,));
+                    navigateTo(
+                        context,
+                        TeacherMarksSemesters(
+                          gradeSection: teacherClass,
+                        ));
                   },
                   child: HomeText(
                       text: 'Marks', numS: 22, image: 'images/grade.png'),
                 ),
                 Center(
                   child: Container(
-                    width: 300,
-                    height: 300,
+                    width: 270,
+                    height: 270,
                     child: SvgPicture.asset(
                       'images/Classroom-bro (2).svg',
                     ),

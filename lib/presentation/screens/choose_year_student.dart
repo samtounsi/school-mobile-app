@@ -80,8 +80,12 @@ class ChooseYear extends StatelessWidget {
                                 SizedBox(
                                   height: 45,
                                 ),
-                                SvgPicture.asset(
-                                    "images/Teacher student-rafiki Orange.svg"),
+                                Container(
+                                  height: 300,
+                                  width: 300,
+                                  child: SvgPicture.asset(
+                                      "images/Online calendar-bro.svg"),
+                                ),
                                 Column(
                                   children: [
                                     Padding(
@@ -105,9 +109,6 @@ class ChooseYear extends StatelessWidget {
                                       height: 20,
                                     )
                                   ],
-                                ),
-                                SizedBox(
-                                  height: 40,
                                 ),
                                 MaterialButton(
                                   onPressed: ()

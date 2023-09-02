@@ -50,6 +50,7 @@ class AddEventTeacher extends StatelessWidget {
                   elevation: 0,
                   width: MediaQuery.of(context).size.width - 10,
                 ));
+                EventCubit.get(context).getListEvent(id!);
               }
               if (state is NotiSuccessState) {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -213,52 +214,57 @@ class AddEventTeacher extends StatelessWidget {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(20),
                                     color: AppColors.lightOrange),
-                                child: TextButton(
-                                    onPressed: () {
-                                      AddEventTeacherModel add =
-                                          AddEventTeacherModel(
-                                              title: titleController.text,
-                                              description:
+                                child: ConditionalBuilder(
+                                  condition: state is! AddEventLoadingState,
+                                  fallback: (context) =>
+                                      CircularProgressIndicator(),
+                                  builder: (context) => TextButton(
+                                      onPressed: () {
+                                        AddEventTeacherModel add =
+                                            AddEventTeacherModel(
+                                                title: titleController.text,
+                                                description:
+                                                    descriptionController.text,
+                                                eventDate: dateController.text,
+                                                eventTime: timeController.text,
+                                                userId: id!);
+                                        EventCubit.get(context)
+                                            .addEventTeacher(add);
+                                        if (titleController.text
+                                            .startsWith('Seventh')) {
+                                          EventCubit.get(context)
+                                              .sendNotification(
+                                                  titleController.text,
                                                   descriptionController.text,
-                                              eventDate: dateController.text,
-                                              eventTime: timeController.text,
-                                              userId: id!);
-                                      EventCubit.get(context)
-                                          .addEventTeacher(add);
-                                      if (titleController.text
-                                          .startsWith('Seventh')) {
-                                        EventCubit.get(context)
-                                            .sendNotification(
-                                                titleController.text,
-                                                descriptionController.text,
-                                                'seventh');
-                                      } else if (titleController.text
-                                          .startsWith('Eighth')) {
-                                        EventCubit.get(context)
-                                            .sendNotification(
-                                                titleController.text,
-                                                descriptionController.text,
-                                                'eighth');
-                                      } else if (titleController.text
-                                          .startsWith('Ninth')) {
-                                        EventCubit.get(context)
-                                            .sendNotification(
-                                                titleController.text,
-                                                descriptionController.text,
-                                                'ninth');
-                                      } else {
-                                        EventCubit.get(context)
-                                            .sendNotification(
-                                                titleController.text,
-                                                descriptionController.text,
-                                                'all');
-                                      }
-                                    },
-                                    child: Text(
-                                      'Add Event',
-                                      style: TextStyle(
-                                          fontSize: 25, color: Colors.white),
-                                    )));
+                                                  'seventh');
+                                        } else if (titleController.text
+                                            .startsWith('Eighth')) {
+                                          EventCubit.get(context)
+                                              .sendNotification(
+                                                  titleController.text,
+                                                  descriptionController.text,
+                                                  'eighth');
+                                        } else if (titleController.text
+                                            .startsWith('Ninth')) {
+                                          EventCubit.get(context)
+                                              .sendNotification(
+                                                  titleController.text,
+                                                  descriptionController.text,
+                                                  'ninth');
+                                        } else {
+                                          EventCubit.get(context)
+                                              .sendNotification(
+                                                  titleController.text,
+                                                  descriptionController.text,
+                                                  'all');
+                                        }
+                                      },
+                                      child: Text(
+                                        'Add Event',
+                                        style: TextStyle(
+                                            fontSize: 25, color: Colors.white),
+                                      )),
+                                ));
                           },
                           fallback: (BuildContext context) => Center(
                             child: CircularProgressIndicator(),

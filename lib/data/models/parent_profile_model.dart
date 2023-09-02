@@ -9,12 +9,12 @@ class ParentProfileModel {
 
   ParentProfileModel(
       {this.type,
-        this.id,
-        this.name,
-        this.phoneNumber,
-        this.childrens,
-        this.photo,
-        this.message});
+      this.id,
+      this.name,
+      this.phoneNumber,
+      this.childrens,
+      this.photo,
+      this.message});
 
   ParentProfileModel.fromJson(Map<String, dynamic> json) {
     type = json['type'];
@@ -58,7 +58,7 @@ class Childrens {
   String? phoneNumber;
   String? photo;
   String? telephoneNumber;
-  double? gPA;
+  dynamic gPA;
   String? birthday;
   String? nationality;
   String? bio;
@@ -71,26 +71,26 @@ class Childrens {
 
   Childrens(
       {this.id,
-        this.firstName,
-        this.lastName,
-        this.fatherName,
-        this.motherName,
-        this.motherLastName,
-        this.gender,
-        this.address,
-        this.phoneNumber,
-        this.photo,
-        this.telephoneNumber,
-        this.gPA,
-        this.birthday,
-        this.nationality,
-        this.bio,
-        this.createdAt,
-        this.updatedAt,
-        this.userId,
-        this.gradeId,
-        this.sectionId,
-        this.parentId});
+      this.firstName,
+      this.lastName,
+      this.fatherName,
+      this.motherName,
+      this.motherLastName,
+      this.gender,
+      this.address,
+      this.phoneNumber,
+      this.photo,
+      this.telephoneNumber,
+      this.gPA,
+      this.birthday,
+      this.nationality,
+      this.bio,
+      this.createdAt,
+      this.updatedAt,
+      this.userId,
+      this.gradeId,
+      this.sectionId,
+      this.parentId});
 
   Childrens.fromJson(Map<String, dynamic> json) {
     id = json['id'];

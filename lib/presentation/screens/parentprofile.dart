@@ -190,7 +190,7 @@ class _ParentProfileState extends State<ParentProfile> {
                 ' ' +
                 childAccount.lastName.toString(),
             style: const TextStyle(
-              fontSize: 22,
+              fontSize: 20,
               color: AppColors.darkBlue,
               fontWeight: FontWeight.w500,
             ),

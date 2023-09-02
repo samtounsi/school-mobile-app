@@ -7,7 +7,7 @@ class StudentProfileModel {
   String? motherName;
   String? motherLastName;
   String? telephoneNumber;
-  double? gPA;
+  dynamic gPA;
   String? address;
   String? gender;
   String? phoneNumber;

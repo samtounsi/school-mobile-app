@@ -7,7 +7,6 @@ import 'package:mobile_schoolapp/presentation/screens/teacherAddQuizesOrHistory.
 
 import '../../business logic/cubits/blocAddQuizzes/cubit.dart';
 import '../../business logic/cubits/blocAddQuizzes/states.dart';
-import '../animations/teacherMotion.dart';
 import '../components and constants/addQuiz.dart';
 import '../components and constants/constants.dart';
 
@@ -15,21 +14,9 @@ import '../components and constants/constants.dart';
 
 
 
-/*
-List<TextEditingController> controller1 = List.generate(5, (i) => TextEditingController());
-List<TextEditingController> controller2 = List.generate(5, (i) => TextEditingController());
-List<TextEditingController> controller3 = List.generate(5, (i) => TextEditingController());
-List<TextEditingController> controller4 = List.generate(5, (i) => TextEditingController());
-List<TextEditingController> controller5 = List.generate(5, (i) => TextEditingController());
-List<TextEditingController> controller6 = List.generate(5, (i) => TextEditingController());
-List<TextEditingController> controller7 = List.generate(5, (i) => TextEditingController());
-List<TextEditingController> controller8 = List.generate(5, (i) => TextEditingController());
-List<TextEditingController> controller9 = List.generate(5, (i) => TextEditingController());
-List<TextEditingController> controller10 = List.generate(5, (i) => TextEditingController());
 
-*/
 
-var formKey2=GlobalKey<FormState>();
+var formKey3=GlobalKey<FormState>();
 int currentIndex=0;
 bool isCompleted=false;
 
@@ -54,39 +41,68 @@ class AddQuizQuestions extends StatelessWidget {
     return BlocConsumer<AddQuizCubit,AddQuizStates>(
       listener: (context,state)
       {
-        if(state is AddTeacherQuizSuccessState)
-          {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Center(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: AppColors.darkBlue,
-                    borderRadius: BorderRadius.circular(17),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                     'added quiz success',
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              behavior: SnackBarBehavior.floating,
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              width: MediaQuery.of(context).size.width - 10,
-            ));
-          }
+       if(state is AddTeacherQuizSuccessState)
+       {
+         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+           content: Center(
+             child: Container(
+               decoration: BoxDecoration(
+                 color: AppColors.aqua,
+                 borderRadius: BorderRadius.circular(17),
+               ),
+               child: Padding(
+                 padding: const EdgeInsets.all(8.0),
+                 child: Text(
+                   'added successfully',
+                   overflow: TextOverflow.ellipsis,
+                   maxLines: 2,
+                   style: TextStyle(
+                     fontSize: 16,
+                     color: Colors.white,
+                   ),
+                 ),
+               ),
+             ),
+           ),
+           behavior: SnackBarBehavior.floating,
+           backgroundColor: Colors.transparent,
+           elevation: 0,
+           width: MediaQuery.of(context).size.width - 10,
+         ));
+       // navigateTo(context, TeacherQuizzesAddOrHistory());
+
+           AddQuizCubit.get(context).quizPost.removeRange(0, AddQuizCubit.get(context).quizPost.length);
 
 
-
-      },
+       }
+       else if (state is AddTeacherQuizErrorState) {
+         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+           content: Center(
+             child: Container(
+               decoration: BoxDecoration(
+                 color: AppColors.lightOrange,
+                 borderRadius: BorderRadius.circular(17),
+               ),
+               child: Padding(
+                 padding: const EdgeInsets.all(8.0),
+                 child: Text(
+                   state.error.toString(),
+                   overflow: TextOverflow.ellipsis,
+                   maxLines: 2,
+                   style: TextStyle(
+                     fontSize: 16,
+                     color: Colors.white,
+                   ),
+                 ),
+               ),
+             ),
+           ),
+           behavior: SnackBarBehavior.floating,
+           backgroundColor: Colors.transparent,
+           elevation: 0,
+           width: MediaQuery.of(context).size.width-10,
+         ));
+       }},
       builder: (context,state)
       {
         return Container(
@@ -107,7 +123,6 @@ class AddQuizQuestions extends StatelessWidget {
                   child: IconButton(
                     onPressed: (){
                       Navigator.pop(context);
-
                     },
                     icon: Icon(Icons.arrow_back,
                       size: 35,
@@ -127,7 +142,7 @@ class AddQuizQuestions extends StatelessWidget {
 
               ),
               body: Form(
-                key:formKey2,
+                key:formKey3,
                 child: Padding(
                   padding: EdgeInsetsDirectional.only(bottom:15,top:20),
                   child: Theme(
@@ -151,7 +166,7 @@ class AddQuizQuestions extends StatelessWidget {
                             if(isLastStep)
                             {
                               print('Completed');
-                              if(formKey2.currentState!.validate())
+                              if(formKey3.currentState!.validate())
                               {
                                 AddQuizCubit.get(context).addQuizQuestions(
                                     nof: numberOfQuestions, quizController: questionList).then(
@@ -171,7 +186,7 @@ class AddQuizQuestions extends StatelessWidget {
                                       );
                                       print(model.toJson(model).toString());
                                       AddQuizCubit.get(context).postQuiz(data: model);
-                                    }).then((value) => navigateAndFinish(context, TeacherMotion()));
+                                    });
 
                               }
 

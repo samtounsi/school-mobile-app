@@ -9,7 +9,6 @@ import '../../business logic/cubits/blocHistoryQuizzes/cubit.dart';
 import 'quizzesHistoryQuestion.dart';
 import 'package:mobile_schoolapp/presentation/screens/teacherAddQuizesOrHistory.dart';
 
-
 class QuizzesHistory extends StatefulWidget {
   QuizzesHistory({Key? key}) : super(key: key);
 
@@ -18,8 +17,6 @@ class QuizzesHistory extends StatefulWidget {
 }
 
 class _QuizzesHistoryState extends State<QuizzesHistory> {
-
-
   @override
   void initState() {
     QuizzesHistoryCubit.get(context).getListQuizzesHistoryForTeacher();
@@ -54,7 +51,11 @@ class _QuizzesHistoryState extends State<QuizzesHistory> {
                             QuizzesHistoryCubit.get(context)
                                 .postTeacherQuizzesHistoryQuestion(
                                     modelTQHL[index].id);
-                            navigateTo(context, QuizzesScreenHQ(quizId: modelTQHL[index].id,));
+                            navigateTo(
+                                context,
+                                QuizzesScreenHQ(
+                                  quizId: modelTQHL[index].id,
+                                ));
                           },
                           child: Padding(
                             padding: const EdgeInsets.only(
@@ -145,14 +146,19 @@ class _QuizzesHistoryState extends State<QuizzesHistory> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 40, right: 60, left: 160),
-            child: Text(
-              'Quizzes History',
-              style: TextStyle(color: AppColors.lightOrange, fontSize: 20),
+            padding: const EdgeInsets.only(top: 40, right: 10),
+            child: Row(
+              children: [
+                Spacer(),
+                Text(
+                  'Quizzes History',
+                  style: TextStyle(color: AppColors.lightOrange, fontSize: 20),
+                ),
+              ],
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 50),
+            padding: const EdgeInsets.only(top: 40),
             child: IconButton(
                 onPressed: () {
                   Navigator.pop(context);
@@ -160,7 +166,7 @@ class _QuizzesHistoryState extends State<QuizzesHistory> {
                 icon: Icon(
                   Icons.arrow_back,
                   color: AppColors.darkBlue,
-                  size: 30,
+                  size: 35,
                 )),
           )
         ],

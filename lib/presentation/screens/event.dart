@@ -22,7 +22,6 @@ class _EventScreenState extends State<EventScreen> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,46 +33,46 @@ class _EventScreenState extends State<EventScreen> {
               fit: BoxFit.fill)),
       child: BlocConsumer<EventCubit, EventState>(
         listener: (context, state) {
-          if(state is DeleteEventSuccessState)
-            {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Center(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.aqua,
-                      borderRadius: BorderRadius.circular(17),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        "delete event success",
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.white,
-                        ),
+          if (state is DeleteEventSuccessState) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Center(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.aqua,
+                    borderRadius: BorderRadius.circular(17),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "delete event success",
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
                       ),
                     ),
                   ),
                 ),
-                behavior: SnackBarBehavior.floating,
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                width: MediaQuery.of(context).size.width-10,
-              ));
-            }
+              ),
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              width: MediaQuery.of(context).size.width - 10,
+            ));
+            EventCubit.get(context).getListEvent(id!);
+          } else if (state is EventSuccessState) {}
         },
         builder: (context, state) {
-          var modelEvent = EventCubit.get(context).event;
           return ConditionalBuilder(
             condition: state is! EventLoadingState,
             builder: (BuildContext context) {
+              var modelEvent = EventCubit.get(context).event!.reversed.toList();
               return Stack(
                 alignment: Alignment.bottomRight,
                 children: [
                   Padding(
-                      padding: const EdgeInsets.only(top: 100),
+                      padding: const EdgeInsets.only(top: 90),
                       child: ListView.separated(
                           shrinkWrap: true,
                           physics: const BouncingScrollPhysics(),
@@ -114,22 +113,42 @@ class _EventScreenState extends State<EventScreen> {
                                               children: [
                                                 IconButton(
                                                   onPressed: () {
-                                                    showDialog(context: context, builder:(context) => AlertDialog(
-                                                      title: Text("Are you sure?"),
-                                                      actions: [
-
-                                                        TextButton(onPressed:(){}, child: Text('cancel',
-                                                        style: TextStyle(fontSize: 15),)),
-                                                        TextButton(onPressed:(){
-                                                          EventCubit.get(context)
-                                                              .deleteEventTeacher(
-                                                              modelEvent[index]
-                                                                  .id);
-                                                          Navigator.pop(context);
-                                                        }, child:const Text('delete',
-                                                            style: TextStyle(fontSize: 15))),
-                                                      ],
-                                                    ),);
+                                                    showDialog(
+                                                      context: context,
+                                                      builder: (context) =>
+                                                          AlertDialog(
+                                                        title: Text(
+                                                            "Are you sure?"),
+                                                        actions: [
+                                                          TextButton(
+                                                              onPressed: () {
+                                                                Navigator.pop(
+                                                                    context);
+                                                              },
+                                                              child: Text(
+                                                                'cancel',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        15),
+                                                              )),
+                                                          TextButton(
+                                                              onPressed: () {
+                                                                EventCubit.get(
+                                                                        context)
+                                                                    .deleteEventTeacher(
+                                                                        modelEvent[index]
+                                                                            .id);
+                                                                Navigator.pop(
+                                                                    context);
+                                                              },
+                                                              child: const Text(
+                                                                  'delete',
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          15))),
+                                                        ],
+                                                      ),
+                                                    );
                                                   },
                                                   icon: Icon(
                                                     Icons.delete,
@@ -260,7 +279,6 @@ class _EventScreenState extends State<EventScreen> {
             ),
           );
         },
-
       ),
     );
   }

@@ -23,28 +23,27 @@ class TeacherQuizzesAddOrHistory extends StatelessWidget {
           appBar: AppBar(
             elevation: 0,
             backgroundColor: Colors.transparent,
-            leading:  Padding(
-              padding: const EdgeInsets.only(left: 0,top: 25),
+            leading: Padding(
+              padding: const EdgeInsets.only(left: 0, top: 25),
               child: IconButton(
-                onPressed: (){
+                onPressed: () {
                   Navigator.pop(context);
-
                 },
-                icon: Icon(Icons.arrow_back,
-                  size: 28,
-                  color: AppColors.darkBlue,),),
+                icon: Icon(
+                  Icons.arrow_back,
+                  size: 35,
+                  color: AppColors.darkBlue,
+                ),
+              ),
             ),
             titleSpacing: 10,
-
-
           ),
-
           body: Padding(
             padding: const EdgeInsets.only(top: 100, left: 25, right: 25),
             child: Column(
               children: [
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     navigateTo(context, AddQuizScreen());
                   },
                   child: MarkItem(
